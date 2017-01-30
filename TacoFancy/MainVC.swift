@@ -12,6 +12,15 @@ import SwiftKeychainWrapper
 
 class MainVC: UIViewController {
 
+    var taco: Taco!
+    var tacos = [Taco]()
+    
+    @IBOutlet weak var fullTacoName: UILabel!
+    @IBOutlet weak var tacoBtn: UIButton!
+    @IBAction func tacoBtnTapped(_ sender: Any) {
+        getRandomTaco()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,21 +45,59 @@ class MainVC: UIViewController {
             })
         }
     }
+    
+    
+    @IBAction func tossBtnTapped(_ sender: Any) {
+        getRandomTaco()
+    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func saveBtnTapped(_ sender: Any) {
+        saveTaco(taco)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func getRandomTaco() {
+        
+        guard let url = URL(string: random) else {
+            print("Cannot create URL")
+            return
+        }
+        let urlRequest = URLRequest(url: url)
+        let session = URLSession.shared
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
+            
+            self.tacos = []
+            
+            if error != nil {
+                print(error as Any)
+            } else {
+                if let urlContent = data {
+                    do {
+                        let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: []) as? [String: Any]
+                        print(jsonResult as Any)
+                            if let taco = Taco(json: jsonResult!) {
+                                DispatchQueue.main.async {
+                                    self.tacoBtn.isHidden = true
+                                    self.configureTaco(taco)
+                                }
+                            }
+                    } catch {
+                        print("JSON processing failed.")
+                    }
+                }
+            }
+        }
+        task.resume()
+        
     }
-    */
-
+    
+    func configureTaco(_ taco: Taco) {
+        self.taco = taco
+        self.fullTacoName.text = taco.baseLayer + " , " + taco.condiment
+    }
+    
+    func saveTaco(_ taco: Taco) {
+        self.taco = taco
+        let tacoToSave = ["base-layer": taco.baseLayer, "condiment": taco.condiment]
+        DataService.ds.REF_CURRENT_USER.child("saved-tacos").child(taco.baseLayer + " with " + taco.condiment).updateChildValues(tacoToSave)
+    }
 }

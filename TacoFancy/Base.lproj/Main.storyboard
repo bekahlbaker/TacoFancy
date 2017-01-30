@@ -56,7 +56,34 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7p-0y-0Js">
                                 <rect key="frame" x="16" y="83" width="288" height="323"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn9-Df-cap">
+                                        <rect key="frame" x="8" y="8" width="272" height="307"/>
+                                        <state key="normal" title="TACO">
+                                            <color key="titleColor" red="0.97254901959999995" green="0.015686274510000001" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tacoBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k42-e3-Q9K"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jS4-hR-4rw">
+                                        <rect key="frame" x="16" y="16" width="256" height="291"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="jS4-hR-4rw" secondAttribute="trailing" constant="16" id="3TC-1K-gnl"/>
+                                    <constraint firstItem="hn9-Df-cap" firstAttribute="leading" secondItem="r7p-0y-0Js" secondAttribute="leading" constant="8" id="5v0-sQ-upR"/>
+                                    <constraint firstAttribute="trailing" secondItem="hn9-Df-cap" secondAttribute="trailing" constant="8" id="Crw-lE-EW7"/>
+                                    <constraint firstItem="jS4-hR-4rw" firstAttribute="top" secondItem="r7p-0y-0Js" secondAttribute="top" constant="16" id="MJB-x2-Xy9"/>
+                                    <constraint firstItem="hn9-Df-cap" firstAttribute="top" secondItem="r7p-0y-0Js" secondAttribute="top" constant="8" id="Oty-41-07q"/>
+                                    <constraint firstAttribute="bottom" secondItem="hn9-Df-cap" secondAttribute="bottom" constant="8" id="Pbb-k1-AsL"/>
+                                    <constraint firstAttribute="bottom" secondItem="jS4-hR-4rw" secondAttribute="bottom" constant="16" id="QO4-c5-xfO"/>
+                                    <constraint firstItem="jS4-hR-4rw" firstAttribute="leading" secondItem="r7p-0y-0Js" secondAttribute="leading" constant="16" id="YfE-3Z-QvG"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRi-X6-OVr">
                                 <rect key="frame" x="32" y="414" width="50" height="50"/>
@@ -65,6 +92,9 @@
                                     <constraint firstAttribute="height" constant="50" id="hyN-ae-Nja"/>
                                 </constraints>
                                 <state key="normal" image="no"/>
+                                <connections>
+                                    <action selector="tossBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vsc-Ck-jLu"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ueq-Eb-hkA">
                                 <rect key="frame" x="238" y="414" width="50" height="50"/>
@@ -74,7 +104,7 @@
                                 </constraints>
                                 <state key="normal" image="yes"/>
                                 <connections>
-                                    <segue destination="pAy-Ce-u3j" kind="show" id="hXu-7J-Fmc"/>
+                                    <action selector="saveBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3J5-UG-byv"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -94,6 +124,10 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="fullTacoName" destination="jS4-hR-4rw" id="2dR-fM-rYY"/>
+                        <outlet property="tacoBtn" destination="hn9-Df-cap" id="LIe-tE-fla"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

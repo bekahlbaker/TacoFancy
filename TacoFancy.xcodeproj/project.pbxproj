@@ -195,6 +195,7 @@
 				TargetAttributes = {
 					273271AE1DA960AB001AF568 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = SAWE6E694F;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -416,6 +417,7 @@
 			baseConfigurationReference = 0550F7DEE54ED83AE02ECEBB /* Pods-TacoFancy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SAWE6E694F;
 				INFOPLIST_FILE = TacoFancy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bekahlynnbaker.TacoFancy;
@@ -429,6 +431,7 @@
 			baseConfigurationReference = 8A2BD763FD764AF26EB598B5 /* Pods-TacoFancy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SAWE6E694F;
 				INFOPLIST_FILE = TacoFancy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bekahlynnbaker.TacoFancy;

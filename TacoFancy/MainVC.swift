@@ -7,13 +7,34 @@
 //
 
 import UIKit
+import Firebase
+import SwiftKeychainWrapper
 
 class MainVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+//        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
+//        try! FIRAuth.auth()?.signOut()
+        
+        if KeychainWrapper.standard.string(forKey: KEY_UID) != nil {
+            let currentUser = KeychainWrapper.standard.string(forKey: KEY_UID)! as String
+            print("CURRENT USER \(currentUser)")
+        } else {
+            FIRAuth.auth()?.signInAnonymously(completion: { (user, error) in
+                print("AUTH IS RUNNING")
+                if error != nil {
+                    print("There was an error logging in anonymously")
+                    print(error as Any)
+                } else {
+                    print("We are now logged in")
+                    let uid = user!.uid
+                    let userData = ["provider": user?.providerID]
+                    DataService.ds.completeSignIn(uid, userData: userData as! Dictionary<String, String>)
+                }
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -12,7 +12,8 @@
 		27017B4A1E3C0A4400DD090D /* RecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B491E3C0A4400DD090D /* RecipeVC.swift */; };
 		27017B4C1E3C0A9300DD090D /* SavedTacosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B4B1E3C0A9300DD090D /* SavedTacosVC.swift */; };
 		27017B4E1E3C0AAC00DD090D /* IngredientsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B4D1E3C0AAC00DD090D /* IngredientsVC.swift */; };
-		27017B501E3FAABB00DD090D /* GoogleService-Info (2).plist in Resources */ = {isa = PBXBuildFile; fileRef = 27017B4F1E3FAABB00DD090D /* GoogleService-Info (2).plist */; };
+		27017B521E3FACBA00DD090D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B511E3FACBA00DD090D /* DataService.swift */; };
+		27017B541E3FB80400DD090D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27017B531E3FB80400DD090D /* GoogleService-Info.plist */; };
 		273271B31DA960AB001AF568 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273271B21DA960AB001AF568 /* AppDelegate.swift */; };
 		273271B81DA960AB001AF568 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273271B61DA960AB001AF568 /* Main.storyboard */; };
 		273271BA1DA960AB001AF568 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273271B91DA960AB001AF568 /* Assets.xcassets */; };
@@ -29,7 +30,8 @@
 		27017B491E3C0A4400DD090D /* RecipeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeVC.swift; sourceTree = "<group>"; };
 		27017B4B1E3C0A9300DD090D /* SavedTacosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTacosVC.swift; sourceTree = "<group>"; };
 		27017B4D1E3C0AAC00DD090D /* IngredientsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsVC.swift; sourceTree = "<group>"; };
-		27017B4F1E3FAABB00DD090D /* GoogleService-Info (2).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info (2).plist"; path = "../../../Downloads/GoogleService-Info (2).plist"; sourceTree = "<group>"; };
+		27017B511E3FACBA00DD090D /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		27017B531E3FB80400DD090D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		273271AF1DA960AB001AF568 /* TacoFancy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TacoFancy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		273271B21DA960AB001AF568 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		273271B71DA960AB001AF568 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		27017B401E3C095000DD090D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				27017B511E3FACBA00DD090D /* DataService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -126,7 +129,7 @@
 				273271B91DA960AB001AF568 /* Assets.xcassets */,
 				273271BB1DA960AB001AF568 /* LaunchScreen.storyboard */,
 				273271BE1DA960AB001AF568 /* Info.plist */,
-				27017B4F1E3FAABB00DD090D /* GoogleService-Info (2).plist */,
+				27017B531E3FB80400DD090D /* GoogleService-Info.plist */,
 			);
 			path = TacoFancy;
 			sourceTree = "<group>";
@@ -223,8 +226,8 @@
 				273271C61DA9A5D4001AF568 /* mexican-fiesta.ttf in Resources */,
 				273271BA1DA960AB001AF568 /* Assets.xcassets in Resources */,
 				273271C81DA9AA9A001AF568 /* DOSEQUIS.TTF in Resources */,
-				27017B501E3FAABB00DD090D /* GoogleService-Info (2).plist in Resources */,
 				273271B81DA960AB001AF568 /* Main.storyboard in Resources */,
+				27017B541E3FB80400DD090D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27017B4A1E3C0A4400DD090D /* RecipeVC.swift in Sources */,
+				27017B521E3FACBA00DD090D /* DataService.swift in Sources */,
 				27017B4E1E3C0AAC00DD090D /* IngredientsVC.swift in Sources */,
 				273271B31DA960AB001AF568 /* AppDelegate.swift in Sources */,
 				27017B421E3C09BD00DD090D /* MainVC.swift in Sources */,

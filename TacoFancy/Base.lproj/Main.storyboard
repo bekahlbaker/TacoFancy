@@ -159,7 +159,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
                                             <connections>
-                                                <segue destination="S1W-5j-tGm" kind="show" id="zxs-qf-kuf"/>
+                                                <segue destination="QJ6-IH-yH8" kind="show" id="lOh-TG-pWH"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -176,45 +176,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lpc-ek-ESK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1106.25" y="907.5"/>
-        </scene>
-        <!--Ingredients-->
-        <scene sceneID="qRz-0d-xP1">
-            <objects>
-                <tableViewController id="S1W-5j-tGm" customClass="IngredientsVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="txa-1a-pjK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oqZ-hF-f6M">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oqZ-hF-f6M" id="fQj-e0-BTc">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QG-oV-B4l">
-                                            <rect key="frame" x="137" y="6" width="46" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <segue destination="QJ6-IH-yH8" kind="show" id="Acn-8J-Q5i"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="S1W-5j-tGm" id="Lwq-8k-ggs"/>
-                            <outlet property="delegate" destination="S1W-5j-tGm" id="vQW-NF-QnJ"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Ingredients" id="mLD-tC-xdo"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fjy-22-3dV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2160" y="911"/>
         </scene>
         <!--Recipe-->
         <scene sceneID="NE6-bD-cYS">
@@ -239,7 +200,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8l-SE-OJe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3113" y="908"/>
+            <point key="canvasLocation" x="2233" y="910"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wvj-0s-pLQ">

@@ -1,0 +1,6 @@
+framework module Pods_TacoFancy {
+  umbrella header "Pods-TacoFancy-umbrella.h"
+
+  export *
+  module * { export * }
+}

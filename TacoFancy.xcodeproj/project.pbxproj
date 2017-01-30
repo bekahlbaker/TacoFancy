@@ -7,21 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27017B421E3C09BD00DD090D /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B411E3C09BD00DD090D /* MainVC.swift */; };
+		27017B441E3C09D900DD090D /* FIrstLaunchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B431E3C09D900DD090D /* FIrstLaunchVC.swift */; };
+		27017B4A1E3C0A4400DD090D /* RecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B491E3C0A4400DD090D /* RecipeVC.swift */; };
+		27017B4C1E3C0A9300DD090D /* SavedTacosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B4B1E3C0A9300DD090D /* SavedTacosVC.swift */; };
+		27017B4E1E3C0AAC00DD090D /* IngredientsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B4D1E3C0AAC00DD090D /* IngredientsVC.swift */; };
 		273271B31DA960AB001AF568 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273271B21DA960AB001AF568 /* AppDelegate.swift */; };
-		273271B51DA960AB001AF568 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273271B41DA960AB001AF568 /* ViewController.swift */; };
 		273271B81DA960AB001AF568 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273271B61DA960AB001AF568 /* Main.storyboard */; };
 		273271BA1DA960AB001AF568 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273271B91DA960AB001AF568 /* Assets.xcassets */; };
 		273271BD1DA960AB001AF568 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273271BB1DA960AB001AF568 /* LaunchScreen.storyboard */; };
+		273271C61DA9A5D4001AF568 /* mexican-fiesta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */; };
+		273271C81DA9AA9A001AF568 /* DOSEQUIS.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27017B411E3C09BD00DD090D /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		27017B431E3C09D900DD090D /* FIrstLaunchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIrstLaunchVC.swift; sourceTree = "<group>"; };
+		27017B491E3C0A4400DD090D /* RecipeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeVC.swift; sourceTree = "<group>"; };
+		27017B4B1E3C0A9300DD090D /* SavedTacosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTacosVC.swift; sourceTree = "<group>"; };
+		27017B4D1E3C0AAC00DD090D /* IngredientsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsVC.swift; sourceTree = "<group>"; };
 		273271AF1DA960AB001AF568 /* TacoFancy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TacoFancy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		273271B21DA960AB001AF568 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		273271B41DA960AB001AF568 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		273271B71DA960AB001AF568 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		273271B91DA960AB001AF568 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		273271BC1DA960AB001AF568 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		273271BE1DA960AB001AF568 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mexican-fiesta.ttf"; sourceTree = "<group>"; };
+		273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = DOSEQUIS.TTF; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +47,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27017B3C1E3C090100DD090D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				27017B431E3C09D900DD090D /* FIrstLaunchVC.swift */,
+				27017B411E3C09BD00DD090D /* MainVC.swift */,
+				27017B4B1E3C0A9300DD090D /* SavedTacosVC.swift */,
+				27017B4D1E3C0AAC00DD090D /* IngredientsVC.swift */,
+				27017B491E3C0A4400DD090D /* RecipeVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		27017B3D1E3C091000DD090D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		27017B3E1E3C091700DD090D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		27017B3F1E3C091C00DD090D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		27017B401E3C095000DD090D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		273271A61DA960AB001AF568 = {
 			isa = PBXGroup;
 			children = (
@@ -54,14 +106,28 @@
 		273271B11DA960AB001AF568 /* TacoFancy */ = {
 			isa = PBXGroup;
 			children = (
+				27017B401E3C095000DD090D /* Services */,
+				27017B3F1E3C091C00DD090D /* Extensions */,
+				27017B3E1E3C091700DD090D /* Model */,
+				27017B3D1E3C091000DD090D /* View */,
+				27017B3C1E3C090100DD090D /* Controller */,
+				273271C41DA9A5AF001AF568 /* Resources */,
 				273271B21DA960AB001AF568 /* AppDelegate.swift */,
-				273271B41DA960AB001AF568 /* ViewController.swift */,
 				273271B61DA960AB001AF568 /* Main.storyboard */,
 				273271B91DA960AB001AF568 /* Assets.xcassets */,
 				273271BB1DA960AB001AF568 /* LaunchScreen.storyboard */,
 				273271BE1DA960AB001AF568 /* Info.plist */,
 			);
 			path = TacoFancy;
+			sourceTree = "<group>";
+		};
+		273271C41DA9A5AF001AF568 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */,
+				273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,7 +190,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				273271BD1DA960AB001AF568 /* LaunchScreen.storyboard in Resources */,
+				273271C61DA9A5D4001AF568 /* mexican-fiesta.ttf in Resources */,
 				273271BA1DA960AB001AF568 /* Assets.xcassets in Resources */,
+				273271C81DA9AA9A001AF568 /* DOSEQUIS.TTF in Resources */,
 				273271B81DA960AB001AF568 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,8 +204,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				273271B51DA960AB001AF568 /* ViewController.swift in Sources */,
+				27017B4A1E3C0A4400DD090D /* RecipeVC.swift in Sources */,
+				27017B4E1E3C0AAC00DD090D /* IngredientsVC.swift in Sources */,
 				273271B31DA960AB001AF568 /* AppDelegate.swift in Sources */,
+				27017B421E3C09BD00DD090D /* MainVC.swift in Sources */,
+				27017B441E3C09D900DD090D /* FIrstLaunchVC.swift in Sources */,
+				27017B4C1E3C0A9300DD090D /* SavedTacosVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +371,7 @@
 				273271C31DA960AB001AF568 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

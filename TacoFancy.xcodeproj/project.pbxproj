@@ -16,6 +16,9 @@
 		27017B541E3FB80400DD090D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27017B531E3FB80400DD090D /* GoogleService-Info.plist */; };
 		27017B561E3FC71700DD090D /* Taco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B551E3FC71700DD090D /* Taco.swift */; };
 		27017B581E3FE95B00DD090D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B571E3FE95B00DD090D /* Constants.swift */; };
+		27017B5A1E40175000DD090D /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B591E40175000DD090D /* Overlay.swift */; };
+		27017B5C1E40176A00DD090D /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B5B1E40176A00DD090D /* DraggableView.swift */; };
+		27017B5E1E4017AE00DD090D /* DraggableViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B5D1E4017AE00DD090D /* DraggableViewBackground.swift */; };
 		273271B31DA960AB001AF568 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273271B21DA960AB001AF568 /* AppDelegate.swift */; };
 		273271B81DA960AB001AF568 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273271B61DA960AB001AF568 /* Main.storyboard */; };
 		273271BA1DA960AB001AF568 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273271B91DA960AB001AF568 /* Assets.xcassets */; };
@@ -36,6 +39,9 @@
 		27017B531E3FB80400DD090D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		27017B551E3FC71700DD090D /* Taco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Taco.swift; sourceTree = "<group>"; };
 		27017B571E3FE95B00DD090D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		27017B591E40175000DD090D /* Overlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
+		27017B5B1E40176A00DD090D /* DraggableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
+		27017B5D1E4017AE00DD090D /* DraggableViewBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableViewBackground.swift; sourceTree = "<group>"; };
 		273271AF1DA960AB001AF568 /* TacoFancy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TacoFancy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		273271B21DA960AB001AF568 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		273271B71DA960AB001AF568 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,6 +81,9 @@
 		27017B3D1E3C091000DD090D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				27017B591E40175000DD090D /* Overlay.swift */,
+				27017B5B1E40176A00DD090D /* DraggableView.swift */,
+				27017B5D1E4017AE00DD090D /* DraggableViewBackground.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -293,8 +302,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27017B5E1E4017AE00DD090D /* DraggableViewBackground.swift in Sources */,
+				27017B5C1E40176A00DD090D /* DraggableView.swift in Sources */,
 				27017B4A1E3C0A4400DD090D /* RecipeVC.swift in Sources */,
 				27017B521E3FACBA00DD090D /* DataService.swift in Sources */,
+				27017B5A1E40175000DD090D /* Overlay.swift in Sources */,
 				27017B4E1E3C0AAC00DD090D /* IngredientsVC.swift in Sources */,
 				273271B31DA960AB001AF568 /* AppDelegate.swift in Sources */,
 				27017B561E3FC71700DD090D /* Taco.swift in Sources */,

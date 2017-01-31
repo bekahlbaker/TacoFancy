@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -23,7 +22,7 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="DraggableViewBackground" customModule="TacoFancy" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -54,78 +53,28 @@
                                     <constraint firstAttribute="height" constant="75" id="v3g-Ox-OMg"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7p-0y-0Js">
-                                <rect key="frame" x="16" y="83" width="288" height="323"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn9-Df-cap">
-                                        <rect key="frame" x="8" y="8" width="272" height="307"/>
-                                        <state key="normal" title="TACO">
-                                            <color key="titleColor" red="0.97254901959999995" green="0.015686274510000001" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="tacoBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k42-e3-Q9K"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jS4-hR-4rw">
-                                        <rect key="frame" x="16" y="16" width="256" height="291"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="jS4-hR-4rw" secondAttribute="trailing" constant="16" id="3TC-1K-gnl"/>
-                                    <constraint firstItem="hn9-Df-cap" firstAttribute="leading" secondItem="r7p-0y-0Js" secondAttribute="leading" constant="8" id="5v0-sQ-upR"/>
-                                    <constraint firstAttribute="trailing" secondItem="hn9-Df-cap" secondAttribute="trailing" constant="8" id="Crw-lE-EW7"/>
-                                    <constraint firstItem="jS4-hR-4rw" firstAttribute="top" secondItem="r7p-0y-0Js" secondAttribute="top" constant="16" id="MJB-x2-Xy9"/>
-                                    <constraint firstItem="hn9-Df-cap" firstAttribute="top" secondItem="r7p-0y-0Js" secondAttribute="top" constant="8" id="Oty-41-07q"/>
-                                    <constraint firstAttribute="bottom" secondItem="hn9-Df-cap" secondAttribute="bottom" constant="8" id="Pbb-k1-AsL"/>
-                                    <constraint firstAttribute="bottom" secondItem="jS4-hR-4rw" secondAttribute="bottom" constant="16" id="QO4-c5-xfO"/>
-                                    <constraint firstItem="jS4-hR-4rw" firstAttribute="leading" secondItem="r7p-0y-0Js" secondAttribute="leading" constant="16" id="YfE-3Z-QvG"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRi-X6-OVr">
-                                <rect key="frame" x="32" y="414" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="hKI-GT-t8F"/>
-                                    <constraint firstAttribute="height" constant="50" id="hyN-ae-Nja"/>
-                                </constraints>
-                                <state key="normal" image="no"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn9-Df-cap">
+                                <rect key="frame" x="140" y="178" width="40" height="124"/>
+                                <state key="normal" title="TACO">
+                                    <color key="titleColor" red="0.97254901959999995" green="0.015686274510000001" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="tossBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vsc-Ck-jLu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ueq-Eb-hkA">
-                                <rect key="frame" x="238" y="414" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="hWJ-Mz-Njq"/>
-                                    <constraint firstAttribute="width" constant="50" id="lfu-rI-lEm"/>
-                                </constraints>
-                                <state key="normal" image="yes"/>
-                                <connections>
-                                    <action selector="saveBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3J5-UG-byv"/>
+                                    <action selector="tacoBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k42-e3-Q9K"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.91372549020000005" green="0.83137254900000002" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ueq-Eb-hkA" secondAttribute="bottom" constant="16" id="G8f-Bx-6Or"/>
-                            <constraint firstItem="r7p-0y-0Js" firstAttribute="top" secondItem="MH5-Ph-Ns2" secondAttribute="bottom" constant="8" id="HfB-cC-yoT"/>
+                            <constraint firstItem="hn9-Df-cap" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="178" id="8AY-gy-FWv"/>
                             <constraint firstItem="MH5-Ph-Ns2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Ht7-js-ODm"/>
                             <constraint firstAttribute="trailing" secondItem="MH5-Ph-Ns2" secondAttribute="trailing" id="IZA-rh-BPB"/>
-                            <constraint firstItem="Ueq-Eb-hkA" firstAttribute="top" secondItem="r7p-0y-0Js" secondAttribute="bottom" constant="8" id="JKm-uM-y2m"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FRi-X6-OVr" secondAttribute="bottom" constant="16" id="Nm1-lX-PDU"/>
-                            <constraint firstItem="r7p-0y-0Js" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NzJ-rb-KDa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ueq-Eb-hkA" secondAttribute="trailing" constant="16" id="PAx-oH-7Eb"/>
+                            <constraint firstItem="hn9-Df-cap" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eGD-AL-Bge"/>
                             <constraint firstItem="MH5-Ph-Ns2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gYM-u1-VL4"/>
-                            <constraint firstItem="r7p-0y-0Js" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="j5B-u5-f6p"/>
-                            <constraint firstItem="FRi-X6-OVr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="oTT-L4-zQh"/>
+                            <constraint firstItem="hn9-Df-cap" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="qaN-vF-iJR"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
-                        <outlet property="fullTacoName" destination="jS4-hR-4rw" id="2dR-fM-rYY"/>
                         <outlet property="tacoBtn" destination="hn9-Df-cap" id="LIe-tE-fla"/>
                     </connections>
                 </viewController>
@@ -254,8 +203,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="no" width="50" height="50"/>
         <image name="taco3" width="1466" height="1452"/>
-        <image name="yes" width="50" height="50"/>
     </resources>
 </document>

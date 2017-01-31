@@ -18,7 +18,9 @@ class MainVC: UIViewController {
     @IBOutlet weak var fullTacoName: UILabel!
     @IBOutlet weak var tacoBtn: UIButton!
     @IBAction func tacoBtnTapped(_ sender: Any) {
-        getRandomTaco()
+        let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
+        self.view.addSubview(draggableBackground)
+        tacoBtn.isHidden = true
     }
     
     override func viewDidLoad() {
@@ -56,7 +58,7 @@ class MainVC: UIViewController {
     }
     
     func getRandomTaco() {
-        
+        print("GETTING RANDOM TACO")
         guard let url = URL(string: random) else {
             print("Cannot create URL")
             return
@@ -73,7 +75,7 @@ class MainVC: UIViewController {
                 if let urlContent = data {
                     do {
                         let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: []) as? [String: Any]
-                        print(jsonResult as Any)
+//                        print(jsonResult as Any)
                             if let taco = Taco(json: jsonResult!) {
                                 DispatchQueue.main.async {
                                     self.tacoBtn.isHidden = true
@@ -88,16 +90,18 @@ class MainVC: UIViewController {
         }
         task.resume()
         
+        let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
+        self.view.addSubview(draggableBackground)
     }
     
     func configureTaco(_ taco: Taco) {
         self.taco = taco
-        self.fullTacoName.text = taco.baseLayer + " , " + taco.condiment
+        self.fullTacoName.text = taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell
     }
     
     func saveTaco(_ taco: Taco) {
         self.taco = taco
-        let tacoToSave = ["base-layer": taco.baseLayer, "condiment": taco.condiment]
-        DataService.ds.REF_CURRENT_USER.child("saved-tacos").child(taco.baseLayer + " with " + taco.condiment).updateChildValues(tacoToSave)
+        let tacoToSave = ["base-layer": taco.baseLayer, "condiment": taco.condiment, "mixin": taco.mixin, "seasoning": taco.seasoning, "shell": taco.shell]
+        DataService.ds.REF_CURRENT_USER.child("saved-tacos").child(taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell).updateChildValues(tacoToSave)
     }
 }

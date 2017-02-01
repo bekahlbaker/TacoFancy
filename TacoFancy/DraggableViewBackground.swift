@@ -115,13 +115,24 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         })
     }
     
-    //Adds new card to view
+    //Adds new card to view after swiping
     func cardSwipedLeft(_ card: UIView) -> Void {
-        print("Drag 5. Clicked 3.CARD SWIPED LEFT")
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
+        print("Drag 5.CARD SWIPED LEFT")
+        getRandomTaco()
     }
     func cardSwipedRight(_ card: UIView) -> Void {
-        print("Drag 5. Clicked 3.CARD SWIPED RIGHT")
+        print("Drag 5.CARD SWIPED RIGHT")
+        saveTaco(taco)
+        getRandomTaco()
+    }
+    
+    //Adds new card to view after clicking
+    func cardClickedLeft(_ card: UIView) -> Void {
+        print("Clicked 3.CARD SWIPED LEFT")
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
+    }
+    func cardClickedRight(_ card: UIView) -> Void {
+        print("Clicked 3.CARD SWIPED RIGHT")
         saveTaco(taco)
         Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
     }

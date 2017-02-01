@@ -12,14 +12,16 @@ import UIKit
 
 let ACTION_MARGIN: Float = 120
 let SCALE_STRENGTH: Float = 4
-let SCALE_MAX:Float = 0.93
+let SCALE_MAX:Float = 0.90
 let ROTATION_MAX: Float = 1
-let ROTATION_STRENGTH: Float = 320
+let ROTATION_STRENGTH: Float = 310
 let ROTATION_ANGLE: Float = 3.14/8
 
 protocol DraggableViewDelegate {
     func cardSwipedLeft(_ card: UIView) -> Void
     func cardSwipedRight(_ card: UIView) -> Void
+    func cardClickedLeft(_ card: UIView) -> Void
+    func cardClickedRight(_ card: UIView) -> Void
 }
 
 class DraggableView: UIView {
@@ -122,7 +124,7 @@ class DraggableView: UIView {
         } else if floatXFromCenter < -ACTION_MARGIN {
             self.leftAction()
         } else {
-            UIView.animate(withDuration: 0.5, animations: {() -> Void in
+            UIView.animate(withDuration: 0.3, animations: {() -> Void in
                 self.center = self.originPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
                 self.overlayView.alpha = 0
@@ -133,32 +135,33 @@ class DraggableView: UIView {
     //Removes card from screen
     func rightAction() -> Void {
         print("Drag 4.RIGHT ACTION")
-        let finishPoint: CGPoint = CGPoint(x: 500, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
+        let finishPoint: CGPoint = CGPoint(x: 600, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
         UIView.animate(withDuration: 0.3,
                        animations: {
                         self.center = finishPoint
         }, completion: {
             (value: Bool) in
+            self.removeFromSuperview()
             self.delegate.cardSwipedRight(self)
         })
-        
     }
     func leftAction() -> Void {
         print("Drag 4.LEFT ACTION")
-        let finishPoint: CGPoint = CGPoint(x: -500, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
+        let finishPoint: CGPoint = CGPoint(x: -600, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
         UIView.animate(withDuration: 0.3,
                        animations: {
                         self.center = finishPoint
         }, completion: {
             (value: Bool) in
-        self.delegate.cardSwipedLeft(self)
+            self.removeFromSuperview()
+            self.delegate.cardSwipedLeft(self)
         })
     }
     
     //Moves card off screen
     func rightClickAction() -> Void {
         print("Clicked 2.RIGHT CLICK ACTION")
-        let finishPoint = CGPoint(x: 600, y: self.center.y)
+        let finishPoint = CGPoint(x: 700, y: self.center.y)
         UIView.animate(withDuration: 0.5,
                        animations: {
                         self.center = finishPoint
@@ -169,11 +172,11 @@ class DraggableView: UIView {
                 self.overlayView.alpha = 0
             })
         })
-        delegate.cardSwipedRight(self)
+        delegate.cardClickedRight(self)
     }
     func leftClickAction() -> Void {
         print("Clicked 2.LEFT CLICK ACTION")
-        let finishPoint: CGPoint = CGPoint(x: -600, y: self.center.y)
+        let finishPoint: CGPoint = CGPoint(x: -700, y: self.center.y)
         UIView.animate(withDuration: 0.5,
                        animations: {
                         self.center = finishPoint
@@ -184,7 +187,7 @@ class DraggableView: UIView {
                 self.overlayView.alpha = 0
             })
         })
-        delegate.cardSwipedLeft(self)
+        delegate.cardClickedLeft(self)
     }
 }
 

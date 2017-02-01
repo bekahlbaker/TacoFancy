@@ -23,6 +23,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var messageButton: UIButton!
     var checkButton: UIButton!
     var xButton: UIButton!
+    var tacoButton: UIButton!
     
     var taco: Taco!
     var tacoString: String!
@@ -34,6 +35,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         super.layoutSubviews()
+        self.tag = 100
         self.setupView()
         getRandomTaco()
     }
@@ -85,7 +87,12 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         print("SETUP VIEW")
         self.backgroundColor = UIColor.clear
         
-        xButton = UIButton(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2 + 35, y: self.frame.size.height/2 + CARD_HEIGHT/2 + 10, width: 59, height: 59))
+        tacoButton = UIButton(frame: CGRect(x: self.bounds.maxX - 70, y: 10, width: 59, height: 59))
+        tacoButton.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin]
+        tacoButton.setImage(UIImage(named: "taco3"), for: UIControlState())
+        tacoButton.addTarget(self, action: #selector(openSavedTacos), for: UIControlEvents.touchUpInside)
+        
+        xButton = UIButton(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2 + 35, y: self.frame.size.height/2 + CARD_HEIGHT/2 + 10, width: 50, height: 50))
         xButton.setImage(UIImage(named: "no"), for: UIControlState())
         xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), for: UIControlEvents.touchUpInside)
         
@@ -95,6 +102,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         
         self.addSubview(xButton)
         self.addSubview(checkButton)
+        self.addSubview(tacoButton)
     }
     
     func createDraggableViewWithData() -> DraggableView {
@@ -157,5 +165,13 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             dragView.overlayView.alpha = 0.8
         })
         dragView.leftClickAction()
+    }
+    
+    func openSavedTacos() {
+        print("Opening saved tacos")
+        if let viewWithTag = self.viewWithTag(100) {
+            viewWithTag.removeFromSuperview()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "openSavedTacos"), object: nil)
+        }
     }
 }

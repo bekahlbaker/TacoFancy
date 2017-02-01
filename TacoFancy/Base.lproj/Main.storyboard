@@ -22,7 +22,7 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="DraggableViewBackground" customModule="TacoFancy" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -35,21 +35,11 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgZ-eh-OM5">
-                                        <rect key="frame" x="268" y="19" width="44" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="44" id="67K-am-gZV"/>
-                                            <constraint firstAttribute="height" constant="44" id="vYy-fU-fWM"/>
-                                        </constraints>
-                                        <state key="normal" image="taco3"/>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92549019607843142" green="0.39215686274509803" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="f2J-JO-fgT" secondAttribute="bottom" constant="16" id="9ye-At-Dqp"/>
                                     <constraint firstItem="f2J-JO-fgT" firstAttribute="leading" secondItem="MH5-Ph-Ns2" secondAttribute="leading" constant="8" id="9z8-P3-uBU"/>
-                                    <constraint firstAttribute="trailing" secondItem="fgZ-eh-OM5" secondAttribute="trailing" constant="8" id="O7u-5U-quV"/>
-                                    <constraint firstItem="fgZ-eh-OM5" firstAttribute="centerY" secondItem="f2J-JO-fgT" secondAttribute="centerY" id="iXO-wu-TQ1"/>
                                     <constraint firstAttribute="height" constant="75" id="v3g-Ox-OMg"/>
                                 </constraints>
                             </view>
@@ -76,6 +66,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="tacoBtn" destination="hn9-Df-cap" id="LIe-tE-fla"/>
+                        <segue destination="hOL-gu-CKD" kind="show" identifier="SavedTacosVC" id="JX7-M7-HMw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -121,45 +112,6 @@
             </objects>
             <point key="canvasLocation" x="1068.75" y="132.5"/>
         </scene>
-        <!--Saved Tacos-->
-        <scene sceneID="AqC-2V-B4N">
-            <objects>
-                <tableViewController id="ljQ-Fy-xvW" customClass="SavedTacosVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" id="U1g-IV-pX3">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="whV-aj-WbX">
-                                <rect key="frame" x="0.0" y="28" width="320" height="64"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="whV-aj-WbX" id="V4X-Fm-oPl">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsW-Pr-3EM">
-                                            <rect key="frame" x="137" y="16" width="46" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <segue destination="QJ6-IH-yH8" kind="show" id="lOh-TG-pWH"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ljQ-Fy-xvW" id="6wu-C1-UNr"/>
-                            <outlet property="delegate" destination="ljQ-Fy-xvW" id="O4X-6I-SzM"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Saved Tacos" id="AmC-8U-yeH"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lpc-ek-ESK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1106.25" y="907.5"/>
-        </scene>
         <!--Recipe-->
         <scene sceneID="NE6-bD-cYS">
             <objects>
@@ -183,26 +135,101 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8l-SE-OJe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2233" y="910"/>
+            <point key="canvasLocation" x="1961" y="875"/>
+        </scene>
+        <!--Saved Tacos-->
+        <scene sceneID="5ys-l7-EkM">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vOB-ZP-Wnp" customClass="SavedTacosVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3h9-Mb-t1p"/>
+                        <viewControllerLayoutGuide type="bottom" id="lkr-vw-xNr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zg9-j1-LHs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="icY-h6-n4c">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" id="ggA-Ym-Ne0">
+                                    <rect key="frame" x="0.0" y="78" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SavedTacoCell" id="Exc-uf-vBl" customClass="SavedTacosCell" customModule="TacoFancy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Exc-uf-vBl" id="ELC-qI-flS">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JqR-fT-ALe">
+                                                    <rect key="frame" x="16" y="5" width="288" height="40"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="JqR-fT-ALe" firstAttribute="top" secondItem="ELC-qI-flS" secondAttribute="top" constant="5" id="JFV-Vr-Zqw"/>
+                                                <constraint firstAttribute="trailing" secondItem="JqR-fT-ALe" secondAttribute="trailing" constant="16" id="MDt-4f-wCQ"/>
+                                                <constraint firstItem="JqR-fT-ALe" firstAttribute="leading" secondItem="ELC-qI-flS" secondAttribute="leading" constant="16" id="rbg-Bi-MVZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="JqR-fT-ALe" secondAttribute="bottom" constant="5" id="tOG-Gs-2R4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="tacoName" destination="JqR-fT-ALe" id="wT8-fw-aHe"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="icY-h6-n4c" firstAttribute="top" secondItem="3h9-Mb-t1p" secondAttribute="bottom" id="Dqm-su-kzp"/>
+                            <constraint firstAttribute="trailing" secondItem="icY-h6-n4c" secondAttribute="trailing" id="RZm-o6-wny"/>
+                            <constraint firstItem="lkr-vw-xNr" firstAttribute="top" secondItem="icY-h6-n4c" secondAttribute="bottom" id="VWJ-qJ-9fY"/>
+                            <constraint firstItem="icY-h6-n4c" firstAttribute="leading" secondItem="Zg9-j1-LHs" secondAttribute="leading" id="pTl-gY-zhF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Saved Tacos" id="t4J-8T-ndS">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="zvZ-zA-rZQ">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="presentation" identifier="MainVC" modalPresentationStyle="overCurrentContext" id="eu5-jS-bMX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="icY-h6-n4c" id="qWc-sI-7a5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="at3-ci-xzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1069" y="875"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Wvj-0s-pLQ">
+        <scene sceneID="Dao-7o-tUB">
             <objects>
-                <navigationController id="pAy-Ce-u3j" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uNf-m5-2bH">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hOL-gu-CKD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="py3-qV-lnx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="tXu-T2-PuR">
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
-                        <segue destination="ljQ-Fy-xvW" kind="relationship" relationship="rootViewController" id="Ybw-Hj-jQb"/>
+                        <segue destination="vOB-ZP-Wnp" kind="relationship" relationship="rootViewController" id="pb6-xv-l8C"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="biV-NJ-AGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yZ9-tV-yxc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="176" y="910"/>
+            <point key="canvasLocation" x="176" y="875"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="taco3" width="1466" height="1452"/>
-    </resources>
 </document>

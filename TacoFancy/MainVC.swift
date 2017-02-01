@@ -14,6 +14,7 @@ class MainVC: UIViewController {
 
     var taco: Taco!
     var tacos = [Taco]()
+    var tacoButton: UIButton!
     
     @IBOutlet weak var fullTacoName: UILabel!
     @IBOutlet weak var tacoBtn: UIButton!
@@ -25,6 +26,12 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tacoButton = UIButton(frame: CGRect(x: view.bounds.maxX - 70, y: 10, width: 59, height: 59))
+        tacoButton.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin]
+        tacoButton.setImage(UIImage(named: "taco3"), for: UIControlState())
+        tacoButton.addTarget(self, action: #selector(openSavedTacos), for: UIControlEvents.touchUpInside)
+        view.addSubview(tacoButton)
         
 //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
 //        try! FIRAuth.auth()?.signOut()
@@ -46,8 +53,13 @@ class MainVC: UIViewController {
                 }
             })
         }
+        
+    NotificationCenter.default.addObserver(self, selector: #selector(openSavedTacos(notification:)), name:NSNotification.Name(rawValue: "openSavedTacos"), object: nil)
     }
     
+    func openSavedTacos(notification: NSNotification) {
+        performSegue(withIdentifier: "SavedTacosVC", sender: nil)
+    }
     
     @IBAction func tossBtnTapped(_ sender: Any) {
         getRandomTaco()

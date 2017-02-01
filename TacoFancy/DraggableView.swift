@@ -10,7 +10,7 @@
 import Foundation
 import UIKit
 
-let ACTION_MARGIN: Float = 140
+let ACTION_MARGIN: Float = 120
 let SCALE_STRENGTH: Float = 4
 let SCALE_MAX:Float = 0.93
 let ROTATION_MAX: Float = 1
@@ -69,7 +69,9 @@ class DraggableView: UIView {
         self.layer.shadowOffset = CGSize(width: 1, height: 1);
     }
     
+    //Follow dragging gesture around screen
     func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) -> Void {
+        print("Drag 1.BEING DRAGGED")
         xFromCenter = Float(gestureRecognizer.translation(in: self).x)
         yFromCenter = Float(gestureRecognizer.translation(in: self).y)
         
@@ -100,7 +102,9 @@ class DraggableView: UIView {
         }
     }
     
+    //Check image following dragging cards
     func updateOverlay(_ distance: CGFloat) -> Void {
+        print("Drag 2.UPDATE OVERLAY")
         if distance > 0 {
             overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeRight)
         } else {
@@ -109,7 +113,9 @@ class DraggableView: UIView {
         overlayView.alpha = CGFloat(min(fabsf(Float(distance))/100, 0.4))
     }
     
+    //Drags card off screen and calls left or right action and hides check image
     func afterSwipeAction() -> Void {
+        print("Drag 3.AFTER SWIPE ACTION")
         let floatXFromCenter = Float(xFromCenter)
         if floatXFromCenter > ACTION_MARGIN {
             self.rightAction()
@@ -124,52 +130,59 @@ class DraggableView: UIView {
         }
     }
     
+    //Removes card from screen
     func rightAction() -> Void {
+        print("Drag 4.RIGHT ACTION")
         let finishPoint: CGPoint = CGPoint(x: 500, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
-        UIView.animate(withDuration: 0.5,
+        UIView.animate(withDuration: 0.3,
                        animations: {
                         self.center = finishPoint
         }, completion: {
             (value: Bool) in
-            self.removeFromSuperview()
+            self.delegate.cardSwipedRight(self)
         })
-        delegate.cardSwipedRight(self)
+        
     }
-    
     func leftAction() -> Void {
+        print("Drag 4.LEFT ACTION")
         let finishPoint: CGPoint = CGPoint(x: -500, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
+        UIView.animate(withDuration: 0.3,
+                       animations: {
+                        self.center = finishPoint
+        }, completion: {
+            (value: Bool) in
+        self.delegate.cardSwipedLeft(self)
+        })
+    }
+    
+    //Moves card off screen
+    func rightClickAction() -> Void {
+        print("Clicked 2.RIGHT CLICK ACTION")
+        let finishPoint = CGPoint(x: 600, y: self.center.y)
         UIView.animate(withDuration: 0.5,
                        animations: {
                         self.center = finishPoint
-        }, completion: {
-            (value: Bool) in
-            self.removeFromSuperview()
-        })
-        delegate.cardSwipedLeft(self)
-    }
-    
-    func rightClickAction() -> Void {
-        let finishPoint = CGPoint(x: 600, y: self.center.y)
-        UIView.animate(withDuration: 0.8,
-                       animations: {
-                        self.center = finishPoint
                         self.transform = CGAffineTransform(rotationAngle: 1)
         }, completion: {
             (value: Bool) in
-            self.removeFromSuperview()
+            UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                self.overlayView.alpha = 0
+            })
         })
         delegate.cardSwipedRight(self)
     }
-    
     func leftClickAction() -> Void {
+        print("Clicked 2.LEFT CLICK ACTION")
         let finishPoint: CGPoint = CGPoint(x: -600, y: self.center.y)
-        UIView.animate(withDuration: 0.8,
+        UIView.animate(withDuration: 0.5,
                        animations: {
                         self.center = finishPoint
                         self.transform = CGAffineTransform(rotationAngle: 1)
         }, completion: {
             (value: Bool) in
-            self.removeFromSuperview()
+            UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                self.overlayView.alpha = 0
+            })
         })
         delegate.cardSwipedLeft(self)
     }

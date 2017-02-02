@@ -44,6 +44,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedTacoCell") as? SavedTacosCell
         if hasSavedTacos {
+            tableView.isUserInteractionEnabled = true
             cell?.tacoName.text = savedTacos[indexPath.row]
         } else {
             tableView.isUserInteractionEnabled = false
@@ -58,7 +59,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             let cellValue = savedTacos[indexPath.row]
             self.tacoNameToPass = cellValue
             if self.tacoNameToPass != nil {
-                performSegue(withIdentifier: "RecipeVC", sender: nil)
+                performSegue(withIdentifier: "IngredientsVC", sender: nil)
             }
         } else {
             print("No tacos")
@@ -85,8 +86,8 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "RecipeVC" {
-            let myVC = segue.destination as? RecipeVC
+        if segue.identifier == "IngredientsVC" {
+            let myVC = segue.destination as? IngredientsVC
             myVC?.tacoNamePassed = self.tacoNameToPass
         }
     }

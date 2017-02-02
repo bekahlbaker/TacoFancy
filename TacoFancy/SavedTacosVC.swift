@@ -44,7 +44,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedTacoCell") as? SavedTacosCell
         if hasSavedTacos {
-            tableView.isUserInteractionEnabled = true
+            tableView.isUserInteractionEnabled = false
             cell?.tacoName.text = savedTacos[indexPath.row]
         } else {
             tableView.isUserInteractionEnabled = false

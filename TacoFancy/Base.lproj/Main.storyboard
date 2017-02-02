@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -112,7 +113,7 @@
             </objects>
             <point key="canvasLocation" x="1068.75" y="132.5"/>
         </scene>
-        <!--Recipe-->
+        <!--Ingredients-->
         <scene sceneID="NE6-bD-cYS">
             <objects>
                 <viewController id="QJ6-IH-yH8" customClass="RecipeVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
@@ -128,16 +129,75 @@
                                 <rect key="frame" x="-16" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="306" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zb8-CH-6gC">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" rowHeight="306" id="tTh-mc-w0G" customClass="RecipeCell" customModule="TacoFancy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="306"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tTh-mc-w0G" id="pYD-un-4OX">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="305"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRH-kJ-tC2">
+                                                    <rect key="frame" x="16" y="13" width="288" height="279.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="yRH-kJ-tC2" secondAttribute="trailing" constant="8" id="AOH-G9-lAo"/>
+                                                <constraint firstItem="yRH-kJ-tC2" firstAttribute="leading" secondItem="pYD-un-4OX" secondAttribute="leadingMargin" constant="8" id="F5p-pP-XPp"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="yRH-kJ-tC2" secondAttribute="bottom" constant="5" id="iY9-M2-ly4"/>
+                                                <constraint firstItem="yRH-kJ-tC2" firstAttribute="top" secondItem="pYD-un-4OX" secondAttribute="topMargin" constant="5" id="zHg-H1-UuG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="recipeLbl" destination="yRH-kJ-tC2" id="gaG-uw-fsi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zb8-CH-6gC" firstAttribute="leading" secondItem="jem-Ek-KsT" secondAttribute="leading" id="3eg-vl-yTJ"/>
+                            <constraint firstItem="zb8-CH-6gC" firstAttribute="top" secondItem="bjO-JZ-Lyb" secondAttribute="bottom" id="9H2-HZ-uJZ"/>
+                            <constraint firstAttribute="trailing" secondItem="zb8-CH-6gC" secondAttribute="trailing" id="Nr2-2b-zyh"/>
+                            <constraint firstItem="mm3-4M-nrl" firstAttribute="top" secondItem="zb8-CH-6gC" secondAttribute="bottom" id="rEq-g1-wJC"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Recipe" id="IcN-sO-sOM"/>
+                    <navigationItem key="navigationItem" title="Ingredients" id="IcN-sO-sOM"/>
+                    <connections>
+                        <outlet property="tableView" destination="zb8-CH-6gC" id="JyG-8g-yka"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8l-SE-OJe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1961" y="875"/>
+            <point key="canvasLocation" x="1959.375" y="875"/>
         </scene>
-        <!--Saved Tacos-->
+        <!--View Controller-->
+        <scene sceneID="XP6-bu-yBx">
+            <objects>
+                <viewController id="DYc-9o-c31" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dEc-IQ-Lse"/>
+                        <viewControllerLayoutGuide type="bottom" id="mOc-3z-f0M"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PmU-w3-CXL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bLY-Nk-FgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2723" y="884"/>
+        </scene>
+        <!--Tacos-->
         <scene sceneID="5ys-l7-EkM">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="vOB-ZP-Wnp" customClass="SavedTacosVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
@@ -167,7 +227,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JqR-fT-ALe">
                                                     <rect key="frame" x="16" y="5" width="288" height="40"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -194,7 +254,7 @@
                             <constraint firstItem="icY-h6-n4c" firstAttribute="leading" secondItem="Zg9-j1-LHs" secondAttribute="leading" id="pTl-gY-zhF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Saved Tacos" id="t4J-8T-ndS">
+                    <navigationItem key="navigationItem" title="Tacos" id="t4J-8T-ndS">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="zvZ-zA-rZQ">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="presentation" identifier="MainVC" modalPresentationStyle="overCurrentContext" id="eu5-jS-bMX"/>
@@ -203,6 +263,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="icY-h6-n4c" id="qWc-sI-7a5"/>
+                        <segue destination="QJ6-IH-yH8" kind="show" identifier="RecipeVC" id="0mH-vh-L7m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="at3-ci-xzg" userLabel="First Responder" sceneMemberID="firstResponder"/>

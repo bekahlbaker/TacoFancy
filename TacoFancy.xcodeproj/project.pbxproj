@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		27017B421E3C09BD00DD090D /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B411E3C09BD00DD090D /* MainVC.swift */; };
-		27017B441E3C09D900DD090D /* FIrstLaunchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B431E3C09D900DD090D /* FIrstLaunchVC.swift */; };
 		27017B4A1E3C0A4400DD090D /* RecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B491E3C0A4400DD090D /* RecipeVC.swift */; };
 		27017B521E3FACBA00DD090D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B511E3FACBA00DD090D /* DataService.swift */; };
 		27017B541E3FB80400DD090D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27017B531E3FB80400DD090D /* GoogleService-Info.plist */; };
@@ -34,7 +33,6 @@
 /* Begin PBXFileReference section */
 		0550F7DEE54ED83AE02ECEBB /* Pods-TacoFancy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TacoFancy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TacoFancy/Pods-TacoFancy.debug.xcconfig"; sourceTree = "<group>"; };
 		27017B411E3C09BD00DD090D /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		27017B431E3C09D900DD090D /* FIrstLaunchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIrstLaunchVC.swift; sourceTree = "<group>"; };
 		27017B491E3C0A4400DD090D /* RecipeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeVC.swift; sourceTree = "<group>"; };
 		27017B511E3FACBA00DD090D /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		27017B531E3FB80400DD090D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -75,7 +73,6 @@
 		27017B3C1E3C090100DD090D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				27017B431E3C09D900DD090D /* FIrstLaunchVC.swift */,
 				27017B411E3C09BD00DD090D /* MainVC.swift */,
 				27017B611E42623800DD090D /* SavedTacosVC.swift */,
 				27017B6D1E43AB2F00DD090D /* IngredientsVC.swift */,
@@ -320,7 +317,6 @@
 				273271B31DA960AB001AF568 /* AppDelegate.swift in Sources */,
 				27017B561E3FC71700DD090D /* Taco.swift in Sources */,
 				27017B421E3C09BD00DD090D /* MainVC.swift in Sources */,
-				27017B441E3C09D900DD090D /* FIrstLaunchVC.swift in Sources */,
 				27017B6E1E43AB2F00DD090D /* IngredientsVC.swift in Sources */,
 				27017B581E3FE95B00DD090D /* Constants.swift in Sources */,
 				27017B661E42BDDB00DD090D /* RecipeCell.swift in Sources */,

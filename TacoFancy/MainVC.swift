@@ -11,27 +11,58 @@ import Firebase
 import SwiftKeychainWrapper
 
 class MainVC: UIViewController {
-
+    
+    @IBOutlet weak var menuBtn: UIButton!
+    @IBAction func menuBtnTapped(_ sender: Any) {
+        performSegue(withIdentifier: "SavedTacosVC", sender: nil)
+    }
+    @IBAction func menuBtnTapped2(_ sender: Any) {
+        performSegue(withIdentifier: "SavedTacosVC", sender: nil)
+    }
+    
+    @IBOutlet weak var onboardView: UIView!
+    @IBOutlet weak var dismissOnboardBtn: UIButton!
+    @IBAction func dismissOnboardBtnTapped(_ sender: Any) {
+        onboardView.isHidden = true
+        dismissOnboardBtn.isHidden = true
+    }
+    
+    
+    @IBOutlet weak var tacoQuoteLbl: UILabel!
+    
     var taco: Taco!
     var tacos = [Taco]()
-    var tacoButton: UIButton!
-    
-    @IBOutlet weak var fullTacoName: UILabel!
+
     @IBOutlet weak var tacoBtn: UIButton!
     @IBAction func tacoBtnTapped(_ sender: Any) {
         let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
         self.view.addSubview(draggableBackground)
         tacoBtn.isHidden = true
+        tacoQuoteLbl.isHidden = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tacoButton = UIButton(frame: CGRect(x: view.bounds.maxX - 70, y: 10, width: 59, height: 59))
-        tacoButton.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin]
-        tacoButton.setImage(UIImage(named: "taco3"), for: UIControlState())
-        tacoButton.addTarget(self, action: #selector(openSavedTacos), for: UIControlEvents.touchUpInside)
-        view.addSubview(tacoButton)
+        onboardView.isHidden = true
+        dismissOnboardBtn.isHidden = true
+        
+        if(UserDefaults.standard.bool(forKey: "HasLaunchedOnce"))
+        {
+            // app already launched
+            print("NOT first launch")
+        }
+        else
+        {
+            // This is the first launch ever
+            print("FIRST launch")
+            onboardView.isHidden = false
+            dismissOnboardBtn.isHidden = false
+            UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
+            UserDefaults.standard.synchronize()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showOnboard(notification:)), name:NSNotification.Name(rawValue: "showOnboard"), object: nil)
         
 //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
 //        try! FIRAuth.auth()?.signOut()
@@ -54,66 +85,27 @@ class MainVC: UIViewController {
             })
         }
         
-    NotificationCenter.default.addObserver(self, selector: #selector(openSavedTacos(notification:)), name:NSNotification.Name(rawValue: "openSavedTacos"), object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(tacoGlow(notification:)), name:NSNotification.Name(rawValue: "tacoGlow"), object: nil)
+        
+    NotificationCenter.default.addObserver(self, selector: #selector(stopTacoGlow(notification:)), name:NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
     }
     
-    func openSavedTacos(notification: NSNotification) {
-        performSegue(withIdentifier: "SavedTacosVC", sender: nil)
-    }
-    
-    @IBAction func tossBtnTapped(_ sender: Any) {
-        getRandomTaco()
+    func showOnboard(notification: NSNotification){
+        print("Showing onboard")
+        performSegue(withIdentifier: "FirstLaunchVC", sender: nil)
     }
 
-    @IBAction func saveBtnTapped(_ sender: Any) {
-        saveTaco(taco)
+    func tacoGlow(notification: NSNotification) {
+        menuBtn.layer.shadowColor = UIColor.yellow.cgColor
+        menuBtn.layer.shadowRadius = 10.0
+        menuBtn.layer.shadowOffset = CGSize.zero
+        menuBtn.layer.shadowOpacity = 1.0
     }
     
-    func getRandomTaco() {
-        print("GETTING RANDOM TACO")
-        guard let url = URL(string: random) else {
-            print("Cannot create URL")
-            return
-        }
-        let urlRequest = URLRequest(url: url)
-        let session = URLSession.shared
-        let task = session.dataTask(with: urlRequest) { (data, response, error) in
-            
-            self.tacos = []
-            
-            if error != nil {
-                print(error as Any)
-            } else {
-                if let urlContent = data {
-                    do {
-                        let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: []) as? [String: Any]
-//                        print(jsonResult as Any)
-                            if let taco = Taco(json: jsonResult!) {
-                                DispatchQueue.main.async {
-                                    self.tacoBtn.isHidden = true
-                                    self.configureTaco(taco)
-                                }
-                            }
-                    } catch {
-                        print("JSON processing failed.")
-                    }
-                }
-            }
-        }
-        task.resume()
-        
-        let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
-        self.view.addSubview(draggableBackground)
-    }
-    
-    func configureTaco(_ taco: Taco) {
-        self.taco = taco
-        self.fullTacoName.text = taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell
-    }
-    
-    func saveTaco(_ taco: Taco) {
-        self.taco = taco
-        let tacoToSave = ["base-layer": taco.baseLayer, "condiment": taco.condiment, "mixin": taco.mixin, "seasoning": taco.seasoning, "shell": taco.shell]
-        DataService.ds.REF_CURRENT_USER.child("saved-tacos").child(taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell).updateChildValues(tacoToSave)
+    func stopTacoGlow(notification: NSNotification) {
+        menuBtn.layer.shadowColor = UIColor.clear.cgColor
+        menuBtn.layer.shadowRadius = 10.0
+        menuBtn.layer.shadowOffset = CGSize.zero
+        menuBtn.layer.shadowOpacity = 1.0
     }
 }

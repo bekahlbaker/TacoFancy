@@ -14,9 +14,9 @@ import Firebase
 class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     let MAX_BUFFER_SIZE = 2
-    let CARD_HEIGHT: CGFloat = 300
-    let CARD_WIDTH: CGFloat = 300
-    
+    var CARD_HEIGHT: CGFloat = 250
+    var CARD_WIDTH: CGFloat = 250
+
     var loadedCard: DraggableView!
     var newCard: DraggableView!
     var menuButton: UIButton!
@@ -78,6 +78,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func saveTaco(_ taco: Taco) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tacoGlow"), object: nil)
         self.taco = taco
         let tacoToSave = ["base-layer": taco.baseLayer, "condiment": taco.condiment, "mixin": taco.mixin, "seasoning": taco.seasoning, "shell": taco.shell]
         DataService.ds.REF_CURRENT_USER.child("saved-tacos").child(taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell).updateChildValues(tacoToSave)
@@ -87,29 +88,32 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func setupView() -> Void {
         print("SETUP VIEW")
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+
+        CARD_WIDTH = screenWidth * 0.75
+        CARD_HEIGHT = screenHeight * 0.33
+
+
         self.backgroundColor = UIColor.clear
-        
-        tacoButton = UIButton(frame: CGRect(x: self.bounds.maxX - 70, y: 10, width: 59, height: 59))
-        tacoButton.autoresizingMask = [.flexibleRightMargin, .flexibleBottomMargin]
-        tacoButton.setImage(UIImage(named: "taco3"), for: UIControlState())
-        tacoButton.addTarget(self, action: #selector(openSavedTacos), for: UIControlEvents.touchUpInside)
-        
-        xButton = UIButton(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2 + 35, y: self.frame.size.height/2 + CARD_HEIGHT/2 + 10, width: 50, height: 50))
-        xButton.setImage(UIImage(named: "no"), for: UIControlState())
+        self.frame = CGRect(x: 0, y: 85, width: screenWidth, height: screenHeight - 85)
+
+        xButton = UIButton(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2 + 35, y: self.frame.size.height/2 + CARD_HEIGHT/2, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
+        xButton.setImage(UIImage(named: "redXBtn"), for: UIControlState())
         xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), for: UIControlEvents.touchUpInside)
         
-        checkButton = UIButton(frame: CGRect(x: self.frame.size.width/2 + CARD_WIDTH/2 - 85, y: self.frame.size.height/2 + CARD_HEIGHT/2 + 10, width: 59, height: 59))
-        checkButton.setImage(UIImage(named: "yes"), for: UIControlState())
+        checkButton = UIButton(frame: CGRect(x: self.frame.size.width/2 + CARD_WIDTH/2 - 85, y: self.frame.size.height/2 + CARD_HEIGHT/2, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
+        checkButton.setImage(UIImage(named: "greenCheckBtn"), for: UIControlState())
         checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), for: UIControlEvents.touchUpInside)
         
         self.addSubview(xButton)
         self.addSubview(checkButton)
-        self.addSubview(tacoButton)
     }
     
     func createDraggableViewWithData() -> DraggableView {
         print("CREATE DRAGGABLE VIEW")
-        let draggableView = DraggableView(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2, y: (self.frame.size.height - CARD_HEIGHT)/2, width: CARD_WIDTH, height: CARD_HEIGHT))
+        let draggableView = DraggableView(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2, y: (self.frame.size.height - CARD_HEIGHT)/2 - 50 , width: CARD_WIDTH, height: CARD_HEIGHT))
         draggableView.information.text = tacoString
         draggableView.delegate = self
         return draggableView
@@ -122,18 +126,8 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             () -> Void in
             print("INSERTING NEXT CARD")
             self.insertSubview(self.loadedCard, belowSubview: self.loadedCard)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
         })
-    }
-    
-    //Adds new card to view after swiping
-    func cardSwipedLeft(_ card: UIView) -> Void {
-        print("Drag 5.CARD SWIPED LEFT")
-        getRandomTaco()
-    }
-    func cardSwipedRight(_ card: UIView) -> Void {
-        print("Drag 5.CARD SWIPED RIGHT")
-        saveTaco(taco)
-        getRandomTaco()
     }
     
     //Adds new card to view after clicking

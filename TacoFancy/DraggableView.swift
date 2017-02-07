@@ -18,8 +18,6 @@ let ROTATION_STRENGTH: Float = 310
 let ROTATION_ANGLE: Float = 3.14/8
 
 protocol DraggableViewDelegate {
-    func cardSwipedLeft(_ card: UIView) -> Void
-    func cardSwipedRight(_ card: UIView) -> Void
     func cardClickedLeft(_ card: UIView) -> Void
     func cardClickedRight(_ card: UIView) -> Void
 }
@@ -42,12 +40,14 @@ class DraggableView: UIView {
         
         self.setupView()
         
+        let regularFont = UIFont(name: "Avenir-Light", size: 13)
+        
         information = UILabel(frame: CGRect(x: 0, y: 50, width: self.frame.size.width - 20, height: 200))
         information.center = CGPoint(x: Int(self.frame.size.width/2), y: Int(self.frame.size.height/2))
         information.numberOfLines = 0
-        information.text = "no info given"
         information.textAlignment = NSTextAlignment.center
         information.textColor = UIColor.black
+        information.font = regularFont
         
         self.backgroundColor = UIColor.white
         
@@ -109,8 +109,10 @@ class DraggableView: UIView {
         print("Drag 2.UPDATE OVERLAY")
         if distance > 0 {
             overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeRight)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tacoGlow"), object: nil)
         } else {
             overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeLeft)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
         }
         overlayView.alpha = CGFloat(min(fabsf(Float(distance))/100, 0.4))
     }
@@ -124,6 +126,7 @@ class DraggableView: UIView {
         } else if floatXFromCenter < -ACTION_MARGIN {
             self.leftAction()
         } else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
             UIView.animate(withDuration: 0.3, animations: {() -> Void in
                 self.center = self.originPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
@@ -135,6 +138,7 @@ class DraggableView: UIView {
     //Removes card from screen
     func rightAction() -> Void {
         print("Drag 4.RIGHT ACTION")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tacoGlow"), object: nil)
         let finishPoint: CGPoint = CGPoint(x: 600, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
         UIView.animate(withDuration: 0.3,
                        animations: {
@@ -142,11 +146,12 @@ class DraggableView: UIView {
         }, completion: {
             (value: Bool) in
             self.removeFromSuperview()
-            self.delegate.cardSwipedRight(self)
+            self.delegate.cardClickedRight(self)
         })
     }
     func leftAction() -> Void {
         print("Drag 4.LEFT ACTION")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
         let finishPoint: CGPoint = CGPoint(x: -600, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
         UIView.animate(withDuration: 0.3,
                        animations: {
@@ -154,7 +159,7 @@ class DraggableView: UIView {
         }, completion: {
             (value: Bool) in
             self.removeFromSuperview()
-            self.delegate.cardSwipedLeft(self)
+            self.delegate.cardClickedLeft(self)
         })
     }
     

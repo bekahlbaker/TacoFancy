@@ -26,7 +26,7 @@ class OverlayView: UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
-        imageView = UIImageView(image: UIImage(named: "no"))
+        imageView = UIImageView(image: UIImage(named: "redXBtn"))
         self.addSubview(imageView)
     }
     
@@ -37,14 +37,14 @@ class OverlayView: UIView{
         _mode = mode
         
         if _mode == GGOverlayViewMode.ggOverlayViewModeLeft {
-            imageView.image = UIImage(named: "no")
+            imageView.image = UIImage(named: "redXBtn")
         } else {
-            imageView.image = UIImage(named: "yes")
+            imageView.image = UIImage(named: "greenCheckBtn")
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.frame = CGRect(x: 50, y: 50, width: 100, height: 100)
+        imageView.frame = CGRect(x: 75, y: 75, width: 100, height: 100)
     }
 }

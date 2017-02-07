@@ -35,16 +35,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clearTacoQuote"), object: nil)
+        
         let indexToUse = UserDefaults.standard.integer(forKey: "index")
-        if indexToUse < 24 {
+        if indexToUse < 39 {
             let indexToStore = indexToUse + 1
             UserDefaults.standard.set(indexToStore, forKey: "index")
             print("APP DELEGATE BACKGROUND: \(indexToStore)")
-        } else if indexToUse == 24 {
+        } else if indexToUse == 39 {
             UserDefaults.standard.set(0, forKey: "index")
             print("APP DELEGATE BACKGROUND: \(indexToUse)")
         }
-        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

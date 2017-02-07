@@ -32,7 +32,6 @@ class MainVC: UIViewController {
     
     var taco: Taco!
     var tacos = [Taco]()
-    var index = 0
     
     @IBOutlet weak var tacoBtn: UIButton!
     @IBAction func tacoBtnTapped(_ sender: Any) {
@@ -43,14 +42,13 @@ class MainVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        showTacoQuote()
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let indexToSave = index
-        UserDefaults.standard.set(indexToSave + 1, forKey: "index")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
         
         onboardView.isHidden = true
         dismissOnboardBtn.isHidden = true
@@ -68,9 +66,8 @@ class MainVC: UIViewController {
             dismissOnboardBtn.isHidden = false
             UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
             UserDefaults.standard.synchronize()
+            UserDefaults.standard.set(0, forKey: "index")
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(showOnboard(notification:)), name:NSNotification.Name(rawValue: "showOnboard"), object: nil)
         
         //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         //        try! FIRAuth.auth()?.signOut()
@@ -96,11 +93,8 @@ class MainVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(tacoGlow(notification:)), name:NSNotification.Name(rawValue: "tacoGlow"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(stopTacoGlow(notification:)), name:NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
-    }
-    
-    func showOnboard(notification: NSNotification){
-        print("Showing onboard")
-        performSegue(withIdentifier: "FirstLaunchVC", sender: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showTacoQuote(notification:)), name:NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
     }
     
     func tacoGlow(notification: NSNotification) {
@@ -117,17 +111,14 @@ class MainVC: UIViewController {
         menuBtn.layer.shadowOpacity = 1.0
     }
     
-    func showTacoQuote() {
-        var indexToUse: Int = UserDefaults.standard.object(forKey: "index") as! Int
+    func showTacoQuote(notification: NSNotification) {
+        let indexToUse = UserDefaults.standard.integer(forKey: "index")
+        print("VIEW APPEAR \(indexToUse)")
         let pList = Bundle.main.path(forResource: "TacoQuotes", ofType: "plist")
         guard let content = NSDictionary(contentsOfFile: pList!) as? [String:[String]] else {
             fatalError()
         }
         guard let quoteArray = content["Quote"] else { fatalError() }
-        if indexToUse < quoteArray.count {
-            self.tacoQuoteLbl.text = quoteArray[indexToUse]
-        } else if indexToUse == quoteArray.count {
-            indexToUse = 0
-        }
+        self.tacoQuoteLbl.text = quoteArray[indexToUse]
     }
 }

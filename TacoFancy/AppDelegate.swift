@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
+        
         FIRApp.configure()
         return true
         
@@ -32,20 +34,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        let indexToUse = UserDefaults.standard.integer(forKey: "index")
+        if indexToUse < 24 {
+            let indexToStore = indexToUse + 1
+            UserDefaults.standard.set(indexToStore, forKey: "index")
+            print("APP DELEGATE BACKGROUND: \(indexToStore)")
+        } else if indexToUse == 24 {
+            UserDefaults.standard.set(0, forKey: "index")
+            print("APP DELEGATE BACKGROUND: \(indexToUse)")
+        }
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        let indexToUse = UserDefaults.standard.integer(forKey: "index")
+        print("APP DELEGATE FOREGROUND : \(indexToUse)")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

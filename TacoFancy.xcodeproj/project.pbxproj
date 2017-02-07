@@ -19,7 +19,6 @@
 		27017B621E42623800DD090D /* SavedTacosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B611E42623800DD090D /* SavedTacosVC.swift */; };
 		27017B641E42766B00DD090D /* SavedTacosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B631E42766B00DD090D /* SavedTacosCell.swift */; };
 		27017B661E42BDDB00DD090D /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B651E42BDDB00DD090D /* RecipeCell.swift */; };
-		27017B6C1E43A54200DD090D /* BoldTitle+NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B6B1E43A54200DD090D /* BoldTitle+NSMutableAttributedString.swift */; };
 		27017B6E1E43AB2F00DD090D /* IngredientsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27017B6D1E43AB2F00DD090D /* IngredientsVC.swift */; };
 		273271B31DA960AB001AF568 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273271B21DA960AB001AF568 /* AppDelegate.swift */; };
 		273271B81DA960AB001AF568 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273271B61DA960AB001AF568 /* Main.storyboard */; };
@@ -27,6 +26,7 @@
 		273271BD1DA960AB001AF568 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273271BB1DA960AB001AF568 /* LaunchScreen.storyboard */; };
 		273271C61DA9A5D4001AF568 /* mexican-fiesta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */; };
 		273271C81DA9AA9A001AF568 /* DOSEQUIS.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */; };
+		279860451E4A3D04008B4345 /* TacoQuotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 279860441E4A3D04008B4345 /* TacoQuotes.plist */; };
 		373916E762872071ED087E43 /* Pods_TacoFancy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB73ACB8DC76DB800BC806B3 /* Pods_TacoFancy.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +44,6 @@
 		27017B611E42623800DD090D /* SavedTacosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTacosVC.swift; sourceTree = "<group>"; };
 		27017B631E42766B00DD090D /* SavedTacosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTacosCell.swift; sourceTree = "<group>"; };
 		27017B651E42BDDB00DD090D /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
-		27017B6B1E43A54200DD090D /* BoldTitle+NSMutableAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BoldTitle+NSMutableAttributedString.swift"; path = "../../../.Trash/BoldTitle+NSMutableAttributedString.swift"; sourceTree = "<group>"; };
 		27017B6D1E43AB2F00DD090D /* IngredientsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsVC.swift; sourceTree = "<group>"; };
 		273271AF1DA960AB001AF568 /* TacoFancy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TacoFancy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		273271B21DA960AB001AF568 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +53,7 @@
 		273271BE1DA960AB001AF568 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mexican-fiesta.ttf"; sourceTree = "<group>"; };
 		273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = DOSEQUIS.TTF; sourceTree = "<group>"; };
+		279860441E4A3D04008B4345 /* TacoQuotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TacoQuotes.plist; sourceTree = "<group>"; };
 		8A2BD763FD764AF26EB598B5 /* Pods-TacoFancy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TacoFancy.release.xcconfig"; path = "Pods/Target Support Files/Pods-TacoFancy/Pods-TacoFancy.release.xcconfig"; sourceTree = "<group>"; };
 		AB73ACB8DC76DB800BC806B3 /* Pods_TacoFancy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TacoFancy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				27017B551E3FC71700DD090D /* Taco.swift */,
+				279860441E4A3D04008B4345 /* TacoQuotes.plist */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -104,7 +105,6 @@
 		27017B3F1E3C091C00DD090D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				27017B6B1E43A54200DD090D /* BoldTitle+NSMutableAttributedString.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -246,6 +246,7 @@
 			files = (
 				273271BD1DA960AB001AF568 /* LaunchScreen.storyboard in Resources */,
 				273271C61DA9A5D4001AF568 /* mexican-fiesta.ttf in Resources */,
+				279860451E4A3D04008B4345 /* TacoQuotes.plist in Resources */,
 				273271BA1DA960AB001AF568 /* Assets.xcassets in Resources */,
 				273271C81DA9AA9A001AF568 /* DOSEQUIS.TTF in Resources */,
 				273271B81DA960AB001AF568 /* Main.storyboard in Resources */,
@@ -320,7 +321,6 @@
 				27017B6E1E43AB2F00DD090D /* IngredientsVC.swift in Sources */,
 				27017B581E3FE95B00DD090D /* Constants.swift in Sources */,
 				27017B661E42BDDB00DD090D /* RecipeCell.swift in Sources */,
-				27017B6C1E43A54200DD090D /* BoldTitle+NSMutableAttributedString.swift in Sources */,
 				27017B621E42623800DD090D /* SavedTacosVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

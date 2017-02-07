@@ -46,19 +46,21 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell?.recipeLbl.text = "Sorry. We can't find this ingredient. Please try again."
         } else {
             let regularFont = UIFont(name: "Avenir-Light", size: 13)
-            let boldFont = UIFont(name: "Avenir-Medium", size: 14)
-            
+            let mediumFont = UIFont(name: "Avenir-Medium", size: 14)
+            let boldFont = UIFont(name: "Avenir-Heavy", size: 14)
+            let linkColor = UIColor(red:0.00, green:0.64, blue:0.66, alpha:1.0)
+
             let ingredients = String(recipe[indexPath.row])
             let ingredient = String(ingredients!.characters.prefix(100)) + "..."
             let title = String(savedTaco[indexPath.row])
             let wordRange = (ingredient as NSString).range(of: title!)
             let attributedString = NSMutableAttributedString(string: ingredient, attributes: [NSFontAttributeName: regularFont as Any])
-            attributedString.setAttributes([NSFontAttributeName : boldFont as Any, NSForegroundColorAttributeName : UIColor.black], range: wordRange)
+            attributedString.setAttributes([NSFontAttributeName : mediumFont as Any, NSForegroundColorAttributeName : UIColor.black], range: wordRange)
             
             let viewMore = "\nView Full Recipe"
             let viewMoreRange = (viewMore as NSString).range(of: viewMore)
             let viewMoreAttributedString = NSMutableAttributedString(string: viewMore, attributes: [NSFontAttributeName: boldFont as Any])
-            viewMoreAttributedString.setAttributes([NSFontAttributeName : boldFont as Any, NSForegroundColorAttributeName : UIColor.blue], range: viewMoreRange)
+            viewMoreAttributedString.setAttributes([NSFontAttributeName : boldFont as Any, NSForegroundColorAttributeName : linkColor], range: viewMoreRange)
             
             let combination = NSMutableAttributedString()
             combination.append(attributedString)

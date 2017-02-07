@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import QuartzCore
 
 class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -26,7 +27,9 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         tableView.estimatedRowHeight = 50
         
         downloadSavedTacos()
+        setUpGradientNavBar()
     }
+    
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -91,5 +94,32 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             let myVC = segue.destination as? IngredientsVC
             myVC?.tacoNamePassed = self.tacoNameToPass
         }
+    }
+    
+    func setUpGradientNavBar() {
+        let titleFont = UIFont(name: "Avenir-Heavy", size: 18)
+        let backFont = UIFont(name: "Avenir-Medium", size: 16)
+        let orange = UIColor(red:0.95, green:0.58, blue:0.00, alpha:1.0)
+        let yellow = UIColor(red:0.99, green:0.77, blue:0.07, alpha:1.0)
+        let darkOrange = UIColor(red:0.91, green:0.32, blue:0.05, alpha:1.0)
+        let gradientLayer = CAGradientLayer()
+        var updatedFrame = self.navigationController!.navigationBar.bounds
+        let navAppearence = UINavigationBar.appearance()
+        updatedFrame.size.height += 20
+        gradientLayer.frame = updatedFrame
+        gradientLayer.colors = [orange.cgColor, yellow.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 0.8)
+        
+        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        self.navigationController!.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+        navAppearence.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navAppearence.titleTextAttributes = [NSFontAttributeName: titleFont!]
+        navAppearence.tintColor = darkOrange
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: backFont!], for: .normal)
     }
 }

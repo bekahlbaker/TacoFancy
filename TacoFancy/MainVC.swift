@@ -32,7 +32,8 @@ class MainVC: UIViewController {
     
     var taco: Taco!
     var tacos = [Taco]()
-
+    var index = 0
+    
     @IBOutlet weak var tacoBtn: UIButton!
     @IBAction func tacoBtnTapped(_ sender: Any) {
         let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
@@ -41,8 +42,15 @@ class MainVC: UIViewController {
         tacoQuoteLbl.isHidden = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        showTacoQuote()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let indexToSave = index
+        UserDefaults.standard.set(indexToSave + 1, forKey: "index")
         
         onboardView.isHidden = true
         dismissOnboardBtn.isHidden = true
@@ -64,8 +72,8 @@ class MainVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(showOnboard(notification:)), name:NSNotification.Name(rawValue: "showOnboard"), object: nil)
         
-//        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
-//        try! FIRAuth.auth()?.signOut()
+        //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
+        //        try! FIRAuth.auth()?.signOut()
         
         if KeychainWrapper.standard.string(forKey: KEY_UID) != nil {
             let currentUser = KeychainWrapper.standard.string(forKey: KEY_UID)! as String
@@ -85,16 +93,16 @@ class MainVC: UIViewController {
             })
         }
         
-    NotificationCenter.default.addObserver(self, selector: #selector(tacoGlow(notification:)), name:NSNotification.Name(rawValue: "tacoGlow"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(tacoGlow(notification:)), name:NSNotification.Name(rawValue: "tacoGlow"), object: nil)
         
-    NotificationCenter.default.addObserver(self, selector: #selector(stopTacoGlow(notification:)), name:NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(stopTacoGlow(notification:)), name:NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
     }
     
     func showOnboard(notification: NSNotification){
         print("Showing onboard")
         performSegue(withIdentifier: "FirstLaunchVC", sender: nil)
     }
-
+    
     func tacoGlow(notification: NSNotification) {
         menuBtn.layer.shadowColor = UIColor.yellow.cgColor
         menuBtn.layer.shadowRadius = 10.0
@@ -107,5 +115,19 @@ class MainVC: UIViewController {
         menuBtn.layer.shadowRadius = 10.0
         menuBtn.layer.shadowOffset = CGSize.zero
         menuBtn.layer.shadowOpacity = 1.0
+    }
+    
+    func showTacoQuote() {
+        var indexToUse: Int = UserDefaults.standard.object(forKey: "index") as! Int
+        let pList = Bundle.main.path(forResource: "TacoQuotes", ofType: "plist")
+        guard let content = NSDictionary(contentsOfFile: pList!) as? [String:[String]] else {
+            fatalError()
+        }
+        guard let quoteArray = content["Quote"] else { fatalError() }
+        if indexToUse < quoteArray.count {
+            self.tacoQuoteLbl.text = quoteArray[indexToUse]
+        } else if indexToUse == quoteArray.count {
+            indexToUse = 0
+        }
     }
 }

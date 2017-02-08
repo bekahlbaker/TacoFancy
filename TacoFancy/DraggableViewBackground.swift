@@ -142,6 +142,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
     }
     func cardClickedRight(_ card: UIView) -> Void {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
         print("Clicked 3.CARD SWIPED RIGHT")
         saveTaco(taco)
         Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)

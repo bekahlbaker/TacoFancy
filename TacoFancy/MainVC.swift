@@ -32,10 +32,7 @@ class MainVC: UIViewController {
             UserDefaults.standard.synchronize()
             print("Has tapped once")
         }
-        let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
-        self.view.addSubview(draggableBackground)
-        tacoBtn.isHidden = true
-        tacoQuoteLbl.isHidden = true
+        checkForHasSwipedOnce()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,10 +70,56 @@ class MainVC: UIViewController {
         }
     }
     
+    func checkForHasSwipedOnce() {
+        if(UserDefaults.standard.bool(forKey: "HasSwipedOnce"))
+        {
+            // app already launched
+            print("NOT first launch")
+            let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
+            self.view.addSubview(draggableBackground)
+            tacoBtn.isHidden = true
+            tacoQuoteLbl.isHidden = true
+        }
+        else
+        {
+            // This is the first launch ever
+            print("FIRST launch")
+            UserDefaults.standard.set(true, forKey: "HasSwipedOnce")
+            UserDefaults.standard.synchronize()
+            let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
+            self.view.insertSubview(draggableBackground, at: 1)
+            tacoBtn.isHidden = true
+            tacoQuoteLbl.isHidden = true
+            swipeOnboard.isHidden = false
+        }
+    }
+    
+    func checkForHasSavedTacoOnce(notification: NSNotification) {
+        if(UserDefaults.standard.bool(forKey: "HasSavedTacosOnce"))
+        {
+            // app already launched
+            print("NOT first launch")
+            let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
+            self.view.addSubview(draggableBackground)
+            tacoBtn.isHidden = true
+            tacoQuoteLbl.isHidden = true
+        }
+        else
+        {
+            // This is the first launch ever
+            print("FIRST launch")
+            UserDefaults.standard.set(true, forKey: "HasSavedTacosOnce")
+            UserDefaults.standard.synchronize()
+            savedTacosOnboard.isHidden = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mainOnboard.isHidden = true
+        swipeOnboard.isHidden = true
+        savedTacosOnboard.isHidden = true
         
         _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(MainVC.checkForHasTappedOnce), userInfo: nil, repeats: false)
         
@@ -108,6 +151,8 @@ class MainVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showTacoQuote(notification:)), name:NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(clearTacoQuote(notification:)), name:NSNotification.Name(rawValue: "clearTacoQuote"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkForHasSavedTacoOnce(notification:)), name:NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
     }
     
     func tacoGlow(notification: NSNotification) {
@@ -146,5 +191,14 @@ class MainVC: UIViewController {
     @IBOutlet weak var mainOnboard: UIView!
     @IBAction func gotItBtnTapped(_ sender: Any) {
         mainOnboard.isHidden = true
+    }
+    
+    @IBOutlet weak var swipeOnboard: UIView!
+    @IBAction func swipeGotItBtnTapped(_ sender: Any) {
+        swipeOnboard.isHidden = true
+    }
+    @IBOutlet weak var savedTacosOnboard: UIView!
+    @IBAction func savedBtnGotItTapped(_ sender: Any) {
+        savedTacosOnboard.isHidden = true
     }
 }

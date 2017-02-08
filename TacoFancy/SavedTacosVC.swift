@@ -21,6 +21,9 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        savedTacosOnboard.isHidden = true
+        checkForHasOpenedTacosOnce()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -67,6 +70,13 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             }
         } else {
             print("No tacos")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.savedTacos.remove(at: indexPath.row)
+            self.tableView.reloadData()
         }
     }
     
@@ -122,4 +132,27 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         navAppearence.tintColor = darkOrange
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: backFont!], for: .normal)
     }
+    
+    @IBOutlet weak var savedTacosOnboard: UIView!
+    @IBAction func tacosGotItBtnTapped(_ sender: Any) {
+        savedTacosOnboard.isHidden = true
+    }
+    
+    func checkForHasOpenedTacosOnce() {
+        if(UserDefaults.standard.bool(forKey: "HasOpenedTacosOnce"))
+        {
+            // app already launched
+            print("NOT first launch")
+            savedTacosOnboard.isHidden = true
+        }
+        else
+        {
+            // This is the first launch ever
+            print("FIRST launch")
+            UserDefaults.standard.set(true, forKey: "HasOpenedTacosOnce")
+            UserDefaults.standard.synchronize()
+            savedTacosOnboard.isHidden = false
+        }
+    }
+    
 }

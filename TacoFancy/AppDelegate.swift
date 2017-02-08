@@ -23,11 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             // app already launched
             print("NOT first launch")
-            
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "Main")
-            self.window?.rootViewController = viewController
         }
         else
         {
@@ -36,11 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
             UserDefaults.standard.synchronize()
             UserDefaults.standard.set(0, forKey: "index")
-            
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "OnboardNav")
-            self.window?.rootViewController = viewController
         }
         
         FIRApp.configure()

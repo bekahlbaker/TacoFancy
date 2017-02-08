@@ -27,6 +27,11 @@ class MainVC: UIViewController {
     
     @IBOutlet weak var tacoBtn: UIButton!
     @IBAction func tacoBtnTapped(_ sender: Any) {
+        DispatchQueue.global().async {
+            UserDefaults.standard.set(true, forKey: "HasTappedOnce")
+            UserDefaults.standard.synchronize()
+            print("Has tapped once")
+        }
         let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
         self.view.addSubview(draggableBackground)
         tacoBtn.isHidden = true
@@ -47,8 +52,33 @@ class MainVC: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
     }
     
+    func showMainOnboard() {
+        mainOnboard.isHidden = false
+    }
+    
+    func checkForHasTappedOnce() {
+        if(UserDefaults.standard.bool(forKey: "HasTappedOnce"))
+        {
+            // app already launched
+            print("NOT first launch")
+            mainOnboard.isHidden = true
+        }
+        else
+        {
+            // This is the first launch ever
+            print("FIRST launch")
+            UserDefaults.standard.set(true, forKey: "HasTappedOnce")
+            UserDefaults.standard.synchronize()
+            _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainVC.showMainOnboard), userInfo: nil, repeats: false)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainOnboard.isHidden = true
+        
+        _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(MainVC.checkForHasTappedOnce), userInfo: nil, repeats: false)
         
         //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         //        try! FIRAuth.auth()?.signOut()
@@ -111,5 +141,10 @@ class MainVC: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.tacoQuoteLbl.alpha = 1
         }
+    }
+    
+    @IBOutlet weak var mainOnboard: UIView!
+    @IBAction func gotItBtnTapped(_ sender: Any) {
+        mainOnboard.isHidden = true
     }
 }

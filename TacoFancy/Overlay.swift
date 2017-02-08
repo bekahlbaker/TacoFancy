@@ -25,7 +25,7 @@ class OverlayView: UIView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.clear
         imageView = UIImageView(image: UIImage(named: "redXBtn"))
         self.addSubview(imageView)
     }
@@ -45,6 +45,6 @@ class OverlayView: UIView{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.frame = CGRect(x: 75, y: 75, width: 100, height: 100)
+        imageView.frame = CGRect(x: 50, y: 50, width: 100, height: 100)
     }
 }

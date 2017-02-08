@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -157,7 +157,7 @@
                                 <rect key="frame" x="-16" y="101" width="352" height="300"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaK-Zh-T6P">
-                                <rect key="frame" x="16" y="456" width="288" height="20.5"/>
+                                <rect key="frame" x="16" y="456" width="288" height="21"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="0.83921568627450982" green="0.0" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -173,6 +173,7 @@
                                         <fontDescription key="fontDescription" name="Mexicanfiesta-Bold" family="Mexican fiesta" pointSize="60"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJ0-yD-mLz">
                                         <rect key="frame" x="260" y="23" width="50" height="30"/>
@@ -227,26 +228,72 @@
                                     <action selector="tacoBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k42-e3-Q9K"/>
                                 </connections>
                             </button>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQE-Cb-fgT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tap" translatesAutoresizingMaskIntoConstraints="NO" id="pat-Me-Dv4">
+                                        <rect key="frame" x="85" y="224" width="150" height="200"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on Mr. Fancy Taco when you are ready for a random (and wildly delicious) taco recipe to appear in your hand." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtZ-8W-vHU">
+                                        <rect key="frame" x="16" y="114" width="288" height="86"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imb-lq-o0S">
+                                        <rect key="frame" x="97.5" y="456" width="125" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3Tr-f0-xAm"/>
+                                            <constraint firstAttribute="width" constant="125" id="qzR-DC-AXV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Got It!">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="gotItBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aPU-nG-u3p"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="0.86198814655172418" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="pat-Me-Dv4" firstAttribute="top" secondItem="OtZ-8W-vHU" secondAttribute="bottom" constant="24" id="02R-Kg-LKs"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="OtZ-8W-vHU" secondAttribute="trailing" constant="8" id="2ME-Wk-9KM"/>
+                                    <constraint firstItem="pat-Me-Dv4" firstAttribute="centerX" secondItem="pQE-Cb-fgT" secondAttribute="centerX" id="3Yh-KP-0OV"/>
+                                    <constraint firstItem="imb-lq-o0S" firstAttribute="centerX" secondItem="pQE-Cb-fgT" secondAttribute="centerX" id="93c-z0-eft"/>
+                                    <constraint firstItem="imb-lq-o0S" firstAttribute="top" secondItem="pat-Me-Dv4" secondAttribute="bottom" constant="32" id="IC4-Rv-xHq"/>
+                                    <constraint firstItem="OtZ-8W-vHU" firstAttribute="leading" secondItem="pQE-Cb-fgT" secondAttribute="leadingMargin" constant="8" id="Urs-QU-3j1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="pQE-Cb-fgT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5Gv-Ym-cQr"/>
                             <constraint firstItem="JaK-Zh-T6P" firstAttribute="top" secondItem="Cjf-BK-eEH" secondAttribute="bottom" constant="55" id="80r-yx-6Lg"/>
                             <constraint firstItem="JaK-Zh-T6P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="AgN-bH-3A5"/>
                             <constraint firstItem="Cjf-BK-eEH" firstAttribute="top" secondItem="MH5-Ph-Ns2" secondAttribute="bottom" constant="16" id="DNK-6P-jm1"/>
+                            <constraint firstItem="pat-Me-Dv4" firstAttribute="width" secondItem="hn9-Df-cap" secondAttribute="width" id="EHA-qd-OTx"/>
                             <constraint firstItem="JaK-Zh-T6P" firstAttribute="top" secondItem="hn9-Df-cap" secondAttribute="bottom" constant="32" id="Hk1-9b-Xcb"/>
                             <constraint firstItem="MH5-Ph-Ns2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Ht7-js-ODm"/>
                             <constraint firstAttribute="trailing" secondItem="MH5-Ph-Ns2" secondAttribute="trailing" id="IZA-rh-BPB"/>
                             <constraint firstItem="Cjf-BK-eEH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-16" id="Trt-q3-Via"/>
+                            <constraint firstItem="pat-Me-Dv4" firstAttribute="bottom" secondItem="hn9-Df-cap" secondAttribute="bottom" id="amN-PP-8Mm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JaK-Zh-T6P" secondAttribute="trailing" id="bh9-oT-ig7"/>
                             <constraint firstItem="hn9-Df-cap" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eGD-AL-Bge"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pQE-Cb-fgT" secondAttribute="bottom" id="gIV-PK-yZE"/>
                             <constraint firstItem="MH5-Ph-Ns2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gYM-u1-VL4"/>
+                            <constraint firstAttribute="trailing" secondItem="pQE-Cb-fgT" secondAttribute="trailing" id="gpZ-3g-JCa"/>
+                            <constraint firstItem="pQE-Cb-fgT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gwI-RU-hcR"/>
                             <constraint firstAttribute="trailing" secondItem="Cjf-BK-eEH" secondAttribute="trailing" constant="-16" id="hRT-UH-tO1"/>
+                            <constraint firstItem="pat-Me-Dv4" firstAttribute="height" secondItem="hn9-Df-cap" secondAttribute="height" id="oUR-Zs-yh2"/>
                             <constraint firstItem="hn9-Df-cap" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="40" id="qaN-vF-iJR"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="mainOnboard" destination="pQE-Cb-fgT" id="oH9-g9-f8b"/>
                         <outlet property="menuBtn" destination="sJ0-yD-mLz" id="C4h-LA-Ge7"/>
                         <outlet property="tacoBtn" destination="hn9-Df-cap" id="LIe-tE-fla"/>
                         <outlet property="tacoQuoteLbl" destination="JaK-Zh-T6P" id="DIw-8g-voZ"/>
@@ -255,7 +302,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="176.25" y="130"/>
+            <point key="canvasLocation" x="176.25" y="129.92957746478874"/>
         </scene>
         <!--Ingredients-->
         <scene sceneID="NE6-bD-cYS">
@@ -266,7 +313,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mm3-4M-nrl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jem-Ek-KsT">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F5h-lv-bSU">
@@ -274,7 +321,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="306" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zb8-CH-6gC">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                 <prototypes>
@@ -342,11 +389,11 @@
                         <viewControllerLayoutGuide type="bottom" id="mOc-3z-f0M"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PmU-w3-CXL">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WgH-mP-cZt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="598"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5y-Uc-Ul6">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
@@ -411,11 +458,11 @@
                         <viewControllerLayoutGuide type="bottom" id="lkr-vw-xNr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Zg9-j1-LHs">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="icY-h6-n4c">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.83921568629999999" green="0.0" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -533,6 +580,7 @@
         <image name="Hamburger-Menu" width="583" height="168"/>
         <image name="Line" width="520" height="20"/>
         <image name="Taco-Btn" width="553" height="306"/>
+        <image name="Tap" width="112" height="140"/>
         <image name="onboard1" width="619" height="1000"/>
         <image name="onboard2" width="620" height="992"/>
         <image name="onboard3" width="621" height="1000"/>

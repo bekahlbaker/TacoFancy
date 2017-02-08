@@ -101,10 +101,16 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
 
         xButton = UIButton(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2 + 35, y: self.frame.size.height/2 + CARD_HEIGHT/2, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
         xButton.setImage(UIImage(named: "redXBtn"), for: UIControlState())
+        xButton.layer.shadowRadius = 3;
+        xButton.layer.shadowOpacity = 0.2;
+        xButton.layer.shadowOffset = CGSize(width: 1, height: 1);
         xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), for: UIControlEvents.touchUpInside)
         
         checkButton = UIButton(frame: CGRect(x: self.frame.size.width/2 + CARD_WIDTH/2 - 85, y: self.frame.size.height/2 + CARD_HEIGHT/2, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
         checkButton.setImage(UIImage(named: "greenCheckBtn"), for: UIControlState())
+        checkButton.layer.shadowRadius = 3;
+        checkButton.layer.shadowOpacity = 0.2;
+        checkButton.layer.shadowOffset = CGSize(width: 1, height: 1);
         checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), for: UIControlEvents.touchUpInside)
         
         self.addSubview(xButton)

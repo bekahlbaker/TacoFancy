@@ -19,7 +19,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
+        if(UserDefaults.standard.bool(forKey: "HasLaunchedOnce"))
+        {
+            // app already launched
+            print("NOT first launch")
+            
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "Main")
+            self.window?.rootViewController = viewController
+        }
+        else
+        {
+            // This is the first launch ever
+            print("FIRST launch")
+            UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
+            UserDefaults.standard.synchronize()
+            UserDefaults.standard.set(0, forKey: "index")
+            
+            self.window = UIWindow(frame: UIScreen.main.bounds)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "OnboardNav")
+            self.window?.rootViewController = viewController
+        }
         
         FIRApp.configure()
         return true

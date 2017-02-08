@@ -27,6 +27,7 @@
 		273271C61DA9A5D4001AF568 /* mexican-fiesta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */; };
 		273271C81DA9AA9A001AF568 /* DOSEQUIS.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */; };
 		279860451E4A3D04008B4345 /* TacoQuotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 279860441E4A3D04008B4345 /* TacoQuotes.plist */; };
+		279860501E4AC0BC008B4345 /* RightToLeftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2798604F1E4AC0BC008B4345 /* RightToLeftSegue.swift */; };
 		373916E762872071ED087E43 /* Pods_TacoFancy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB73ACB8DC76DB800BC806B3 /* Pods_TacoFancy.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mexican-fiesta.ttf"; sourceTree = "<group>"; };
 		273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = DOSEQUIS.TTF; sourceTree = "<group>"; };
 		279860441E4A3D04008B4345 /* TacoQuotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TacoQuotes.plist; sourceTree = "<group>"; };
+		2798604F1E4AC0BC008B4345 /* RightToLeftSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightToLeftSegue.swift; sourceTree = "<group>"; };
 		8A2BD763FD764AF26EB598B5 /* Pods-TacoFancy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TacoFancy.release.xcconfig"; path = "Pods/Target Support Files/Pods-TacoFancy/Pods-TacoFancy.release.xcconfig"; sourceTree = "<group>"; };
 		AB73ACB8DC76DB800BC806B3 /* Pods_TacoFancy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TacoFancy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -89,6 +91,7 @@
 				27017B5D1E4017AE00DD090D /* DraggableViewBackground.swift */,
 				27017B631E42766B00DD090D /* SavedTacosCell.swift */,
 				27017B651E42BDDB00DD090D /* RecipeCell.swift */,
+				2798604F1E4AC0BC008B4345 /* RightToLeftSegue.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			files = (
 				27017B641E42766B00DD090D /* SavedTacosCell.swift in Sources */,
 				27017B5E1E4017AE00DD090D /* DraggableViewBackground.swift in Sources */,
+				279860501E4AC0BC008B4345 /* RightToLeftSegue.swift in Sources */,
 				27017B5C1E40176A00DD090D /* DraggableView.swift in Sources */,
 				27017B4A1E3C0A4400DD090D /* RecipeVC.swift in Sources */,
 				27017B521E3FACBA00DD090D /* DataService.swift in Sources */,

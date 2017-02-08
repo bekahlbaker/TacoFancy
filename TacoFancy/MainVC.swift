@@ -19,15 +19,7 @@ class MainVC: UIViewController {
     @IBAction func menuBtnTapped2(_ sender: Any) {
         performSegue(withIdentifier: "SavedTacosVC", sender: nil)
     }
-    
-    @IBOutlet weak var onboardView: UIView!
-    @IBOutlet weak var dismissOnboardBtn: UIButton!
-    @IBAction func dismissOnboardBtnTapped(_ sender: Any) {
-        onboardView.isHidden = true
-        dismissOnboardBtn.isHidden = true
-    }
-    
-    
+
     @IBOutlet weak var tacoQuoteLbl: UILabel!
     
     var taco: Taco!
@@ -57,25 +49,6 @@ class MainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        onboardView.isHidden = true
-        dismissOnboardBtn.isHidden = true
-        
-        if(UserDefaults.standard.bool(forKey: "HasLaunchedOnce"))
-        {
-            // app already launched
-            print("NOT first launch")
-        }
-        else
-        {
-            // This is the first launch ever
-            print("FIRST launch")
-            onboardView.isHidden = false
-            dismissOnboardBtn.isHidden = false
-            UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
-            UserDefaults.standard.synchronize()
-            UserDefaults.standard.set(0, forKey: "index")
-        }
         
         //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         //        try! FIRAuth.auth()?.signOut()

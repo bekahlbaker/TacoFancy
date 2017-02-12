@@ -121,6 +121,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         print("CREATE DRAGGABLE VIEW")
         let draggableView = DraggableView(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2, y: (self.frame.size.height - CARD_HEIGHT)/2 - 50 , width: CARD_WIDTH, height: CARD_HEIGHT))
         draggableView.information.text = tacoString
+//        draggableView.information.font = UIFont.preferredFont(forTextStyle: .body)
         draggableView.delegate = self
         return draggableView
     }

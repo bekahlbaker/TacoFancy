@@ -153,21 +153,21 @@ class MainVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(clearTacoQuote(notification:)), name:NSNotification.Name(rawValue: "clearTacoQuote"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkForHasSavedTacoOnce(notification:)), name:NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
-
     }
+
     
     func tacoGlow(notification: NSNotification) {
-        menuBtn.layer.shadowColor = UIColor.yellow.cgColor
-        menuBtn.layer.shadowRadius = 10.0
-        menuBtn.layer.shadowOffset = CGSize.zero
-        menuBtn.layer.shadowOpacity = 1.0
+//        menuBtn.layer.shadowColor = UIColor.yellow.cgColor
+//        menuBtn.layer.shadowRadius = 10.0
+//        menuBtn.layer.shadowOffset = CGSize.zero
+//        menuBtn.layer.shadowOpacity = 1.0
     }
     
     func stopTacoGlow(notification: NSNotification) {
-        menuBtn.layer.shadowColor = UIColor.clear.cgColor
-        menuBtn.layer.shadowRadius = 10.0
-        menuBtn.layer.shadowOffset = CGSize.zero
-        menuBtn.layer.shadowOpacity = 1.0
+//        menuBtn.layer.shadowColor = UIColor.clear.cgColor
+//        menuBtn.layer.shadowRadius = 10.0
+//        menuBtn.layer.shadowOffset = CGSize.zero
+//        menuBtn.layer.shadowOpacity = 1.0
     }
     
     func clearTacoQuote(notification: NSNotification) {

@@ -27,7 +27,15 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
+        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(gestureRecognizer:)))
+        rightGesture.direction = .right
+        self.view.addGestureRecognizer(rightGesture)
+        
         downloadSavedTaco()
+    }
+    
+    func swipeRight(gestureRecognizer: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,16 +65,18 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let attributedString = NSMutableAttributedString(string: ingredient, attributes: [NSFontAttributeName: regularFont as Any])
             attributedString.setAttributes([NSFontAttributeName : mediumFont as Any, NSForegroundColorAttributeName : UIColor.black], range: wordRange)
             
-            let viewMore = "\nView Full Recipe"
-            let viewMoreRange = (viewMore as NSString).range(of: viewMore)
-            let viewMoreAttributedString = NSMutableAttributedString(string: viewMore, attributes: [NSFontAttributeName: boldFont as Any])
-            viewMoreAttributedString.setAttributes([NSFontAttributeName : boldFont as Any, NSForegroundColorAttributeName : linkColor], range: viewMoreRange)
+//            let viewMore = "\nView Full Recipe"
+//            let viewMoreRange = (viewMore as NSString).range(of: viewMore)
+//            let viewMoreAttributedString = NSMutableAttributedString(string: viewMore, attributes: [NSFontAttributeName: boldFont as Any])
+//            viewMoreAttributedString.setAttributes([NSFontAttributeName : boldFont as Any, NSForegroundColorAttributeName : linkColor], range: viewMoreRange)
             
             let combination = NSMutableAttributedString()
             combination.append(attributedString)
-            combination.append(viewMoreAttributedString)
+//            combination.append(viewMoreAttributedString)
             
             cell?.recipeLbl.attributedText = combination
+            cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            cell?.tintColor = linkColor
         }
         
         return cell!

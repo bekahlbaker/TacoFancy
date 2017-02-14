@@ -91,7 +91,7 @@
                                     <action selector="tacoBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k42-e3-Q9K"/>
                                 </connections>
                             </button>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b32-Ce-Sha">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b32-Ce-Sha">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you choose to save a taco, they are magically exported to your Saved Tacos list. What a great place to be." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uD-9V-eZb">
@@ -134,24 +134,24 @@
                                     <constraint firstItem="4uD-9V-eZb" firstAttribute="leading" secondItem="b32-Ce-Sha" secondAttribute="leadingMargin" constant="8" id="nFi-uu-7vc"/>
                                 </constraints>
                             </view>
-                            <view opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQE-Cb-fgT">
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQE-Cb-fgT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Tap" translatesAutoresizingMaskIntoConstraints="NO" id="pat-Me-Dv4">
-                                        <rect key="frame" x="110" y="151.5" width="100" height="150"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tap" translatesAutoresizingMaskIntoConstraints="NO" id="pat-Me-Dv4">
+                                        <rect key="frame" x="110" y="152" width="100" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="Ca7-FZ-Zpe"/>
                                             <constraint firstAttribute="height" constant="150" id="okz-qN-xDW"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tap on Mr. Fancy Taco when you are ready for a random (and wildly delicious) taco recipe to appear in your hand." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtZ-8W-vHU">
-                                        <rect key="frame" x="16" y="41.5" width="288" height="86"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on Mr. Fancy Taco when you are ready for a random (and wildly delicious) taco recipe to appear in your hand." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtZ-8W-vHU">
+                                        <rect key="frame" x="16" y="42" width="288" height="86"/>
                                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imb-lq-o0S">
-                                        <rect key="frame" x="98" y="317.5" width="125" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imb-lq-o0S">
+                                        <rect key="frame" x="98" y="318" width="125" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="3Tr-f0-xAm"/>
@@ -173,29 +173,30 @@
                                     <constraint firstItem="pat-Me-Dv4" firstAttribute="centerX" secondItem="pQE-Cb-fgT" secondAttribute="centerX" id="3Yh-KP-0OV"/>
                                     <constraint firstItem="imb-lq-o0S" firstAttribute="centerX" secondItem="pQE-Cb-fgT" secondAttribute="centerX" id="93c-z0-eft"/>
                                     <constraint firstItem="imb-lq-o0S" firstAttribute="top" secondItem="pat-Me-Dv4" secondAttribute="bottom" constant="16" id="IC4-Rv-xHq"/>
+                                    <constraint firstItem="OtZ-8W-vHU" firstAttribute="top" secondItem="pQE-Cb-fgT" secondAttribute="top" constant="42" id="KFb-WP-j0x"/>
                                     <constraint firstItem="OtZ-8W-vHU" firstAttribute="leading" secondItem="pQE-Cb-fgT" secondAttribute="leadingMargin" constant="8" id="Urs-QU-3j1"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPt-7x-nnG">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPt-7x-nnG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Swipe the taco card to the right to save it - or to the left to toss it out (although who would ever throw out a taco?!)." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMN-A0-D0o">
-                                        <rect key="frame" x="16" y="41.5" width="288" height="86"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe the taco card to the right to save it - or to the left to toss it out (although who would ever throw out a taco?!)." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMN-A0-D0o">
+                                        <rect key="frame" x="16" y="42" width="288" height="86"/>
                                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="equalSpacing" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="RaM-oZ-r99">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="RaM-oZ-r99">
                                         <rect key="frame" x="28" y="152" width="264" height="150"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Swipe-Left" translatesAutoresizingMaskIntoConstraints="NO" id="si7-Po-6fJ">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Swipe-Left" translatesAutoresizingMaskIntoConstraints="NO" id="si7-Po-6fJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="Ewj-Oa-73t"/>
                                                     <constraint firstAttribute="width" constant="100" id="WpH-W9-Tuh"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Swipe-RIght" translatesAutoresizingMaskIntoConstraints="NO" id="w5m-wX-AUg">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Swipe-RIght" translatesAutoresizingMaskIntoConstraints="NO" id="w5m-wX-AUg">
                                                 <rect key="frame" x="164" y="0.0" width="100" height="150"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="Qle-j4-Ria"/>
@@ -204,8 +205,8 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bm3-yN-4h2">
-                                        <rect key="frame" x="97" y="317.5" width="125" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bm3-yN-4h2">
+                                        <rect key="frame" x="97" y="318" width="125" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="125" id="M4B-Fm-ZbW"/>
@@ -223,6 +224,7 @@
                                 <color key="backgroundColor" red="0.40784313725490196" green="0.40784313725490196" blue="0.40784313725490196" alpha="0.86134159482758621" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="RaM-oZ-r99" firstAttribute="top" secondItem="EMN-A0-D0o" secondAttribute="bottom" constant="24" id="0Qo-aR-0JE"/>
+                                    <constraint firstItem="EMN-A0-D0o" firstAttribute="top" secondItem="UPt-7x-nnG" secondAttribute="top" constant="42" id="Afh-70-2CO"/>
                                     <constraint firstItem="EMN-A0-D0o" firstAttribute="leading" secondItem="UPt-7x-nnG" secondAttribute="leadingMargin" constant="8" id="JUs-6N-xkF"/>
                                     <constraint firstItem="RaM-oZ-r99" firstAttribute="centerX" secondItem="UPt-7x-nnG" secondAttribute="centerX" id="Ovu-EB-Vvv"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="EMN-A0-D0o" secondAttribute="trailing" constant="8" id="dVf-ud-jWJ"/>
@@ -358,12 +360,12 @@
                         <viewControllerLayoutGuide type="top" id="dEc-IQ-Lse"/>
                         <viewControllerLayoutGuide type="bottom" id="mOc-3z-f0M"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="PmU-w3-CXL">
+                    <view key="view" contentMode="scaleToFill" id="PmU-w3-CXL">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WgH-mP-cZt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="569"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="505"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5y-Uc-Ul6">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
@@ -436,6 +438,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="icY-h6-n4c">
                                 <rect key="frame" x="0.0" y="72" width="320" height="383"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.21176470589999999" green="0.84313725490000002" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.83921568629999999" green="0.0" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Hjl-vA-ICD">
@@ -444,15 +447,15 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SavedTacoCell" id="Exc-uf-vBl" customClass="SavedTacosCell" customModule="TacoFancy" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SavedTacoCell" id="Exc-uf-vBl" customClass="SavedTacosCell" customModule="TacoFancy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Exc-uf-vBl" id="ELC-qI-flS">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JqR-fT-ALe">
-                                                    <rect key="frame" x="16" y="8" width="288" height="25.5"/>
+                                                    <rect key="frame" x="16" y="8" width="255" height="25.5"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -471,7 +474,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIS-hb-fZn">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIS-hb-fZn">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Swipe-Left" translatesAutoresizingMaskIntoConstraints="NO" id="sL9-Xs-u9O">

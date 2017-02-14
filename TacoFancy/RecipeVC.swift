@@ -18,9 +18,17 @@ class RecipeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let rightGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(gestureRecognizer:)))
+        rightGesture.direction = .right
+        self.view.addGestureRecognizer(rightGesture)
+        
         print(ingredientPassed)
         
         downloadRecipe(ingredient: ingredientPassed)
+    }
+    
+    func swipeRight(gestureRecognizer: UISwipeGestureRecognizer) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func downloadRecipe(ingredient: String!) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Swa-RZ-9fQ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,6 +15,24 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Skx-yj-TcE">
+            <objects>
+                <tabBarController id="Swa-RZ-9fQ" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="DW3-SE-Vef">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="dMR-iW-aoK"/>
+                        <segue destination="hOL-gu-CKD" kind="relationship" relationship="viewControllers" id="APB-Ax-FgC"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="btt-HV-mbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-870" y="44"/>
+        </scene>
         <!--MainVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -27,16 +45,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kC-gX-bx4">
-                                <rect key="frame" x="0.0" y="519" width="320" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items>
-                                    <tabBarItem title="Home" image="home" id="tHk-MB-dw0"/>
-                                    <tabBarItem title="" systemItem="favorites" id="lmN-DA-sJJ"/>
-                                </items>
-                            </tabBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaK-Zh-T6P">
-                                <rect key="frame" x="16" y="447.5" width="288" height="20.5"/>
+                                <rect key="frame" x="16" y="398.5" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="0.83921568627450982" green="0.0" blue="0.14509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -73,7 +83,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn9-Df-cap">
-                                <rect key="frame" x="35" y="159.5" width="250" height="250"/>
+                                <rect key="frame" x="35" y="159" width="250" height="250"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.97254901959999995" green="0.015686274510000001" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -82,7 +92,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b32-Ce-Sha">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you choose to save a taco, they are magically exported to your Saved Tacos list. What a great place to be." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uD-9V-eZb">
                                         <rect key="frame" x="16" y="140" width="288" height="86"/>
@@ -125,7 +135,7 @@
                                 </constraints>
                             </view>
                             <view opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pQE-Cb-fgT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Tap" translatesAutoresizingMaskIntoConstraints="NO" id="pat-Me-Dv4">
                                         <rect key="frame" x="110" y="151.5" width="100" height="150"/>
@@ -167,7 +177,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPt-7x-nnG">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Swipe the taco card to the right to save it - or to the left to toss it out (although who would ever throw out a taco?!)." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMN-A0-D0o">
                                         <rect key="frame" x="16" y="41.5" width="288" height="86"/>
@@ -231,12 +241,9 @@
                             <constraint firstAttribute="trailing" secondItem="UPt-7x-nnG" secondAttribute="trailing" id="F2a-Uy-ln6"/>
                             <constraint firstItem="MH5-Ph-Ns2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Ht7-js-ODm"/>
                             <constraint firstAttribute="trailing" secondItem="MH5-Ph-Ns2" secondAttribute="trailing" id="IZA-rh-BPB"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5kC-gX-bx4" secondAttribute="bottom" id="KOa-kF-opd"/>
                             <constraint firstItem="5mE-9g-tw0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N3w-Bg-f2j"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="JaK-Zh-T6P" secondAttribute="bottom" constant="100" id="Pib-r7-FEu"/>
-                            <constraint firstItem="5kC-gX-bx4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VRG-jt-V0i"/>
                             <constraint firstItem="b32-Ce-Sha" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XMV-oG-Neg"/>
-                            <constraint firstAttribute="trailing" secondItem="5kC-gX-bx4" secondAttribute="trailing" id="Xiq-mB-ICW"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="b32-Ce-Sha" secondAttribute="bottom" id="ZOw-ra-vdk"/>
                             <constraint firstItem="5mE-9g-tw0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ZZK-IW-xpN"/>
                             <constraint firstItem="UPt-7x-nnG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Zgb-yQ-L1Z"/>
@@ -253,6 +260,8 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="OOi-4l-LIs"/>
+                    <navigationItem key="navigationItem" id="WFR-kb-uH4"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="mainOnboard" destination="pQE-Cb-fgT" id="oH9-g9-f8b"/>
@@ -261,22 +270,21 @@
                         <outlet property="tacoBtn" destination="hn9-Df-cap" id="LIe-tE-fla"/>
                         <outlet property="tacoMan" destination="5mE-9g-tw0" id="Zax-AI-Ve5"/>
                         <outlet property="tacoQuoteLbl" destination="JaK-Zh-T6P" id="DIw-8g-voZ"/>
-                        <segue destination="hOL-gu-CKD" kind="show" identifier="SavedTacosVC" id="JX7-M7-HMw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="175.36231884057972" y="127.98913043478262"/>
+            <point key="canvasLocation" x="249" y="43"/>
         </scene>
         <!--Ingredients-->
         <scene sceneID="NE6-bD-cYS">
             <objects>
-                <viewController id="QJ6-IH-yH8" customClass="IngredientsVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="QJ6-IH-yH8" customClass="IngredientsVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bjO-JZ-Lyb"/>
                         <viewControllerLayoutGuide type="bottom" id="mm3-4M-nrl"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jem-Ek-KsT">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="jem-Ek-KsT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -285,7 +293,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="306" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zb8-CH-6gC">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="391"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                 <prototypes>
@@ -341,18 +349,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8l-SE-OJe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="HbJ-Y4-uf0">
-                    <connections>
-                        <segue destination="vOB-ZP-Wnp" kind="show" id="g8w-VD-Tq9"/>
-                    </connections>
-                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="HbJ-Y4-uf0"/>
             </objects>
-            <point key="canvasLocation" x="1959.375" y="875"/>
+            <point key="canvasLocation" x="1354" y="848"/>
         </scene>
         <!--Recipe-->
         <scene sceneID="XP6-bu-yBx">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="DYc-9o-c31" customClass="RecipeVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="DYc-9o-c31" customClass="RecipeVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dEc-IQ-Lse"/>
                         <viewControllerLayoutGuide type="bottom" id="mOc-3z-f0M"/>
@@ -362,7 +366,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WgH-mP-cZt">
-                                <rect key="frame" x="0.0" y="20" width="320" height="598"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="505"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5y-Uc-Ul6">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="400"/>
@@ -415,36 +419,27 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLY-Nk-FgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="YMb-yB-GLE">
-                    <connections>
-                        <segue destination="QJ6-IH-yH8" kind="show" id="zr5-4a-q4u"/>
-                    </connections>
-                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="YMb-yB-GLE"/>
             </objects>
-            <point key="canvasLocation" x="2723" y="884"/>
+            <point key="canvasLocation" x="2464" y="847"/>
         </scene>
         <!--Tacos-->
         <scene sceneID="5ys-l7-EkM">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="vOB-ZP-Wnp" customClass="SavedTacosVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Tacos" extendedLayoutIncludesOpaqueBars="YES" id="vOB-ZP-Wnp" customClass="SavedTacosVC" customModule="TacoFancy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3h9-Mb-t1p"/>
                         <viewControllerLayoutGuide type="bottom" id="lkr-vw-xNr"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Zg9-j1-LHs">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="Zg9-j1-LHs">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="icY-h6-n4c">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.83921568629999999" green="0.0" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
-                                <view key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleToFill" id="ggA-Ym-Ne0">
-                                    <rect key="frame" x="0.0" y="78" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" tag="1" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SavedTacoCell" id="Exc-uf-vBl" customClass="SavedTacosCell" customModule="TacoFancy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="50"/>
@@ -482,24 +477,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIS-hb-fZn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIS-hb-fZn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Swipe-Left" translatesAutoresizingMaskIntoConstraints="NO" id="sL9-Xs-u9O">
-                                        <rect key="frame" x="220" y="20" width="100" height="100"/>
+                                        <rect key="frame" x="220" y="0.0" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="H0Q-n6-WUT"/>
                                             <constraint firstAttribute="width" constant="100" id="PuJ-LT-hFY"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you decide you've made a horrible mistake - no worries! Just swipe left to delete a taco." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMb-WF-54h">
-                                        <rect key="frame" x="16" y="152" width="288" height="64.5"/>
+                                        <rect key="frame" x="16" y="132" width="288" height="64.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaO-lQ-0Cg">
-                                        <rect key="frame" x="98" y="248.5" width="125" height="40"/>
+                                        <rect key="frame" x="98" y="228.5" width="125" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="125" id="3Jk-po-9gz"/>
@@ -538,13 +533,9 @@
                             <constraint firstItem="icY-h6-n4c" firstAttribute="leading" secondItem="Zg9-j1-LHs" secondAttribute="leading" id="pTl-gY-zhF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Tacos" id="t4J-8T-ndS">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="zvZ-zA-rZQ">
-                            <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" identifier="MainVC" id="eu5-jS-bMX"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="YRY-Q9-azQ"/>
+                    <navigationItem key="navigationItem" title="Tacos" id="t4J-8T-ndS"/>
                     <connections>
                         <outlet property="savedTacosOnboard" destination="lIS-hb-fZn" id="dAM-Nk-nZD"/>
                         <outlet property="tableView" destination="icY-h6-n4c" id="qWc-sI-7a5"/>
@@ -552,18 +543,15 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="at3-ci-xzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="wrE-ov-z7l">
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" id="ryJ-HZ-dMG"/>
-                    </connections>
-                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="wrE-ov-z7l"/>
             </objects>
-            <point key="canvasLocation" x="1068.1159420289855" y="874.72826086956525"/>
+            <point key="canvasLocation" x="249" y="850"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Dao-7o-tUB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hOL-gu-CKD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="VTa-Qk-GGG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="py3-qV-lnx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -575,12 +563,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="vOB-ZP-Wnp" kind="relationship" relationship="rootViewController" id="pb6-xv-l8C"/>
+                        <segue destination="vOB-ZP-Wnp" kind="relationship" relationship="rootViewController" id="2rg-8p-r1H"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ9-tV-yxc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="176" y="875"/>
+            <point key="canvasLocation" x="-870" y="849"/>
         </scene>
     </scenes>
     <resources>
@@ -589,11 +577,5 @@
         <image name="Swipe-RIght" width="134" height="131"/>
         <image name="TacoMan" width="478" height="395"/>
         <image name="Tap" width="112" height="140"/>
-        <image name="home" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="eu5-jS-bMX"/>
-        <segue reference="g8w-VD-Tq9"/>
-        <segue reference="zr5-4a-q4u"/>
-    </inferredMetricsTieBreakers>
 </document>

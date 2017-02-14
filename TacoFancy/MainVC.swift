@@ -30,7 +30,13 @@ class MainVC: UIViewController {
         checkForHasSwipedOnce()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        jumpTimer.invalidate()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+        
         let indexToUse = UserDefaults.standard.integer(forKey: "index")
         if indexToUse < 39 {
             let indexToStore = indexToUse + 1

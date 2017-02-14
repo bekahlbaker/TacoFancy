@@ -98,7 +98,6 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     DataService.ds.REF_INGREDIENTS.child(self.savedTaco[i]).observe( .value, with: { (snapshot) in
                         let recipe = snapshot.value
                         self.recipe.append(String(describing: recipe!))
-                        print(self.recipe)
                         if self.recipe.count > 0 {
                             self.perform(#selector(self.loadTableData(_:)), with: nil, afterDelay: 0.5)
                         }

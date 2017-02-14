@@ -86,6 +86,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         DataService.ds.REF_CURRENT_USER.child("saved-tacos").child(taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell).updateChildValues(tacoToSave)
         let ingredientsToSave = [taco.baseLayer: taco.baseLayerRecipe, taco.condiment: taco.condimentRecipe, taco.mixin: taco.mixinRecipe, taco.seasoning: taco.seasoningRecipe, taco.shell: taco.shellRecipe]
         DataService.ds.REF_INGREDIENTS.updateChildValues(ingredientsToSave)
+        DataService.ds.REF_CURRENT_USER.child("saved-ingredients").updateChildValues(ingredientsToSave)
     }
     
     func setupView() -> Void {

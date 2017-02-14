@@ -10,13 +10,17 @@ import UIKit
 import Firebase
 import QuartzCore
 
-class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     var savedTacos = [String]()
+    var savedIngredients = [String]()
     var tacoNameToPass: String!
-    var hasSavedTacos = false
+    var ingredientNameToPass: String!
+    var hasSavedTacos = true
+    var hasSavedIngredients = true
+    var isSearchingTacos = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +28,14 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         savedTacosOnboard.isHidden = true
         checkForHasOpenedTacosOnce()
         
+        searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 50
+        tableView.estimatedRowHeight = 100
         
         downloadSavedTacos()
+        downloadSavedIngredients()
         setUpGradientNavBar()
     }
     
@@ -40,43 +46,109 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if hasSavedTacos {
-            return self.savedTacos.count
-        } else {
-            return 1
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            if hasSavedTacos {
+                if inSearchMode {
+                    return filteredSavedTacos.count
+                }
+                return self.savedTacos.count
+            }
+        case 1:
+            if hasSavedIngredients {
+                if inSearchMode {
+                    return filteredSavedIngredients.count
+                }
+                return self.savedIngredients.count
+            }
+        default:
+            break
         }
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedTacoCell") as? SavedTacosCell
-        if hasSavedTacos {
-            tableView.isUserInteractionEnabled = true
-            cell?.tacoName.textAlignment = .left
-            cell?.tacoName.text = savedTacos[indexPath.row]
-        } else {
-            tableView.isUserInteractionEnabled = false
-            cell?.tacoName.textAlignment = .center
-            cell?.tacoName.text = "You haven't saved any tacos yet! :( \nWhat are you waiting for?"
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            if hasSavedTacos {
+                if inSearchMode {
+                    tableView.isUserInteractionEnabled = true
+                    cell?.tacoName.textAlignment = .left
+                    cell?.tacoName.text = filteredSavedTacos[indexPath.row]
+                } else {
+                    tableView.isUserInteractionEnabled = true
+                    cell?.tacoName.textAlignment = .left
+                    cell?.tacoName.text = savedTacos[indexPath.row]
+                }
+            } else {
+                tableView.isUserInteractionEnabled = false
+                cell?.tacoName.textAlignment = .center
+                cell?.tacoName.text = "You haven't saved any tacos yet! :( \nWhat are you waiting for?"
+            }
+        case 1:
+            if hasSavedIngredients {
+                if inSearchMode {
+                    tableView.isUserInteractionEnabled = true
+                    cell?.tacoName.textAlignment = .left
+                    cell?.tacoName.text = filteredSavedIngredients[indexPath.row]
+                } else {
+                    tableView.isUserInteractionEnabled = true
+                    cell?.tacoName.textAlignment = .left
+                    cell?.tacoName.text = savedIngredients[indexPath.row]
+                }
+            } else {
+                tableView.isUserInteractionEnabled = false
+                cell?.tacoName.textAlignment = .center
+                cell?.tacoName.text = "You haven't saved any tacos yet! :( \nWhat are you waiting for?"
+            }
+        default:
+            break
         }
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if hasSavedTacos {
-            let cellValue = savedTacos[indexPath.row]
-            self.tacoNameToPass = cellValue
-            if self.tacoNameToPass != nil {
-                performSegue(withIdentifier: "IngredientsVC", sender: nil)
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            if hasSavedTacos {
+                let cellValue = savedTacos[indexPath.row]
+                self.tacoNameToPass = cellValue
+                if self.tacoNameToPass != nil {
+                    performSegue(withIdentifier: "IngredientsVC", sender: nil)
+                }
+            } else {
+                print("No tacos")
             }
-        } else {
-            print("No tacos")
+            searchBar.resignFirstResponder()
+        case 1:
+            if hasSavedIngredients {
+                let cellValue = savedIngredients[indexPath.row]
+                self.ingredientNameToPass = cellValue
+                if self.ingredientNameToPass != nil {
+                    performSegue(withIdentifier: "RecipeVC", sender: nil)
+                }
+            } else {
+                print("No ingredients")
+            }
+            searchBar.resignFirstResponder()
+        default:
+            break
         }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.savedTacos.remove(at: indexPath.row)
-            self.tableView.reloadData()
+            if isSearchingTacos {
+                self.savedTacos.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            } else {
+                self.savedIngredients.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -99,10 +171,35 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         })
     }
     
+    func downloadSavedIngredients() {
+        DataService.ds.REF_CURRENT_USER.child("saved-ingredients").observe( .value, with: { (snapshot) in
+            self.savedIngredients = []
+            if let _ = snapshot.value as? NSNull {
+                print("No Ingredients saved")
+                self.hasSavedIngredients = false
+            } else{
+                self.hasSavedIngredients = true
+                if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    for snap in snapshot {
+                        let ing = snap.key
+                        self.savedIngredients.append(ing)
+                        print(self.savedIngredients)
+                    }
+                }
+            }
+            self.tableView.reloadData()
+        })
+    }
+
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "IngredientsVC" {
             let myVC = segue.destination as? IngredientsVC
             myVC?.tacoNamePassed = self.tacoNameToPass
+        }
+        if segue.identifier == "RecipeVC" {
+            let myVC = segue.destination as? RecipeVC
+            myVC?.ingredientPassed = self.ingredientNameToPass
         }
     }
     
@@ -155,4 +252,81 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
+    var filteredSavedTacos = [String]()
+    var filteredSavedIngredients = [String]()
+    var inSearchMode = false
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if !inSearchMode {
+            inSearchMode = true
+            tableView.reloadData()
+        }
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            filteredSavedTacos = savedTacos.filter({ (text) -> Bool in
+                let tmp: NSString = text as NSString
+                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+                return range.location != NSNotFound
+            })
+            if(filteredSavedTacos.count == 0){
+                inSearchMode = false;
+            } else {
+                inSearchMode = true;
+            }
+            tableView.reloadData()
+        case 1:
+            filteredSavedIngredients = savedIngredients.filter({ (text) -> Bool in
+                let tmp: NSString = text as NSString
+                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+                return range.location != NSNotFound
+            })
+            if(filteredSavedIngredients.count == 0){
+                inSearchMode = false;
+            } else {
+                inSearchMode = true;
+            }
+            tableView.reloadData()
+
+        default:
+            break
+        }
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        inSearchMode = true
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        inSearchMode = false
+        searchBar.text = nil
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        inSearchMode = false
+    }
+
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBAction func segmentedIndexChanged(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            print("Saved Tacos")
+            isSearchingTacos = true
+            downloadSavedTacos()
+        case 1:
+            print("Ingredients")
+            isSearchingTacos = false
+            downloadSavedIngredients()
+        default:
+            break
+        }
+    }
 }

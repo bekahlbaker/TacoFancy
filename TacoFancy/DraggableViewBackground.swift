@@ -28,6 +28,8 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var taco: Taco!
     var tacoString: String!
     
+    let activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
@@ -38,10 +40,11 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         self.tag = 100
         self.setupView()
         getRandomTaco()
+        print("GETTING RANDOM TACO on INIT")
     }
     
     func getRandomTaco() {
-        print("GETTING RANDOM TACO")
+        activitySpinner.startAnimating()
         guard let url = URL(string: random) else {
             print("Cannot create URL")
             return
@@ -58,10 +61,10 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
                         if let taco = Taco(json: jsonResult!) {
                             DispatchQueue.global().sync {
                                 self.configureTaco(taco)
-                                DispatchQueue.main.sync {
-                                    self.loadCards()
-                                }
                             }
+                        }
+                        DispatchQueue.main.sync {
+                            self.loadCards()
                         }
                     } catch {
                         print("JSON processing failed.")
@@ -78,7 +81,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func saveTaco(_ taco: Taco) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tacoGlow"), object: nil)
         self.taco = taco
         let tacoToSave = ["base-layer": taco.baseLayer, "condiment": taco.condiment, "mixin": taco.mixin, "seasoning": taco.seasoning, "shell": taco.shell]
         DataService.ds.REF_CURRENT_USER.child("saved-tacos").child(taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell).updateChildValues(tacoToSave)
@@ -113,6 +115,9 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         checkButton.layer.shadowOffset = CGSize(width: 1, height: 1);
         checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), for: UIControlEvents.touchUpInside)
         
+        activitySpinner.center = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2 - 50)
+        self.addSubview(activitySpinner)
+        
         self.addSubview(xButton)
         self.addSubview(checkButton)
     }
@@ -132,8 +137,8 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         UIView.animate(withDuration: 0.3, animations: {
             () -> Void in
             print("INSERTING NEXT CARD")
-            self.insertSubview(self.loadedCard, belowSubview: self.loadedCard)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
+            self.addSubview(self.loadedCard)
+            self.activitySpinner.stopAnimating()
         })
     }
     
@@ -141,12 +146,14 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     func cardClickedLeft(_ card: UIView) -> Void {
         print("Clicked 3.CARD SWIPED LEFT")
         Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
+        print("GETTING RANDOM TACO when SWIPED LEFT")
     }
     func cardClickedRight(_ card: UIView) -> Void {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
         print("Clicked 3.CARD SWIPED RIGHT")
         saveTaco(taco)
         Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
+        print("GETTING RANDOM TACO when SWIPED RIGHT")
     }
     
     //Check image following dragging cards
@@ -169,13 +176,5 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             dragView.overlayView.alpha = 0.8
         })
         dragView.leftClickAction()
-    }
-    
-    func openSavedTacos() {
-        print("Opening saved tacos")
-        if let viewWithTag = self.viewWithTag(100) {
-            viewWithTag.removeFromSuperview()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "openSavedTacos"), object: nil)
-        }
     }
 }

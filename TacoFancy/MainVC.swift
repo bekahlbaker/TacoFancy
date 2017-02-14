@@ -12,21 +12,16 @@ import SwiftKeychainWrapper
 
 class MainVC: UIViewController {
     
-    @IBOutlet weak var menuBtn: UIButton!
-    @IBAction func menuBtnTapped(_ sender: Any) {
-        performSegue(withIdentifier: "SavedTacosVC", sender: nil)
-    }
-    @IBAction func menuBtnTapped2(_ sender: Any) {
-        performSegue(withIdentifier: "SavedTacosVC", sender: nil)
-    }
-
     @IBOutlet weak var tacoQuoteLbl: UILabel!
     
     var taco: Taco!
     var tacos = [Taco]()
+    var jumpTimer = Timer()
     
     @IBOutlet weak var tacoBtn: UIButton!
     @IBAction func tacoBtnTapped(_ sender: Any) {
+        jumpTimer.invalidate()
+        self.tacoMan.isHidden = true
         DispatchQueue.global().async {
             UserDefaults.standard.set(true, forKey: "HasTappedOnce")
             UserDefaults.standard.synchronize()
@@ -47,6 +42,8 @@ class MainVC: UIViewController {
         }
 
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
+        
+        jumpTimer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(MainVC.tacoManJump), userInfo: nil, repeats: true)
     }
     
     func showMainOnboard() {
@@ -99,8 +96,6 @@ class MainVC: UIViewController {
         {
             // app already launched
             print("NOT first launch")
-            let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
-            self.view.addSubview(draggableBackground)
             tacoBtn.isHidden = true
             tacoQuoteLbl.isHidden = true
         }
@@ -121,7 +116,6 @@ class MainVC: UIViewController {
         swipeOnboard.isHidden = true
         savedTacosOnboard.isHidden = true
         
-        _ = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(MainVC.checkForHasTappedOnce), userInfo: nil, repeats: false)
         
         //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         //        try! FIRAuth.auth()?.signOut()
@@ -143,31 +137,12 @@ class MainVC: UIViewController {
                 }
             })
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(tacoGlow(notification:)), name:NSNotification.Name(rawValue: "tacoGlow"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(stopTacoGlow(notification:)), name:NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(showTacoQuote(notification:)), name:NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(clearTacoQuote(notification:)), name:NSNotification.Name(rawValue: "clearTacoQuote"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkForHasSavedTacoOnce(notification:)), name:NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
-    }
-
-    
-    func tacoGlow(notification: NSNotification) {
-//        menuBtn.layer.shadowColor = UIColor.yellow.cgColor
-//        menuBtn.layer.shadowRadius = 10.0
-//        menuBtn.layer.shadowOffset = CGSize.zero
-//        menuBtn.layer.shadowOpacity = 1.0
-    }
-    
-    func stopTacoGlow(notification: NSNotification) {
-//        menuBtn.layer.shadowColor = UIColor.clear.cgColor
-//        menuBtn.layer.shadowRadius = 10.0
-//        menuBtn.layer.shadowOffset = CGSize.zero
-//        menuBtn.layer.shadowOpacity = 1.0
     }
     
     func clearTacoQuote(notification: NSNotification) {
@@ -188,6 +163,19 @@ class MainVC: UIViewController {
             self.tacoQuoteLbl.alpha = 1
         }
     }
+    
+    func tacoManJump() {
+        print("JUMPING")
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.1
+        shakeAnimation.repeatCount = 5
+        shakeAnimation.autoreverses = true
+        shakeAnimation.fromValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y + 5)
+        shakeAnimation.toValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y - 5)
+        tacoMan.layer.add(shakeAnimation, forKey: "position")
+    }
+    
+    @IBOutlet weak var tacoMan: UIImageView!
     
     @IBOutlet weak var mainOnboard: UIView!
     @IBAction func gotItBtnTapped(_ sender: Any) {

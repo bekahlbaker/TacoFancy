@@ -109,10 +109,10 @@ class DraggableView: UIView {
         print("Drag 2.UPDATE OVERLAY")
         if distance > 0 {
             overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeRight)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tacoGlow"), object: nil)
+            
         } else {
             overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeLeft)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
+            
         }
         overlayView.alpha = CGFloat(min(fabsf(Float(distance))/100, 0.4))
     }
@@ -126,7 +126,6 @@ class DraggableView: UIView {
         } else if floatXFromCenter < -ACTION_MARGIN {
             self.leftAction()
         } else {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
             UIView.animate(withDuration: 0.3, animations: {() -> Void in
                 self.center = self.originPoint
                 self.transform = CGAffineTransform(rotationAngle: 0)
@@ -138,27 +137,25 @@ class DraggableView: UIView {
     //Removes card from screen
     func rightAction() -> Void {
         print("Drag 4.RIGHT ACTION")
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "tacoGlow"), object: nil)
         let finishPoint: CGPoint = CGPoint(x: 600, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
         UIView.animate(withDuration: 0.3,
                        animations: {
                         self.center = finishPoint
+                        self.removeFromSuperview()
         }, completion: {
             (value: Bool) in
-            self.removeFromSuperview()
             self.delegate.cardClickedRight(self)
         })
     }
     func leftAction() -> Void {
         print("Drag 4.LEFT ACTION")
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "stopTacoGlow"), object: nil)
         let finishPoint: CGPoint = CGPoint(x: -600, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
         UIView.animate(withDuration: 0.3,
                        animations: {
                         self.center = finishPoint
+                        self.removeFromSuperview()
         }, completion: {
             (value: Bool) in
-            self.removeFromSuperview()
             self.delegate.cardClickedLeft(self)
         })
     }

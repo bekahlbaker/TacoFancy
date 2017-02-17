@@ -115,22 +115,38 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         {
         case 0:
             if hasSavedTacos {
-                let cellValue = savedTacos[indexPath.row]
-                self.tacoNameToPass = cellValue
-                if self.tacoNameToPass != nil {
-                    performSegue(withIdentifier: "IngredientsVC", sender: nil)
+                if inSearchMode {
+                    let cellValue = filteredSavedTacos[indexPath.row]
+                    self.tacoNameToPass = cellValue
+                    if self.tacoNameToPass != nil {
+                        performSegue(withIdentifier: "IngredientsVC", sender: nil)
+                    }
+                } else {
+                    let cellValue = savedTacos[indexPath.row]
+                    self.tacoNameToPass = cellValue
+                    if self.tacoNameToPass != nil {
+                        performSegue(withIdentifier: "IngredientsVC", sender: nil)
                 }
+            }
             } else {
                 print("No tacos")
             }
             searchBar.resignFirstResponder()
         case 1:
             if hasSavedIngredients {
-                let cellValue = savedIngredients[indexPath.row]
-                self.ingredientNameToPass = cellValue
-                if self.ingredientNameToPass != nil {
-                    performSegue(withIdentifier: "RecipeVC", sender: nil)
+                if inSearchMode {
+                    let cellValue = filteredSavedIngredients[indexPath.row]
+                    self.ingredientNameToPass = cellValue
+                    if self.ingredientNameToPass != nil {
+                        performSegue(withIdentifier: "RecipeVC", sender: nil)
+                    }
+                }else {
+                    let cellValue = savedIngredients[indexPath.row]
+                    self.ingredientNameToPass = cellValue
+                    if self.ingredientNameToPass != nil {
+                        performSegue(withIdentifier: "RecipeVC", sender: nil)
                 }
+            }
             } else {
                 print("No ingredients")
             }
@@ -183,7 +199,6 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     for snap in snapshot {
                         let ing = snap.key
                         self.savedIngredients.append(ing)
-                        print(self.savedIngredients)
                     }
                 }
             }
@@ -236,15 +251,11 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func checkForHasOpenedTacosOnce() {
-        if(UserDefaults.standard.bool(forKey: "HasOpenedTacosOnce"))
-        {
-            // app already launched
+        if(UserDefaults.standard.bool(forKey: "HasOpenedTacosOnce")) {
             print("NOT first launch")
             savedTacosOnboard.isHidden = true
         }
-        else
-        {
-            // This is the first launch ever
+        else {
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasOpenedTacosOnce")
             UserDefaults.standard.synchronize()
@@ -307,10 +318,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         inSearchMode = false
         searchBar.text = nil
         searchBar.resignFirstResponder()
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        inSearchMode = false
+        tableView.reloadData()
     }
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -321,10 +329,16 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             print("Saved Tacos")
             isSearchingTacos = true
             downloadSavedTacos()
+            if inSearchMode {
+                searchBar(searchBar, textDidChange: searchBar.text!)
+            }
         case 1:
             print("Ingredients")
             isSearchingTacos = false
             downloadSavedIngredients()
+            if inSearchMode {
+                searchBar(searchBar, textDidChange: searchBar.text!)
+            }
         default:
             break
         }

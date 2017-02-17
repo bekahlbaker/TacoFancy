@@ -28,7 +28,7 @@ class RecipeVC: UIViewController {
     }
     
     func swipeRight(gestureRecognizer: UISwipeGestureRecognizer) {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     func downloadRecipe(ingredient: String!) {

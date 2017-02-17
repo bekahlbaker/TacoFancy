@@ -20,6 +20,7 @@ let ROTATION_ANGLE: Float = 3.14/8
 protocol DraggableViewDelegate {
     func cardClickedLeft(_ card: UIView) -> Void
     func cardClickedRight(_ card: UIView) -> Void
+    func likeBtn(isOn: Int)
 }
 
 class DraggableView: UIView {
@@ -40,16 +41,26 @@ class DraggableView: UIView {
         
         self.setupView()
         
-        let regularFont = UIFont(name: "Avenir-Light", size: 13)
+        let regularFont = UIFont(name: "Avenir-Medium", size: 14)
         
-        information = UILabel(frame: CGRect(x: 0, y: 50, width: self.frame.size.width - 20, height: 200))
+        information = UILabel(frame: CGRect(x: 0, y: 50, width: self.frame.size.width - 75, height: 200))
         information.center = CGPoint(x: Int(self.frame.size.width/2), y: Int(self.frame.size.height/2))
         information.numberOfLines = 0
         information.textAlignment = NSTextAlignment.center
         information.textColor = UIColor.black
         information.font = regularFont
         
-        self.backgroundColor = UIColor.white
+//        self.backgroundColor = UIColor.white
+        
+        UIGraphicsBeginImageContext(self.frame.size)
+        UIImage(named: "Card")?.draw(in: self.bounds)
+        
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        UIGraphicsEndImageContext()
+        
+        self.backgroundColor = UIColor(patternImage: image)
+        
         
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(DraggableView.beingDragged(_:)))
         
@@ -109,17 +120,18 @@ class DraggableView: UIView {
         print("Drag 2.UPDATE OVERLAY")
         if distance > 0 {
             overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeRight)
-            
+            delegate.likeBtn(isOn: 1)
         } else {
             overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeLeft)
-            
+            delegate.likeBtn(isOn: 2)
         }
-        overlayView.alpha = CGFloat(min(fabsf(Float(distance))/100, 0.4))
+        overlayView.alpha = 1
     }
     
     //Drags card off screen and calls left or right action and hides check image
     func afterSwipeAction() -> Void {
         print("Drag 3.AFTER SWIPE ACTION")
+        delegate.likeBtn(isOn: 3)
         let floatXFromCenter = Float(xFromCenter)
         if floatXFromCenter > ACTION_MARGIN {
             self.rightAction()

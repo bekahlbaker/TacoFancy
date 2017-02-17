@@ -77,7 +77,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func configureTaco(_ taco: Taco) {
         self.taco = taco
-        tacoString = "How about some " + taco.baseLayer + ", with a little " + taco.condiment + ", mixin in some " + taco.mixin + ", and season with " + taco.seasoning + ", and stuff it into a " + taco.shell
+        tacoString = taco.baseLayer + ", with " + taco.condiment + ", mixin " + taco.mixin + ", seasoned with " + taco.seasoning + ", inside " + taco.shell
     }
     
     func saveTaco(_ taco: Taco) {
@@ -96,21 +96,21 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         let screenHeight = screenSize.height
 
         CARD_WIDTH = screenWidth * 0.75
-        CARD_HEIGHT = screenHeight * 0.33
+        CARD_HEIGHT = screenHeight * 0.5
 
 
         self.backgroundColor = UIColor.clear
         self.frame = CGRect(x: 0, y: 85, width: screenWidth, height: screenHeight - 85)
 
         xButton = UIButton(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2 + 35, y: self.frame.size.height/2 + CARD_HEIGHT/2, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
-        xButton.setImage(UIImage(named: "redXBtn"), for: UIControlState())
+        xButton.setImage(UIImage(named: "dislike-off"), for: UIControlState())
         xButton.layer.shadowRadius = 3;
         xButton.layer.shadowOpacity = 0.2;
         xButton.layer.shadowOffset = CGSize(width: 1, height: 1);
         xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), for: UIControlEvents.touchUpInside)
         
         checkButton = UIButton(frame: CGRect(x: self.frame.size.width/2 + CARD_WIDTH/2 - 85, y: self.frame.size.height/2 + CARD_HEIGHT/2, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
-        checkButton.setImage(UIImage(named: "greenCheckBtn"), for: UIControlState())
+        checkButton.setImage(UIImage(named: "like-off"), for: UIControlState())
         checkButton.layer.shadowRadius = 3;
         checkButton.layer.shadowOpacity = 0.2;
         checkButton.layer.shadowOffset = CGSize(width: 1, height: 1);
@@ -138,6 +138,8 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         UIView.animate(withDuration: 0.3, animations: {
             () -> Void in
             print("INSERTING NEXT CARD")
+            self.checkButton.setImage(UIImage(named: "like-off"), for: .normal)
+            self.xButton.setImage(UIImage(named: "dislike-off"), for: .normal)
             self.addSubview(self.loadedCard)
             self.activitySpinner.stopAnimating()
         })
@@ -164,7 +166,8 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         dragView.overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeRight)
         UIView.animate(withDuration: 0.1, animations: {
             () -> Void in
-            dragView.overlayView.alpha = 0.8
+            dragView.overlayView.alpha = 1
+            self.likeBtn(isOn: 1)
         })
         dragView.rightClickAction()
     }
@@ -174,8 +177,24 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         dragView.overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeLeft)
         UIView.animate(withDuration: 0.1, animations: {
             () -> Void in
-            dragView.overlayView.alpha = 0.8
+            dragView.overlayView.alpha = 1
+            self.likeBtn(isOn: 2)
         })
         dragView.leftClickAction()
+    }
+    
+    func likeBtn(isOn: Int) {
+        switch isOn {
+        case 1:
+            self.checkButton.setImage(UIImage(named: "like-on"), for: .normal)
+            self.xButton.setImage(UIImage(named: "dislike-off"), for: .normal)
+        case 2:
+            self.checkButton.setImage(UIImage(named: "like-off"), for: .normal)
+            self.xButton.setImage(UIImage(named: "dislike-on"), for: .normal)
+        case 3:
+            self.checkButton.setImage(UIImage(named: "like-off"), for: .normal)
+            self.xButton.setImage(UIImage(named: "dislike-off"), for: .normal)
+        default: break
+        }
     }
 }

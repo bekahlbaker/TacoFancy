@@ -26,7 +26,7 @@ class OverlayView: UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.clear
-        imageView = UIImageView(image: UIImage(named: "redXBtn"))
+        imageView = UIImageView(image: UIImage(named: "dislike-on"))
         self.addSubview(imageView)
     }
     
@@ -37,9 +37,9 @@ class OverlayView: UIView{
         _mode = mode
         
         if _mode == GGOverlayViewMode.ggOverlayViewModeLeft {
-            imageView.image = UIImage(named: "redXBtn")
+            imageView.image = UIImage(named: "dislike-on")
         } else {
-            imageView.image = UIImage(named: "greenCheckBtn")
+            imageView.image = UIImage(named: "like-on")
         }
     }
     

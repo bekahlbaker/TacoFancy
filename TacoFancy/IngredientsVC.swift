@@ -35,7 +35,7 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func swipeRight(gestureRecognizer: UISwipeGestureRecognizer) {
-        self.navigationController?.popViewController(animated: true)
+       _ = self.navigationController?.popViewController(animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,7 +55,7 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         } else {
             let regularFont = UIFont(name: "Avenir-Light", size: 13)
             let mediumFont = UIFont(name: "Avenir-Medium", size: 14)
-            let boldFont = UIFont(name: "Avenir-Heavy", size: 14)
+            _ = UIFont(name: "Avenir-Heavy", size: 14)
             let linkColor = UIColor(red:0.00, green:0.64, blue:0.66, alpha:1.0)
 
             let ingredients = String(recipe[indexPath.row])
@@ -65,14 +65,8 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let attributedString = NSMutableAttributedString(string: ingredient, attributes: [NSFontAttributeName: regularFont as Any])
             attributedString.setAttributes([NSFontAttributeName : mediumFont as Any, NSForegroundColorAttributeName : UIColor.black], range: wordRange)
             
-//            let viewMore = "\nView Full Recipe"
-//            let viewMoreRange = (viewMore as NSString).range(of: viewMore)
-//            let viewMoreAttributedString = NSMutableAttributedString(string: viewMore, attributes: [NSFontAttributeName: boldFont as Any])
-//            viewMoreAttributedString.setAttributes([NSFontAttributeName : boldFont as Any, NSForegroundColorAttributeName : linkColor], range: viewMoreRange)
-            
             let combination = NSMutableAttributedString()
             combination.append(attributedString)
-//            combination.append(viewMoreAttributedString)
             
             cell?.recipeLbl.attributedText = combination
             cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator

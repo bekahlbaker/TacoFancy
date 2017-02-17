@@ -17,6 +17,7 @@ class MainVC: UIViewController {
     var taco: Taco!
     var tacos = [Taco]()
     var jumpTimer = Timer()
+    var draggableBackground = DraggableViewBackground()
     
     @IBOutlet weak var tacoBtn: UIButton!
     @IBAction func tacoBtnTapped(_ sender: Any) {
@@ -36,6 +37,7 @@ class MainVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        setUpTacoManScreen()
         
         let indexToUse = UserDefaults.standard.integer(forKey: "index")
         if indexToUse < 39 {
@@ -48,24 +50,33 @@ class MainVC: UIViewController {
         }
 
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
-        
-        jumpTimer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(MainVC.tacoManJump), userInfo: nil, repeats: true)
     }
     
-    func showMainOnboard() {
-        mainOnboard.isHidden = false
+    func setUpTacoManScreen() {
+        self.neonSign.image = UIImage(named: "sign-off")
+        self.tacoMan.isHidden = false
+        self.shadowImage.isHidden = false
+        tacoQuoteLbl.isHidden = false
+        tacoBtn.isHidden = false
+        draggableBackground.removeFromSuperview()
+        jumpTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(MainVC.tacoManJump), userInfo: nil, repeats: true)
+    }
+    
+    func setUpCardsScreen() {
+        self.neonSign.image = UIImage(named: "sign-on")
+        self.view.insertSubview(draggableBackground, at: 1)
+        tacoBtn.isHidden = true
+        tacoQuoteLbl.isHidden = true
+        tacoMan.isHidden = true
+        shadowImage.isHidden = true
     }
     
     func checkForHasTappedOnce() {
-        if(UserDefaults.standard.bool(forKey: "HasTappedOnce"))
-        {
-            // app already launched
+        if(UserDefaults.standard.bool(forKey: "HasTappedOnce")) {
             print("NOT first launch")
             mainOnboard.isHidden = true
         }
-        else
-        {
-            // This is the first launch ever
+        else{
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasTappedOnce")
             UserDefaults.standard.synchronize()
@@ -73,41 +84,30 @@ class MainVC: UIViewController {
         }
     }
     
+    func showMainOnboard() {
+        mainOnboard.isHidden = false
+    }
+    
     func checkForHasSwipedOnce() {
-        if(UserDefaults.standard.bool(forKey: "HasSwipedOnce"))
-        {
-            // app already launched
+        if(UserDefaults.standard.bool(forKey: "HasSwipedOnce")) {
             print("NOT first launch")
-            let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
-            self.view.addSubview(draggableBackground)
-            tacoBtn.isHidden = true
-            tacoQuoteLbl.isHidden = true
+            setUpCardsScreen()
         }
-        else
-        {
-            // This is the first launch ever
+        else {
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasSwipedOnce")
             UserDefaults.standard.synchronize()
-            let draggableBackground: DraggableViewBackground = DraggableViewBackground(frame: self.view.frame)
-            self.view.insertSubview(draggableBackground, at: 1)
-            tacoBtn.isHidden = true
-            tacoQuoteLbl.isHidden = true
             swipeOnboard.isHidden = false
+            setUpCardsScreen()
         }
     }
     
     func checkForHasSavedTacoOnce(notification: NSNotification) {
-        if(UserDefaults.standard.bool(forKey: "HasSavedTacosOnce"))
-        {
-            // app already launched
+        if(UserDefaults.standard.bool(forKey: "HasSavedTacosOnce")) {
             print("NOT first launch")
-            tacoBtn.isHidden = true
-            tacoQuoteLbl.isHidden = true
+            setUpCardsScreen()
         }
-        else
-        {
-            // This is the first launch ever
+        else {
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasSavedTacosOnce")
             UserDefaults.standard.synchronize()
@@ -122,7 +122,18 @@ class MainVC: UIViewController {
         swipeOnboard.isHidden = true
         savedTacosOnboard.isHidden = true
         
+        draggableBackground = DraggableViewBackground(frame: self.view.frame)
+
+        anonymouslyLogIn()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(showTacoQuote(notification:)), name:NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(clearTacoQuote(notification:)), name:NSNotification.Name(rawValue: "clearTacoQuote"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(checkForHasSavedTacoOnce(notification:)), name:NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
+    }
+    
+    func anonymouslyLogIn() {
         //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         //        try! FIRAuth.auth()?.signOut()
         
@@ -143,12 +154,6 @@ class MainVC: UIViewController {
                 }
             })
         }
-
-        NotificationCenter.default.addObserver(self, selector: #selector(showTacoQuote(notification:)), name:NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(clearTacoQuote(notification:)), name:NSNotification.Name(rawValue: "clearTacoQuote"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(checkForHasSavedTacoOnce(notification:)), name:NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
     }
     
     func clearTacoQuote(notification: NSNotification) {
@@ -173,15 +178,27 @@ class MainVC: UIViewController {
     func tacoManJump() {
         print("JUMPING")
         let shakeAnimation = CABasicAnimation(keyPath: "position")
-        shakeAnimation.duration = 0.1
+        shakeAnimation.duration = 0.2
         shakeAnimation.repeatCount = 5
         shakeAnimation.autoreverses = true
-        shakeAnimation.fromValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y + 5)
-        shakeAnimation.toValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y - 5)
+        shakeAnimation.fromValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y + 10)
+        shakeAnimation.toValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y - 10)
         tacoMan.layer.add(shakeAnimation, forKey: "position")
+        
+        UIView.animate(withDuration: 0.2, delay:0, options: [.repeat, .autoreverse], animations: {
+            UIView.setAnimationRepeatCount(5)
+            self.neonSign.image = UIImage(named: "sign-on")
+            self.shadowImage.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            
+        }, completion: {completion in
+            self.shadowImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.neonSign.image = UIImage(named: "sign-off")
+        })
     }
     
     @IBOutlet weak var tacoMan: UIImageView!
+    @IBOutlet weak var shadowImage: UIImageView!
+    @IBOutlet weak var neonSign: UIImageView!
     
     @IBOutlet weak var mainOnboard: UIView!
     @IBAction func gotItBtnTapped(_ sender: Any) {
@@ -196,5 +213,4 @@ class MainVC: UIViewController {
     @IBAction func savedBtnGotItTapped(_ sender: Any) {
         savedTacosOnboard.isHidden = true
     }
-    
 }

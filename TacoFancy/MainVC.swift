@@ -40,11 +40,11 @@ class MainVC: UIViewController {
         setUpTacoManScreen()
         
         let indexToUse = UserDefaults.standard.integer(forKey: "index")
-        if indexToUse < 39 {
+        if indexToUse < 38 {
             let indexToStore = indexToUse + 1
             UserDefaults.standard.set(indexToStore, forKey: "index")
             print("APP DELEGATE BACKGROUND: \(indexToStore)")
-        } else if indexToUse == 39 {
+        } else if indexToUse == 38 {
             UserDefaults.standard.set(0, forKey: "index")
             print("APP DELEGATE BACKGROUND: \(indexToUse)")
         }

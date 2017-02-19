@@ -51,30 +51,30 @@
                                     <constraint firstAttribute="height" constant="100" id="OcK-p4-c71"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaK-Zh-T6P">
-                                <rect key="frame" x="20" y="590" width="374" height="22"/>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" All I want to hear are those 3 little magical words .... I brought tacos." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaK-Zh-T6P">
+                                <rect key="frame" x="20" y="512.66666666666652" width="374" height="43.333333333333371"/>
+                                <fontDescription key="fontDescription" name="MyanmarSangamMN" family="Myanmar Sangam MN" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="23"/>
+                                    <fontDescription key="fontDescription" name="MyanmarSangamMN" family="Myanmar Sangam MN" pointSize="22"/>
                                 </variation>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TacoMan" translatesAutoresizingMaskIntoConstraints="NO" id="5mE-9g-tw0">
-                                <rect key="frame" x="82" y="219" width="250" height="250"/>
+                                <rect key="frame" x="82" y="218.66666666666669" width="250" height="250.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="S4m-To-wwP"/>
                                     <constraint firstAttribute="width" constant="250" id="e1G-wW-0AS"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shadow" translatesAutoresizingMaskIntoConstraints="NO" id="f1a-Qw-pbR">
-                                <rect key="frame" x="82" y="429" width="250" height="100"/>
+                                <rect key="frame" x="82" y="428.66666666666663" width="250" height="99.999999999999886"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Bhk-wE-esf"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn9-Df-cap">
-                                <rect key="frame" x="82" y="219" width="250" height="250"/>
+                                <rect key="frame" x="82" y="218.66666666666669" width="250" height="250.00000000000006"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.97254901959999995" green="0.015686274510000001" blue="0.031372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -86,7 +86,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you choose to save a taco, they are magically exported to your Saved Tacos list. What a great place to be." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uD-9V-eZb">
-                                        <rect key="frame" x="16" y="140" width="382" height="65"/>
+                                        <rect key="frame" x="16" y="140" width="382" height="64.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -99,7 +99,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asV-xG-n70">
-                                        <rect key="frame" x="144" y="269" width="125" height="40"/>
+                                        <rect key="frame" x="144" y="268.66666666666669" width="125" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="125" id="Zi3-GW-Vg8"/>
@@ -129,20 +129,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tap" translatesAutoresizingMaskIntoConstraints="NO" id="pat-Me-Dv4">
-                                        <rect key="frame" x="157" y="131" width="100" height="150"/>
+                                        <rect key="frame" x="157" y="130.66666666666669" width="100" height="150.00000000000006"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="Ca7-FZ-Zpe"/>
                                             <constraint firstAttribute="height" constant="150" id="okz-qN-xDW"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on Mr. Fancy Taco when you are ready for a random (and wildly delicious) taco recipe to appear in your hand." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtZ-8W-vHU">
-                                        <rect key="frame" x="16" y="42" width="382" height="65"/>
+                                        <rect key="frame" x="16" y="42.000000000000007" width="382" height="64.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imb-lq-o0S">
-                                        <rect key="frame" x="145" y="297" width="125" height="40"/>
+                                        <rect key="frame" x="145" y="296.66666666666669" width="125" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="3Tr-f0-xAm"/>
@@ -172,23 +172,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe the taco card to the right to save it - or to the left to toss it out (although who would ever throw out a taco?!)." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMN-A0-D0o">
-                                        <rect key="frame" x="16" y="42" width="382" height="65"/>
+                                        <rect key="frame" x="16" y="42.000000000000007" width="382" height="64.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="RaM-oZ-r99">
-                                        <rect key="frame" x="75" y="131" width="264" height="150"/>
+                                        <rect key="frame" x="75" y="130.66666666666669" width="264" height="150.00000000000006"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Swipe-Left" translatesAutoresizingMaskIntoConstraints="NO" id="si7-Po-6fJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="150.00000000000003"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="Ewj-Oa-73t"/>
                                                     <constraint firstAttribute="width" constant="100" id="WpH-W9-Tuh"/>
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Swipe-RIght" translatesAutoresizingMaskIntoConstraints="NO" id="w5m-wX-AUg">
-                                                <rect key="frame" x="164" y="0.0" width="100" height="150"/>
+                                                <rect key="frame" x="164" y="0.0" width="100" height="150.00000000000003"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="Qle-j4-Ria"/>
                                                     <constraint firstAttribute="width" constant="100" id="ZLD-Jz-E0x"/>
@@ -197,7 +197,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bm3-yN-4h2">
-                                        <rect key="frame" x="144" y="297" width="125" height="40"/>
+                                        <rect key="frame" x="144" y="296.66666666666669" width="125" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="125" id="M4B-Fm-ZbW"/>
@@ -234,7 +234,6 @@
                             <constraint firstItem="JaK-Zh-T6P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="AgN-bH-3A5"/>
                             <constraint firstAttribute="trailing" secondItem="UPt-7x-nnG" secondAttribute="trailing" id="F2a-Uy-ln6"/>
                             <constraint firstItem="5mE-9g-tw0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N3w-Bg-f2j"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="JaK-Zh-T6P" secondAttribute="bottom" constant="75" id="Pib-r7-FEu"/>
                             <constraint firstItem="f1a-Qw-pbR" firstAttribute="width" secondItem="5mE-9g-tw0" secondAttribute="width" id="RlQ-gR-jbj"/>
                             <constraint firstItem="f1a-Qw-pbR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WcD-SI-sdO"/>
                             <constraint firstItem="b32-Ce-Sha" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="XMV-oG-Neg"/>
@@ -247,6 +246,7 @@
                             <constraint firstItem="hn9-Df-cap" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eGD-AL-Bge"/>
                             <constraint firstAttribute="trailing" secondItem="NK0-nF-JrV" secondAttribute="trailing" id="f9m-gd-zNe"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pQE-Cb-fgT" secondAttribute="bottom" id="gIV-PK-yZE"/>
+                            <constraint firstItem="JaK-Zh-T6P" firstAttribute="top" secondItem="f1a-Qw-pbR" secondAttribute="bottom" constant="-16" id="gkV-iu-HyJ"/>
                             <constraint firstAttribute="trailing" secondItem="pQE-Cb-fgT" secondAttribute="trailing" id="gpZ-3g-JCa"/>
                             <constraint firstItem="pQE-Cb-fgT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gwI-RU-hcR"/>
                             <constraint firstItem="hn9-Df-cap" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="qaN-vF-iJR"/>
@@ -481,13 +481,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you decide you've made a horrible mistake - no worries! Just swipe left to delete a taco." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMb-WF-54h">
-                                        <rect key="frame" x="16" y="204" width="382" height="64.666666666666686"/>
+                                        <rect key="frame" x="16" y="204" width="382" height="21.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" weight="black" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaO-lQ-0Cg">
-                                        <rect key="frame" x="145" y="300.66666666666669" width="125" height="40"/>
+                                        <rect key="frame" x="145" y="257.66666666666669" width="125" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="125" id="3Jk-po-9gz"/>
@@ -563,7 +563,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="at3-ci-xzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="left" id="wrE-ov-z7l"/>
             </objects>
-            <point key="canvasLocation" x="249" y="850"/>
+            <point key="canvasLocation" x="248" y="811"/>
         </scene>
         <!--Saved-->
         <scene sceneID="Dao-7o-tUB">

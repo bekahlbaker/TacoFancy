@@ -77,7 +77,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func configureTaco(_ taco: Taco) {
         self.taco = taco
-        tacoString = taco.baseLayer + ", with " + taco.condiment + ", mixin " + taco.mixin + ", seasoned with " + taco.seasoning + ", inside " + taco.shell
+        tacoString = taco.baseLayer + "\n with " + taco.condiment + "\n and " + taco.mixin + "\n seasoned with " + taco.seasoning + "\n inside " + taco.shell
     }
     
     func saveTaco(_ taco: Taco) {
@@ -127,7 +127,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         print("CREATE DRAGGABLE VIEW")
         let draggableView = DraggableView(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2, y: (self.frame.size.height - CARD_HEIGHT)/2 - 50 , width: CARD_WIDTH, height: CARD_HEIGHT))
         draggableView.information.text = tacoString
-//        draggableView.information.font = UIFont.preferredFont(forTextStyle: .body)
+//        draggableView.information.font = UIFont(name: "Myanmar Sangum MN" , size: 8)
         draggableView.delegate = self
         return draggableView
     }

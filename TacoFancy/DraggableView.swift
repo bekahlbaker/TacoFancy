@@ -41,24 +41,25 @@ class DraggableView: UIView {
         
         self.setupView()
         
-        let regularFont = UIFont(name: "Avenir-Medium", size: 14)
-        
-        information = UILabel(frame: CGRect(x: 0, y: 50, width: self.frame.size.width - 75, height: 200))
+        let regularFont = UIFont(name: "MyanmarSangamMN" , size: 14)
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+
+        information = UILabel(frame: CGRect(x: 0, y: 50, width: screenWidth * 0.5 + 10, height: screenHeight * 0.5))
         information.center = CGPoint(x: Int(self.frame.size.width/2), y: Int(self.frame.size.height/2))
         information.numberOfLines = 0
         information.textAlignment = NSTextAlignment.center
         information.textColor = UIColor.black
         information.font = regularFont
         
-//        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.clear
         
-        UIGraphicsBeginImageContext(self.frame.size)
+//        UIGraphicsBeginImageContext(self.frame.size)
+        UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0.0)
         UIImage(named: "Card")?.draw(in: self.bounds)
-        
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        
         UIGraphicsEndImageContext()
-        
         self.backgroundColor = UIColor(patternImage: image)
         
         

@@ -11,10 +11,14 @@ import UIKit
 class SavedTacosCell: UITableViewCell {
 
     @IBOutlet weak var tacoName: UILabel!
+    @IBOutlet weak var backgroundLayer: UIView!
+    @IBOutlet weak var shadowLayer: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        backgroundLayer.layer.cornerRadius = 8
+        shadowLayer.layer.cornerRadius = 8
     }
 
 }

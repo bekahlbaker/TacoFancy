@@ -40,8 +40,8 @@ class RecipeVC: UIViewController {
                     self.recipeLbl.text = "Sorry, we can't find the recipe for this. Please try again."
                 } else {
                     if let recipe = snapshot.value as? String {
-                        let regularFont = UIFont(name: "Avenir-Light", size: 13)
-                        let boldFont = UIFont(name: "Avenir-Medium", size: 14)
+                        let regularFont = UIFont(name: "MyanmarSangamMN" , size: 16)
+                        let boldFont = UIFont(name: "MyanmarSangamMN-Bold" , size: 18)
                         
                         let recipeString = String(describing: recipe)
                         let title = self.ingredientPassed

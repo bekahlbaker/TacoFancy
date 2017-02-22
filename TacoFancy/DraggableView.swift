@@ -41,7 +41,7 @@ class DraggableView: UIView {
         
         self.setupView()
         
-        let regularFont = UIFont(name: "MyanmarSangamMN" , size: 14)
+        let regularFont = UIFont(name: "MyanmarSangamMN" , size: 16)
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height

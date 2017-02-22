@@ -16,9 +16,9 @@ class SavedTacosCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        backgroundLayer.layer.cornerRadius = 8
-        shadowLayer.layer.cornerRadius = 8
+//        
+//        backgroundLayer.layer.cornerRadius = 8
+//        shadowLayer.layer.cornerRadius = 8
     }
 
 }

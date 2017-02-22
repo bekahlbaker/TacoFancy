@@ -18,6 +18,7 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var recipe = [String]()
     var ingredientToPass: String!
     var tacosFound = true
+    var backgroundColors = [UIColor(red:0.53, green:0.83, blue:0.49, alpha:1.0), UIColor(red:0.91, green:0.83, blue:0.41, alpha:1.0), UIColor(red:0.95, green:0.57, blue:0.20, alpha:1.0), UIColor(red:1.00, green:0.33, blue:0.48, alpha:1.0)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,10 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         downloadSavedTaco()
     }
     
+//    func setBackgroundColor(cell: IngredientCell, indexPath: IndexPath) {
+//        cell.backgroundLayer.backgroundColor = backgroundColors[indexPath.row % backgroundColors.count]
+//    }
+    
     func swipeRight(gestureRecognizer: UISwipeGestureRecognizer) {
        _ = self.navigationController?.popViewController(animated: true)
     }
@@ -47,14 +52,14 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeCell") as? RecipeCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell") as? IngredientCell
+//        setBackgroundColor(cell: cell!, indexPath: indexPath)
         if recipe[indexPath.row] == "<null>" {
             cell?.isUserInteractionEnabled = false
-            cell?.recipeLbl.text = "Sorry. We can't find this ingredient. Please try again."
+//            cell?.recipeLbl.text = "Sorry. We can't find this ingredient. Please try again."
         } else {
-            let regularFont = UIFont(name: "Avenir-Light", size: 13)
-            let mediumFont = UIFont(name: "Avenir-Medium", size: 14)
+            let regularFont = UIFont(name: "MyanmarSangamMN" , size: 16)
+            let mediumFont = UIFont(name: "MyanmarSangamMN-Bold" , size: 16)
             _ = UIFont(name: "Avenir-Heavy", size: 14)
             let linkColor = UIColor(red:0.00, green:0.64, blue:0.66, alpha:1.0)
 
@@ -68,7 +73,7 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let combination = NSMutableAttributedString()
             combination.append(attributedString)
             
-            cell?.recipeLbl.attributedText = combination
+            cell?.ingredientLbl.attributedText = combination
             cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             cell?.tintColor = linkColor
         }

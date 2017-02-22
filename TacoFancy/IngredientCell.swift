@@ -1,5 +1,5 @@
 //
-//  RecipeCell.swift
+//  IngredientCell.swift
 //  TacoFancy
 //
 //  Created by Rebekah Baker on 2/1/17.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class RecipeCell: UITableViewCell {
+class IngredientCell: UITableViewCell {
     
-    @IBOutlet weak var recipeLbl: UILabel!
+    @IBOutlet weak var ingredientLbl: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

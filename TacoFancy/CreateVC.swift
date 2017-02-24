@@ -13,7 +13,7 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var pickerView: UIPickerView!
     
-    var baseLayerArray = [String]()
+    var baseArray = [String]()
     var condimentsArray = [String]()
     var mixInArray = [String]()
     var seasoningArray = [String]()
@@ -25,26 +25,31 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var chosenShell: String!
     var buttonPicked: UIButton!
     var pickerPicked: UIPickerView!
-    var hasSavedItems = true
     
     @IBOutlet weak var chooseBaseBtn: UIButton!
     @IBAction func chooseBaseBtn(_ sender: Any) {
-        baseLayerArray = downloadData(layer: "base-layers", baseLayerArray)
+        baseArray = downloadData(layer: "base", baseArray)
         showPickerViewAnimation(btn: chooseBaseBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseCondimentBtn: UIButton!
     @IBAction func chooseCondimentBtn(_ sender: Any) {
-        condimentsArray = downloadData(layer: "condiments", condimentsArray)
+        condimentsArray = downloadData(layer: "condiment", condimentsArray)
         showPickerViewAnimation(btn: chooseCondimentBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseMixInBtn: UIButton!
     @IBAction func chooseMixInBtn(_ sender: Any) {
+        mixInArray = downloadData(layer: "mix-in", mixInArray)
+        showPickerViewAnimation(btn: chooseMixInBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseSeasoningBtn: UIButton!
     @IBAction func chooseSeasoningBtn(_ sender: Any) {
+        seasoningArray = downloadData(layer: "seasoning", seasoningArray)
+        showPickerViewAnimation(btn: chooseSeasoningBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseShellBtn: UIButton!
     @IBAction func chooseShellBtn(_ sender: Any) {
+        shellArray = downloadData(layer: "shell", shellArray)
+        showPickerViewAnimation(btn: chooseShellBtn, shouldGrow: true)
     }
     @IBOutlet weak var doneBtn: UIButton!
     @IBAction func doneBtn(_ sender: Any) {
@@ -71,9 +76,15 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch buttonPicked.tag {
         case 1:
-            return baseLayerArray.count
+            return baseArray.count
         case 2:
             return condimentsArray.count
+        case 3:
+            return mixInArray.count
+        case 4:
+            return seasoningArray.count
+        case 5:
+            return shellArray.count
         default:
             return 1
         }
@@ -82,35 +93,51 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch buttonPicked.tag {
         case 1:
-            return baseLayerArray[row]
+            return baseArray[row]
         case 2:
             return condimentsArray[row]
+        case 3:
+            return mixInArray[row]
+        case 4:
+            return seasoningArray[row]
+        case 5:
+            return shellArray[row]
         default:
             return "Nothing Saved"
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch buttonPicked.tag {
-        case 1:
-            if hasSavedItems {
-                chosenBaseLayer = baseLayerArray[row]
-                buttonPicked.setTitle(chosenBaseLayer, for: .normal)
-            } else {
-                chosenBaseLayer = ""
+        if pickerView.numberOfRows(inComponent: 0) > 1 {
+            var chosenIngredient = String()
+            var currentBtnTitle = String()
+            switch self.buttonPicked.tag {
+            case 1:
+                chosenIngredient = baseArray[row]
+                currentBtnTitle = "Base"
+            case 2:
+                chosenIngredient = condimentsArray[row]
+                currentBtnTitle = "Condiment"
+            case 3:
+                chosenIngredient = mixInArray[row]
+                currentBtnTitle = "Mix-In"
+            case 4:
+                chosenIngredient = seasoningArray[row]
+                currentBtnTitle = "Seasoning"
+            case 5:
+                chosenIngredient = shellArray[row]
+                currentBtnTitle = "Shell"
+            default:
+                break
             }
-        case 2:
-            if hasSavedItems {
-                chosenCondiment = condimentsArray[row]
-                buttonPicked.setTitle(chosenCondiment, for: .normal)
+            if chosenIngredient.contains("Choose a") {
+                buttonPicked.setTitle(currentBtnTitle, for: .normal)
             } else {
-                chosenCondiment = ""
+                buttonPicked.setTitle(chosenIngredient, for: .normal)
             }
-        default:
-            break
         }
     }
-    
+
     func showPickerViewAnimation(btn: UIButton, shouldGrow: Bool) {
         let btnBeginFrame = CGRect(x: 60, y: 50 * Double(btn.tag) , width: 200, height: 40)
         let btnEndFrame = CGRect(x: 10, y: 134.5, width: 300, height: 250)
@@ -145,24 +172,43 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         DispatchQueue.global().async {
             DataService.ds.REF_CURRENT_USER.child(layer).observe( .value, with: { (snapshot) in
                 var arrayPassedIn = [String]()
-                arrayPassedIn.append("Choose \(layer)...")
                 if let _ = snapshot.value as? NSNull {
-                    self.hasSavedItems = false
                     arrayPassedIn.append("Nothing saved yet")
+                    switch self.buttonPicked.tag {
+                    case 1:
+                        self.baseArray = arrayPassedIn
+                    case 2:
+                        self.condimentsArray = arrayPassedIn
+                    case 3:
+                        self.mixInArray = arrayPassedIn
+                    case 4:
+                        self.seasoningArray = arrayPassedIn
+                    case 5:
+                        self.shellArray = arrayPassedIn
+                    default:
+                        break
+                    }
                     if arrayPassedIn.count > 0 {
                         self.pickerView.selectRow(0, inComponent: 0, animated: false)
                         self.pickerView.reloadAllComponents()
                     }
                 } else{
+                    arrayPassedIn.append("Choose a \(layer)...")
                     if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                         for snap in snapshot {
                             let ing = snap.key
                             arrayPassedIn.append(ing)
                             switch self.buttonPicked.tag {
                             case 1:
-                                self.baseLayerArray = arrayPassedIn
+                                self.baseArray = arrayPassedIn
                             case 2:
                                 self.condimentsArray = arrayPassedIn
+                            case 3:
+                                self.mixInArray = arrayPassedIn
+                            case 4:
+                                self.seasoningArray = arrayPassedIn
+                            case 5:
+                                self.shellArray = arrayPassedIn
                             default:
                                 break
                             }

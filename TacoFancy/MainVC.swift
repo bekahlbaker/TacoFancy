@@ -63,6 +63,7 @@ class MainVC: UIViewController {
     }
     
     func setUpCardsScreen() {
+        flickerSign()
         self.neonSign.image = UIImage(named: "sign-on")
         self.view.insertSubview(draggableBackground, at: 1)
         tacoBtn.isHidden = true
@@ -70,51 +71,7 @@ class MainVC: UIViewController {
         tacoMan.isHidden = true
         shadowImage.isHidden = true
     }
-    
-    func checkForHasTappedOnce() {
-        if(UserDefaults.standard.bool(forKey: "HasTappedOnce")) {
-            print("NOT first launch")
-            mainOnboard.isHidden = true
-        }
-        else{
-            print("FIRST launch")
-            UserDefaults.standard.set(true, forKey: "HasTappedOnce")
-            UserDefaults.standard.synchronize()
-            _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainVC.showMainOnboard), userInfo: nil, repeats: false)
-        }
-    }
-    
-    func showMainOnboard() {
-        mainOnboard.isHidden = false
-    }
-    
-    func checkForHasSwipedOnce() {
-        if(UserDefaults.standard.bool(forKey: "HasSwipedOnce")) {
-            print("NOT first launch")
-            setUpCardsScreen()
-        }
-        else {
-            print("FIRST launch")
-            UserDefaults.standard.set(true, forKey: "HasSwipedOnce")
-            UserDefaults.standard.synchronize()
-            swipeOnboard.isHidden = false
-            setUpCardsScreen()
-        }
-    }
-    
-    func checkForHasSavedTacoOnce(notification: NSNotification) {
-        if(UserDefaults.standard.bool(forKey: "HasSavedTacosOnce")) {
-            print("NOT first launch")
-            setUpCardsScreen()
-        }
-        else {
-            print("FIRST launch")
-            UserDefaults.standard.set(true, forKey: "HasSavedTacosOnce")
-            UserDefaults.standard.synchronize()
-            savedTacosOnboard.isHidden = false
-        }
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -154,46 +111,6 @@ class MainVC: UIViewController {
                 }
             })
         }
-    }
-    
-    func clearTacoQuote(notification: NSNotification) {
-        tacoQuoteLbl.text = ""
-    }
-    
-    func showTacoQuote(notification: NSNotification) {
-        tacoQuoteLbl.alpha = 0
-        let indexToUse = UserDefaults.standard.integer(forKey: "index")
-        print("VIEW APPEAR \(indexToUse)")
-        let pList = Bundle.main.path(forResource: "TacoQuotes", ofType: "plist")
-        guard let content = NSDictionary(contentsOfFile: pList!) as? [String:[String]] else {
-            fatalError()
-        }
-        guard let quoteArray = content["Quote"] else { fatalError() }
-        self.tacoQuoteLbl.text = quoteArray[indexToUse]
-        UIView.animate(withDuration: 0.5) {
-            self.tacoQuoteLbl.alpha = 1
-        }
-    }
-    
-    func tacoManJump() {
-        print("JUMPING")
-        let shakeAnimation = CABasicAnimation(keyPath: "position")
-        shakeAnimation.duration = 0.2
-        shakeAnimation.repeatCount = 5
-        shakeAnimation.autoreverses = true
-        shakeAnimation.fromValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y + 10)
-        shakeAnimation.toValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y - 10)
-        tacoMan.layer.add(shakeAnimation, forKey: "position")
-        
-        UIView.animate(withDuration: 0.2, delay:0, options: [.repeat, .autoreverse], animations: {
-            UIView.setAnimationRepeatCount(5)
-            self.neonSign.image = UIImage(named: "sign-on")
-            self.shadowImage.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            
-        }, completion: {completion in
-            self.shadowImage.transform = CGAffineTransform(scaleX: 1, y: 1)
-            self.neonSign.image = UIImage(named: "sign-off")
-        })
     }
     
     @IBOutlet weak var tacoMan: UIImageView!

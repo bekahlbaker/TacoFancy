@@ -19,7 +19,6 @@ class DataService {
     
     fileprivate var _REF_BASE = DB_BASE
     fileprivate var _REF_USERS = DB_BASE.child("users")
-    fileprivate var _REF_INGREDIENTS = DB_BASE.child("ingredients")
     
     var REF_BASE: FIRDatabaseReference {
         return _REF_BASE
@@ -33,10 +32,6 @@ class DataService {
         let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
         let user = REF_USERS.child(uid!)
         return user
-    }
-    
-    var REF_INGREDIENTS: FIRDatabaseReference {
-        return _REF_INGREDIENTS
     }
     
     func createFirebaseDBUser(_ uid: String, userData: Dictionary<String, String>) {

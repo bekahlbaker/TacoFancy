@@ -83,10 +83,14 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     func saveTaco(_ taco: Taco) {
         self.taco = taco
         let tacoToSave = ["base-layer": taco.baseLayer, "condiment": taco.condiment, "mixin": taco.mixin, "seasoning": taco.seasoning, "shell": taco.shell]
-        DataService.ds.REF_CURRENT_USER.child("saved-tacos").child(taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell).updateChildValues(tacoToSave)
+        DataService.ds.REF_CURRENT_USER.child("full-tacos").child(taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell).updateChildValues(tacoToSave)
         let ingredientsToSave = [taco.baseLayer: taco.baseLayerRecipe, taco.condiment: taco.condimentRecipe, taco.mixin: taco.mixinRecipe, taco.seasoning: taco.seasoningRecipe, taco.shell: taco.shellRecipe]
-        DataService.ds.REF_INGREDIENTS.updateChildValues(ingredientsToSave)
-        DataService.ds.REF_CURRENT_USER.child("saved-ingredients").updateChildValues(ingredientsToSave)
+        DataService.ds.REF_CURRENT_USER.child("ingredients").updateChildValues(ingredientsToSave)
+        DataService.ds.REF_CURRENT_USER.child("base-layers").updateChildValues([taco.baseLayer: true])
+        DataService.ds.REF_CURRENT_USER.child("condiments").updateChildValues([taco.condiment: true])
+        DataService.ds.REF_CURRENT_USER.child("mixins").updateChildValues([taco.mixin: true])
+        DataService.ds.REF_CURRENT_USER.child("seasonings").updateChildValues([taco.seasoning: true])
+        DataService.ds.REF_CURRENT_USER.child("shells").updateChildValues([taco.shell: true])
     }
     
     func setupView() -> Void {
@@ -117,6 +121,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), for: UIControlEvents.touchUpInside)
         
         activitySpinner.center = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2 - 50)
+        activitySpinner.color = UIColor.white
         self.addSubview(activitySpinner)
         
         self.addSubview(xButton)
@@ -127,7 +132,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         print("CREATE DRAGGABLE VIEW")
         let draggableView = DraggableView(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2, y: (self.frame.size.height - CARD_HEIGHT)/2 - 50 , width: CARD_WIDTH, height: CARD_HEIGHT))
         draggableView.information.text = tacoString
-//        draggableView.information.font = UIFont(name: "Myanmar Sangum MN" , size: 8)
         draggableView.delegate = self
         return draggableView
     }

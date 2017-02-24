@@ -35,7 +35,7 @@ class RecipeVC: UIViewController {
         if ingredient == "<null>" {
             self.recipeLbl.text = "Sorry, we can't find the recipe for this. Please try again."
         } else {
-            DataService.ds.REF_INGREDIENTS.child(ingredient).observe( .value, with: { (snapshot) in
+            DataService.ds.REF_CURRENT_USER.child("ingredients").child(ingredient).observe( .value, with: { (snapshot) in
                 if let _ = snapshot.value as? NSNull {
                     self.recipeLbl.text = "Sorry, we can't find the recipe for this. Please try again."
                 } else {

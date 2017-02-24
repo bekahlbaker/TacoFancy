@@ -24,11 +24,11 @@
 		273271B81DA960AB001AF568 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273271B61DA960AB001AF568 /* Main.storyboard */; };
 		273271BA1DA960AB001AF568 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273271B91DA960AB001AF568 /* Assets.xcassets */; };
 		273271BD1DA960AB001AF568 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 273271BB1DA960AB001AF568 /* LaunchScreen.storyboard */; };
-		273271C61DA9A5D4001AF568 /* mexican-fiesta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */; };
-		273271C81DA9AA9A001AF568 /* DOSEQUIS.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */; };
 		279860451E4A3D04008B4345 /* TacoQuotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 279860441E4A3D04008B4345 /* TacoQuotes.plist */; };
-		279860501E4AC0BC008B4345 /* RightToLeftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2798604F1E4AC0BC008B4345 /* RightToLeftSegue.swift */; };
-		279860521E536DC9008B4345 /* LeftToRIghtSegueModally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279860511E536DC9008B4345 /* LeftToRIghtSegueModally.swift */; };
+		27FBD4DA1E5DFB140076ED3A /* MainVC+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FBD4D91E5DFB140076ED3A /* MainVC+Animations.swift */; };
+		27FBD4DC1E5DFB6F0076ED3A /* MainVC+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FBD4DB1E5DFB6F0076ED3A /* MainVC+Onboarding.swift */; };
+		27FBD4DE1E5DFBC00076ED3A /* SavedTacosVC+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FBD4DD1E5DFBC00076ED3A /* SavedTacosVC+SearchBar.swift */; };
+		27FBD4E01E5E10510076ED3A /* CreateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FBD4DF1E5E10510076ED3A /* CreateVC.swift */; };
 		373916E762872071ED087E43 /* Pods_TacoFancy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB73ACB8DC76DB800BC806B3 /* Pods_TacoFancy.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,11 +53,11 @@
 		273271B91DA960AB001AF568 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		273271BC1DA960AB001AF568 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		273271BE1DA960AB001AF568 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mexican-fiesta.ttf"; sourceTree = "<group>"; };
-		273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = DOSEQUIS.TTF; sourceTree = "<group>"; };
 		279860441E4A3D04008B4345 /* TacoQuotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TacoQuotes.plist; sourceTree = "<group>"; };
-		2798604F1E4AC0BC008B4345 /* RightToLeftSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightToLeftSegue.swift; sourceTree = "<group>"; };
-		279860511E536DC9008B4345 /* LeftToRIghtSegueModally.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftToRIghtSegueModally.swift; sourceTree = "<group>"; };
+		27FBD4D91E5DFB140076ED3A /* MainVC+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainVC+Animations.swift"; sourceTree = "<group>"; };
+		27FBD4DB1E5DFB6F0076ED3A /* MainVC+Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainVC+Onboarding.swift"; sourceTree = "<group>"; };
+		27FBD4DD1E5DFBC00076ED3A /* SavedTacosVC+SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SavedTacosVC+SearchBar.swift"; sourceTree = "<group>"; };
+		27FBD4DF1E5E10510076ED3A /* CreateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateVC.swift; sourceTree = "<group>"; };
 		8A2BD763FD764AF26EB598B5 /* Pods-TacoFancy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TacoFancy.release.xcconfig"; path = "Pods/Target Support Files/Pods-TacoFancy/Pods-TacoFancy.release.xcconfig"; sourceTree = "<group>"; };
 		AB73ACB8DC76DB800BC806B3 /* Pods_TacoFancy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TacoFancy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -81,6 +81,7 @@
 				27017B611E42623800DD090D /* SavedTacosVC.swift */,
 				27017B6D1E43AB2F00DD090D /* IngredientsVC.swift */,
 				27017B491E3C0A4400DD090D /* RecipeVC.swift */,
+				27FBD4DF1E5E10510076ED3A /* CreateVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -93,8 +94,6 @@
 				27017B5D1E4017AE00DD090D /* DraggableViewBackground.swift */,
 				27017B631E42766B00DD090D /* SavedTacosCell.swift */,
 				27017B651E42BDDB00DD090D /* IngredientCell.swift */,
-				2798604F1E4AC0BC008B4345 /* RightToLeftSegue.swift */,
-				279860511E536DC9008B4345 /* LeftToRIghtSegueModally.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -111,6 +110,9 @@
 		27017B3F1E3C091C00DD090D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				27FBD4D91E5DFB140076ED3A /* MainVC+Animations.swift */,
+				27FBD4DB1E5DFB6F0076ED3A /* MainVC+Onboarding.swift */,
+				27FBD4DD1E5DFBC00076ED3A /* SavedTacosVC+SearchBar.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -164,8 +166,6 @@
 		273271C41DA9A5AF001AF568 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				273271C71DA9AA9A001AF568 /* DOSEQUIS.TTF */,
-				273271C51DA9A5D4001AF568 /* mexican-fiesta.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -251,10 +251,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				273271BD1DA960AB001AF568 /* LaunchScreen.storyboard in Resources */,
-				273271C61DA9A5D4001AF568 /* mexican-fiesta.ttf in Resources */,
 				279860451E4A3D04008B4345 /* TacoQuotes.plist in Resources */,
 				273271BA1DA960AB001AF568 /* Assets.xcassets in Resources */,
-				273271C81DA9AA9A001AF568 /* DOSEQUIS.TTF in Resources */,
 				273271B81DA960AB001AF568 /* Main.storyboard in Resources */,
 				27017B541E3FB80400DD090D /* GoogleService-Info.plist in Resources */,
 			);
@@ -317,16 +315,18 @@
 			files = (
 				27017B641E42766B00DD090D /* SavedTacosCell.swift in Sources */,
 				27017B5E1E4017AE00DD090D /* DraggableViewBackground.swift in Sources */,
-				279860521E536DC9008B4345 /* LeftToRIghtSegueModally.swift in Sources */,
-				279860501E4AC0BC008B4345 /* RightToLeftSegue.swift in Sources */,
 				27017B5C1E40176A00DD090D /* DraggableView.swift in Sources */,
+				27FBD4E01E5E10510076ED3A /* CreateVC.swift in Sources */,
+				27FBD4DE1E5DFBC00076ED3A /* SavedTacosVC+SearchBar.swift in Sources */,
 				27017B4A1E3C0A4400DD090D /* RecipeVC.swift in Sources */,
 				27017B521E3FACBA00DD090D /* DataService.swift in Sources */,
 				27017B5A1E40175000DD090D /* Overlay.swift in Sources */,
 				273271B31DA960AB001AF568 /* AppDelegate.swift in Sources */,
+				27FBD4DC1E5DFB6F0076ED3A /* MainVC+Onboarding.swift in Sources */,
 				27017B561E3FC71700DD090D /* Taco.swift in Sources */,
 				27017B421E3C09BD00DD090D /* MainVC.swift in Sources */,
 				27017B6E1E43AB2F00DD090D /* IngredientsVC.swift in Sources */,
+				27FBD4DA1E5DFB140076ED3A /* MainVC+Animations.swift in Sources */,
 				27017B581E3FE95B00DD090D /* Constants.swift in Sources */,
 				27017B661E42BDDB00DD090D /* IngredientCell.swift in Sources */,
 				27017B621E42623800DD090D /* SavedTacosVC.swift in Sources */,

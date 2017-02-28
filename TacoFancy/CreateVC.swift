@@ -25,30 +25,32 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var chosenShell: String!
     var buttonPicked: UIButton!
     var pickerPicked: UIPickerView!
+    var tacoToSave = [String: String]()
+    var tacoName = ""
     
     @IBOutlet weak var chooseBaseBtn: UIButton!
     @IBAction func chooseBaseBtn(_ sender: Any) {
-        baseArray = downloadData(layer: "base", baseArray)
+        baseArray = downloadData(layer: "base")
         showPickerViewAnimation(btn: chooseBaseBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseCondimentBtn: UIButton!
     @IBAction func chooseCondimentBtn(_ sender: Any) {
-        condimentsArray = downloadData(layer: "condiment", condimentsArray)
+        condimentsArray = downloadData(layer: "condiment")
         showPickerViewAnimation(btn: chooseCondimentBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseMixInBtn: UIButton!
     @IBAction func chooseMixInBtn(_ sender: Any) {
-        mixInArray = downloadData(layer: "mix-in", mixInArray)
+        mixInArray = downloadData(layer: "mix-in")
         showPickerViewAnimation(btn: chooseMixInBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseSeasoningBtn: UIButton!
     @IBAction func chooseSeasoningBtn(_ sender: Any) {
-        seasoningArray = downloadData(layer: "seasoning", seasoningArray)
+        seasoningArray = downloadData(layer: "seasoning")
         showPickerViewAnimation(btn: chooseSeasoningBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseShellBtn: UIButton!
     @IBAction func chooseShellBtn(_ sender: Any) {
-        shellArray = downloadData(layer: "shell", shellArray)
+        shellArray = downloadData(layer: "shell")
         showPickerViewAnimation(btn: chooseShellBtn, shouldGrow: true)
     }
     @IBOutlet weak var doneBtn: UIButton!
@@ -57,6 +59,7 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     @IBOutlet weak var createTacoBtn: UIButton!
     @IBAction func createTacoBtn(_ sender: Any) {
+        saveTaco()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +133,7 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
             default:
                 break
             }
+            
             if chosenIngredient.contains("Choose a") {
                 buttonPicked.setTitle(currentBtnTitle, for: .normal)
             } else {
@@ -168,10 +172,10 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         }
     }
     
-    func downloadData(layer: String, _ arrayPassedIn: [String]) -> [String] {
+    func downloadData(layer: String) -> [String] {
+        var arrayPassedIn = [String]()
         DispatchQueue.global().async {
             DataService.ds.REF_CURRENT_USER.child(layer).observe( .value, with: { (snapshot) in
-                var arrayPassedIn = [String]()
                 if let _ = snapshot.value as? NSNull {
                     arrayPassedIn.append("Nothing saved yet")
                     switch self.buttonPicked.tag {
@@ -222,5 +226,32 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
             })
         }
         return arrayPassedIn
+    }
+    
+    func createTacoName(ing: String, btn: UIButton) {
+        if let ingredient = btn.title(for: .normal) {
+            if ingredient != ing {
+                tacoName.append(ingredient + " , ")
+                tacoToSave[ing] = btn.title(for: .normal)
+                btn.setTitle(ing, for: .normal)
+            }
+        }
+    }
+    
+    func saveTaco() {
+        createTacoName(ing: "Base", btn: chooseBaseBtn)
+        createTacoName(ing: "Condiment", btn: chooseCondimentBtn)
+        createTacoName(ing: "Mix-In", btn: chooseMixInBtn)
+        createTacoName(ing: "Seasoning", btn: chooseSeasoningBtn)
+        createTacoName(ing: "Shell", btn: chooseShellBtn)
+        if tacoName != "" {
+            print(" TACO TO SAVE \(tacoName)")
+            DataService.ds.REF_CURRENT_USER.child("created-tacos").child(tacoName).updateChildValues(tacoToSave)
+            print("Saving taco")
+        }
+        tacoName = ""
+        print("CLEARED TACO NAME \(tacoName)")
+        self.pickerView.selectRow(0, inComponent: 0, animated: false)
+        self.pickerView.reloadAllComponents()
     }
 }

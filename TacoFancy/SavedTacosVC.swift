@@ -235,7 +235,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func downloadSavedIngredients() {
-        DataService.ds.REF_CURRENT_USER.child("ingredients").observe( .value, with: { (snapshot) in
+        DataService.ds.REF_CURRENT_USER.child("Ingredients").observe( .value, with: { (snapshot) in
             self.savedIngredients = []
             if let _ = snapshot.value as? NSNull {
                 print("No Ingredients saved")

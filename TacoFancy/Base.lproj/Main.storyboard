@@ -628,7 +628,7 @@
                                     <constraint firstAttribute="height" constant="40" id="PSc-1p-SXp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MyanmarSangamMN" family="Myanmar Sangam MN" pointSize="17"/>
-                                <state key="normal" title="Base Layer">
+                                <state key="normal" title="Base">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

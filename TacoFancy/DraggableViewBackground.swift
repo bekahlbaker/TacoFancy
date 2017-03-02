@@ -40,7 +40,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         self.tag = 100
         self.setupView()
         getRandomTaco()
-        print("GETTING RANDOM TACO on INIT")
     }
     
     func getRandomTaco() {
@@ -49,11 +48,14 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             print("Cannot create URL")
             return
         }
+        let urlconfig = URLSessionConfiguration.default
+        urlconfig.timeoutIntervalForRequest = 5
+        urlconfig.timeoutIntervalForResource = 60
         let urlRequest = URLRequest(url: url)
-        let session = URLSession.shared
+        let session = URLSession(configuration: urlconfig)
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             if error != nil {
-                print(error as Any)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "noInternetConnectionError"), object: nil)
             } else {
                 if let urlContent = data {
                     do {
@@ -94,7 +96,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func setupView() -> Void {
-        print("SETUP VIEW")
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
@@ -129,7 +130,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func createDraggableViewWithData() -> DraggableView {
-        print("CREATE DRAGGABLE VIEW")
         let draggableView = DraggableView(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2, y: (self.frame.size.height - CARD_HEIGHT)/2 - 50 , width: CARD_WIDTH, height: CARD_HEIGHT))
         draggableView.information.text = tacoString
         draggableView.delegate = self
@@ -137,11 +137,9 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     }
     
     func loadCards() -> Void {
-        print("LOAD CARDS")
         self.loadedCard = self.createDraggableViewWithData()
         UIView.animate(withDuration: 0.3, animations: {
             () -> Void in
-            print("INSERTING NEXT CARD")
             self.checkButton.setImage(UIImage(named: "like-off"), for: .normal)
             self.xButton.setImage(UIImage(named: "dislike-off"), for: .normal)
             self.addSubview(self.loadedCard)
@@ -151,21 +149,16 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     //Adds new card to view after clicking
     func cardClickedLeft(_ card: UIView) -> Void {
-        print("Clicked 3.CARD SWIPED LEFT")
         Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
-        print("GETTING RANDOM TACO when SWIPED LEFT")
     }
     func cardClickedRight(_ card: UIView) -> Void {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
-        print("Clicked 3.CARD SWIPED RIGHT")
         saveTaco(taco)
         Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
-        print("GETTING RANDOM TACO when SWIPED RIGHT")
     }
     
     //Check image following dragging cards
     func swipeRight() -> Void {
-        print("Clicked 1.SWIPe RIGHT")
         let dragView: DraggableView = loadedCard
         dragView.overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeRight)
         UIView.animate(withDuration: 0.1, animations: {
@@ -173,10 +166,9 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             dragView.overlayView.alpha = 1
             self.likeBtn(isOn: 1)
         })
-        dragView.rightClickAction()
+        dragView.rightAction()
     }
     func swipeLeft() -> Void {
-        print("Clicked 1.SWIPE LEFT")
         let dragView: DraggableView = loadedCard
         dragView.overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeLeft)
         UIView.animate(withDuration: 0.1, animations: {
@@ -184,7 +176,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             dragView.overlayView.alpha = 1
             self.likeBtn(isOn: 2)
         })
-        dragView.leftClickAction()
+        dragView.leftAction()
     }
     
     func likeBtn(isOn: Int) {

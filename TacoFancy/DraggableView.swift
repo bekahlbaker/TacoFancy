@@ -10,12 +10,12 @@
 import Foundation
 import UIKit
 
-let ACTION_MARGIN: Float = 120
-let SCALE_STRENGTH: Float = 4
-let SCALE_MAX:Float = 0.90
-let ROTATION_MAX: Float = 1
-let ROTATION_STRENGTH: Float = 310
-let ROTATION_ANGLE: Float = 3.14/8
+let ACTION_MARGIN: Float = 50      //%%% distance from center where the action applies. Higher = swipe further in order for the action to be called
+let SCALE_STRENGTH: Float = 20       //%%% how quickly the card shrinks. Higher = slower shrinking
+let SCALE_MAX:Float = 0.93          //%%% upper bar for how much the card shrinks. Higher = shrinks less
+let ROTATION_MAX: Float = 1         //%%% the maximum rotation allowed in radians.  Higher = card can keep rotating longer
+let ROTATION_STRENGTH: Float = 320  //%%% strength of rotation. Higher = weaker rotation
+let ROTATION_ANGLE: Float = 3.14/8  //%%% Higher = stronger rotation angle
 
 protocol DraggableViewDelegate {
     func cardClickedLeft(_ card: UIView) -> Void
@@ -85,7 +85,6 @@ class DraggableView: UIView {
     
     //Follow dragging gesture around screen
     func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) -> Void {
-        print("Drag 1.BEING DRAGGED")
         xFromCenter = Float(gestureRecognizer.translation(in: self).x)
         yFromCenter = Float(gestureRecognizer.translation(in: self).y)
         
@@ -118,7 +117,6 @@ class DraggableView: UIView {
     
     //Check image following dragging cards
     func updateOverlay(_ distance: CGFloat) -> Void {
-        print("Drag 2.UPDATE OVERLAY")
         if distance > 0 {
             overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeRight)
             delegate.likeBtn(isOn: 1)
@@ -131,7 +129,6 @@ class DraggableView: UIView {
     
     //Drags card off screen and calls left or right action and hides check image
     func afterSwipeAction() -> Void {
-        print("Drag 3.AFTER SWIPE ACTION")
         delegate.likeBtn(isOn: 3)
         let floatXFromCenter = Float(xFromCenter)
         if floatXFromCenter > ACTION_MARGIN {
@@ -149,33 +146,6 @@ class DraggableView: UIView {
     
     //Removes card from screen
     func rightAction() -> Void {
-        print("Drag 4.RIGHT ACTION")
-        let finishPoint: CGPoint = CGPoint(x: 600, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
-        UIView.animate(withDuration: 0.3,
-                       animations: {
-                        self.center = finishPoint
-                        self.removeFromSuperview()
-        }, completion: {
-            (value: Bool) in
-            self.delegate.cardClickedRight(self)
-        })
-    }
-    func leftAction() -> Void {
-        print("Drag 4.LEFT ACTION")
-        let finishPoint: CGPoint = CGPoint(x: -600, y: 2 * CGFloat(yFromCenter) + self.originPoint.y)
-        UIView.animate(withDuration: 0.3,
-                       animations: {
-                        self.center = finishPoint
-                        self.removeFromSuperview()
-        }, completion: {
-            (value: Bool) in
-            self.delegate.cardClickedLeft(self)
-        })
-    }
-    
-    //Moves card off screen
-    func rightClickAction() -> Void {
-        print("Clicked 2.RIGHT CLICK ACTION")
         let finishPoint = CGPoint(x: 700, y: self.center.y)
         UIView.animate(withDuration: 0.5,
                        animations: {
@@ -189,8 +159,7 @@ class DraggableView: UIView {
         })
         delegate.cardClickedRight(self)
     }
-    func leftClickAction() -> Void {
-        print("Clicked 2.LEFT CLICK ACTION")
+    func leftAction() -> Void {
         let finishPoint: CGPoint = CGPoint(x: -700, y: self.center.y)
         UIView.animate(withDuration: 0.5,
                        animations: {

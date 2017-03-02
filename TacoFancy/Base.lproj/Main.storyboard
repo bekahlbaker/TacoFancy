@@ -489,6 +489,17 @@
                                 <rect key="frame" x="150" y="242" width="20" height="20"/>
                                 <color key="color" red="0.0039215686269999999" green="0.76078431369999999" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTd-KT-9oe">
+                                <rect key="frame" x="138" y="230" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="HWg-d5-vV6"/>
+                                    <constraint firstAttribute="height" constant="44" id="cug-8S-KgX"/>
+                                </constraints>
+                                <state key="normal" image="relaod"/>
+                                <connections>
+                                    <action selector="reloadBtnTapped:" destination="vOB-ZP-Wnp" eventType="touchUpInside" id="jju-Kw-9FF"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIS-hb-fZn">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <subviews>
@@ -534,12 +545,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="rTd-KT-9oe" firstAttribute="centerY" secondItem="TCI-68-CiD" secondAttribute="centerY" id="2QY-gy-ccZ"/>
                             <constraint firstItem="lIS-hb-fZn" firstAttribute="leading" secondItem="Zg9-j1-LHs" secondAttribute="leading" id="GfT-nm-XO2"/>
                             <constraint firstItem="icY-h6-n4c" firstAttribute="top" secondItem="3h9-Mb-t1p" secondAttribute="bottom" id="MvP-fP-se9"/>
                             <constraint firstAttribute="trailing" secondItem="icY-h6-n4c" secondAttribute="trailing" id="RZm-o6-wny"/>
                             <constraint firstItem="TCI-68-CiD" firstAttribute="centerX" secondItem="Zg9-j1-LHs" secondAttribute="centerX" id="S8J-Y9-iqy"/>
                             <constraint firstItem="lkr-vw-xNr" firstAttribute="top" secondItem="icY-h6-n4c" secondAttribute="bottom" id="VWJ-qJ-9fY"/>
                             <constraint firstItem="lkr-vw-xNr" firstAttribute="top" secondItem="lIS-hb-fZn" secondAttribute="bottom" id="cet-4c-0wq"/>
+                            <constraint firstItem="rTd-KT-9oe" firstAttribute="centerX" secondItem="TCI-68-CiD" secondAttribute="centerX" id="ciQ-IL-a0u"/>
                             <constraint firstItem="lIS-hb-fZn" firstAttribute="top" secondItem="Zg9-j1-LHs" secondAttribute="top" id="esa-dF-0dP"/>
                             <constraint firstItem="sL9-Xs-u9O" firstAttribute="top" secondItem="icY-h6-n4c" secondAttribute="top" constant="44" id="jTF-Og-YZ4"/>
                             <constraint firstAttribute="trailing" secondItem="lIS-hb-fZn" secondAttribute="trailing" id="may-iN-s7M"/>
@@ -568,6 +581,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activitySpinner" destination="TCI-68-CiD" id="zEf-Ef-ze2"/>
+                        <outlet property="reloadBtn" destination="rTd-KT-9oe" id="gW8-2W-7Yn"/>
                         <outlet property="savedTacosOnboard" destination="lIS-hb-fZn" id="dAM-Nk-nZD"/>
                         <outlet property="searchBar" destination="uU5-El-pAp" id="C4L-b9-jdw"/>
                         <outlet property="segmentedControl" destination="4DD-Px-ufR" id="Ikv-vZ-7UF"/>
@@ -836,6 +850,7 @@
         <image name="create-sign-off" width="512" height="158"/>
         <image name="home-empty" width="24" height="23"/>
         <image name="home-filled" width="24" height="23"/>
+        <image name="relaod" width="88" height="96"/>
         <image name="shadow" width="478" height="71"/>
         <image name="sign-off" width="906" height="211"/>
         <image name="star-empty" width="24" height="23"/>

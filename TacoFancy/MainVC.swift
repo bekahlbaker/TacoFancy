@@ -14,6 +14,7 @@ class MainVC: UIViewController {
     
     @IBOutlet weak var tacoQuoteLbl: UILabel!
     
+    var hasInternetConnection = false
     var taco: Taco!
     var tacos = [Taco]()
     var jumpTimer = Timer()
@@ -21,14 +22,19 @@ class MainVC: UIViewController {
     
     @IBOutlet weak var tacoBtn: UIButton!
     @IBAction func tacoBtnTapped(_ sender: Any) {
-        jumpTimer.invalidate()
-        self.tacoMan.isHidden = true
-        DispatchQueue.global().async {
-            UserDefaults.standard.set(true, forKey: "HasTappedOnce")
-            UserDefaults.standard.synchronize()
-            print("Has tapped once")
+        if hasInternetConnection {
+            jumpTimer.invalidate()
+            self.tacoMan.isHidden = true
+            DispatchQueue.global().async {
+                UserDefaults.standard.set(true, forKey: "HasTappedOnce")
+                UserDefaults.standard.synchronize()
+                print("Has tapped once")
+            }
+            checkForHasSwipedOnce()
+        } else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "noInternetConnectionError"), object: nil)
+
         }
-        checkForHasSwipedOnce()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -37,22 +43,41 @@ class MainVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
-        setUpTacoManScreen()
-        
-        let indexToUse = UserDefaults.standard.integer(forKey: "index")
-        if indexToUse < 38 {
-            let indexToStore = indexToUse + 1
-            UserDefaults.standard.set(indexToStore, forKey: "index")
-            print("APP DELEGATE BACKGROUND: \(indexToStore)")
-        } else if indexToUse == 38 {
-            UserDefaults.standard.set(0, forKey: "index")
-            print("APP DELEGATE BACKGROUND: \(indexToUse)")
-        }
-
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
+        checkForInternetConnection()
     }
     
+    func checkForInternetConnection() {
+        DispatchQueue.main.async {
+            guard let url = URL(string: random) else {
+                print("Cannot create URL")
+                return
+            }
+            let urlconfig = URLSessionConfiguration.default
+            urlconfig.timeoutIntervalForRequest = 5
+            urlconfig.timeoutIntervalForResource = 60
+            let urlRequest = URLRequest(url: url)
+            let session = URLSession(configuration: urlconfig)
+            let task = session.dataTask(with: urlRequest) { (data, response, error) in
+                if error != nil {
+                    self.hasInternetConnection = false
+                } else {
+                    self.hasInternetConnection = true
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    func noInternetConnectionError(notification: NSNotification) {
+        let alert = UIAlertController(title: "No Internet Connection", message: "Please check your internet connection and try again.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (alert: UIAlertAction) in
+            self.setUpTacoManScreen()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     func setUpTacoManScreen() {
+        self.checkForInternetConnection()
         self.neonSign.image = UIImage(named: "sign-off")
         self.tacoMan.isHidden = false
         self.shadowImage.isHidden = false
@@ -63,8 +88,10 @@ class MainVC: UIViewController {
     }
     
     func setUpCardsScreen() {
+        self.checkForInternetConnection()
         flickerSign()
         self.neonSign.image = UIImage(named: "sign-on")
+        draggableBackground = DraggableViewBackground(frame: self.view.frame)
         self.view.insertSubview(draggableBackground, at: 1)
         tacoBtn.isHidden = true
         tacoQuoteLbl.isHidden = true
@@ -78,8 +105,6 @@ class MainVC: UIViewController {
         mainOnboard.isHidden = true
         swipeOnboard.isHidden = true
         savedTacosOnboard.isHidden = true
-        
-        draggableBackground = DraggableViewBackground(frame: self.view.frame)
 
         anonymouslyLogIn()
         
@@ -89,9 +114,13 @@ class MainVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkForHasSavedTacoOnce(notification:)), name:NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(noInternetConnectionError(notification:)), name:NSNotification.Name(rawValue: "noInternetConnectionError"), object: nil)
+        
         checkForHasTappedOnce()
+        
+        setUpTacoManScreen()
     }
-    
+
     func anonymouslyLogIn() {
         //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         //        try! FIRAuth.auth()?.signOut()

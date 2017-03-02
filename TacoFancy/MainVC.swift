@@ -88,6 +88,8 @@ class MainVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(clearTacoQuote(notification:)), name:NSNotification.Name(rawValue: "clearTacoQuote"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkForHasSavedTacoOnce(notification:)), name:NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
+        
+        checkForHasTappedOnce()
     }
     
     func anonymouslyLogIn() {

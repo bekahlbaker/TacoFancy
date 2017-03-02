@@ -18,6 +18,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var savedTacosOnboard: UIView!
     @IBAction func tacosGotItBtnTapped(_ sender: Any) {
         savedTacosOnboard.isHidden = true
+        tableView.reloadData()
     }
     
     func checkForHasOpenedTacosOnce() {
@@ -40,16 +41,20 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         switch segmentedControl.selectedSegmentIndex
         {
         case 0:
-            print("Saved Tacos")
-            isSearchingTacos = true
+            print("Saved")
             downloadSavedTacos()
             if inSearchMode {
                 searchBar(searchBar, textDidChange: searchBar.text!)
             }
         case 1:
             print("Ingredients")
-            isSearchingTacos = false
             downloadSavedIngredients()
+            if inSearchMode {
+                searchBar(searchBar, textDidChange: searchBar.text!)
+            }
+        case 2:
+            print("Created")
+            downloadCreatedTacos()
             if inSearchMode {
                 searchBar(searchBar, textDidChange: searchBar.text!)
             }
@@ -59,14 +64,17 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     var savedTacos = [String]()
+    var createdTacos = [String]()
     var savedIngredients = [String]()
     var tacoNameToPass: String!
+    var tacoTypeToPass: String!
     var ingredientNameToPass: String!
     var hasSavedTacos = true
     var hasSavedIngredients = true
-    var isSearchingTacos = true
+    var hasCreatedTacos = true
     var filteredSavedTacos = [String]()
     var filteredSavedIngredients = [String]()
+    var filteredCreatedTacos = [String]()
     var inSearchMode = false
     
     override func viewDidLoad() {
@@ -83,7 +91,6 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         tableView.contentOffset = CGPoint(x: 0.0, y: 44)
         
         downloadSavedTacos()
-        downloadSavedIngredients()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -107,6 +114,13 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     return filteredSavedIngredients.count
                 }
                 return self.savedIngredients.count
+            }
+        case 2:
+            if hasCreatedTacos {
+                if inSearchMode {
+                    return filteredCreatedTacos.count
+                }
+                return createdTacos.count
             }
         default:
             break
@@ -150,6 +164,22 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 cell?.tacoName.textAlignment = .center
                 cell?.tacoName.text = "You haven't saved any tacos yet! :( \nWhat are you waiting for?"
             }
+        case 2:
+            if hasCreatedTacos {
+                if inSearchMode {
+                    tableView.isUserInteractionEnabled = true
+                    cell?.tacoName.textAlignment = .left
+                    cell?.tacoName.text = filteredCreatedTacos[indexPath.row]
+                } else {
+                    tableView.isUserInteractionEnabled = true
+                    cell?.tacoName.textAlignment = .left
+                    cell?.tacoName.text = createdTacos[indexPath.row]
+                }
+            } else {
+                tableView.isUserInteractionEnabled = false
+                cell?.tacoName.textAlignment = .center
+                cell?.tacoName.text = "You haven't created any tacos yet! :( \nWhat are you waiting for?"
+        }
         default:
             break
         }
@@ -164,13 +194,15 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 if inSearchMode {
                     let cellValue = filteredSavedTacos[indexPath.row]
                     self.tacoNameToPass = cellValue
-                    if self.tacoNameToPass != nil {
+                    self.tacoTypeToPass = "full-tacos"
+                    if self.tacoNameToPass != nil && self.tacoTypeToPass != nil {
                         performSegue(withIdentifier: "IngredientsVC", sender: nil)
                     }
                 } else {
                     let cellValue = savedTacos[indexPath.row]
                     self.tacoNameToPass = cellValue
-                    if self.tacoNameToPass != nil {
+                    self.tacoTypeToPass = "full-tacos"
+                    if self.tacoNameToPass != nil && self.tacoTypeToPass != nil {
                         performSegue(withIdentifier: "IngredientsVC", sender: nil)
                     }
                 }
@@ -197,6 +229,27 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 print("No ingredients")
             }
             searchBar.resignFirstResponder()
+        case 2:
+            if hasCreatedTacos {
+                if inSearchMode {
+                    let cellValue = filteredCreatedTacos[indexPath.row]
+                    self.tacoNameToPass = cellValue
+                    self.tacoTypeToPass = "created-tacos"
+                    if self.tacoNameToPass != nil && self.tacoTypeToPass != nil {
+                        performSegue(withIdentifier: "IngredientsVC", sender: nil)
+                    }
+                } else {
+                    let cellValue = createdTacos[indexPath.row]
+                    self.tacoNameToPass = cellValue
+                    self.tacoTypeToPass = "created-tacos"
+                    if self.tacoNameToPass != nil && self.tacoTypeToPass != nil {
+                        performSegue(withIdentifier: "IngredientsVC", sender: nil)
+                    }
+                }
+            } else {
+                print("No tacos")
+            }
+            searchBar.resignFirstResponder()
         default:
             break
         }
@@ -204,12 +257,18 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if isSearchingTacos {
+            switch segmentedControl.selectedSegmentIndex {
+            case 0:
                 self.savedTacos.remove(at: indexPath.row)
                 self.tableView.reloadData()
-            } else {
+            case 1:
                 self.savedIngredients.remove(at: indexPath.row)
                 self.tableView.reloadData()
+            case 2:
+                self.createdTacos.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            default:
+                break
             }
         }
     }
@@ -226,6 +285,26 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     for snap in snapshot {
                         let taco = snap.key
                         self.savedTacos.append(taco)
+                    }
+                }
+            }
+            self.tableView.reloadData()
+            self.activitySpinner.stopAnimating()
+        })
+    }
+    
+    func downloadCreatedTacos() {
+        DataService.ds.REF_CURRENT_USER.child("created-tacos").observe( .value, with: { (snapshot) in
+            self.createdTacos = []
+            if let _ = snapshot.value as? NSNull {
+                print("No Tacos saved")
+                self.hasCreatedTacos = false
+            } else{
+                self.hasCreatedTacos = true
+                if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                    for snap in snapshot {
+                        let taco = snap.key
+                        self.createdTacos.append(taco)
                     }
                 }
             }
@@ -259,6 +338,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if segue.identifier == "IngredientsVC" {
             let myVC = segue.destination as? IngredientsVC
             myVC?.tacoNamePassed = self.tacoNameToPass
+            myVC?.tacoTypePassed = self.tacoTypeToPass
         }
         if segue.identifier == "RecipeVC" {
             let myVC = segue.destination as? RecipeVC

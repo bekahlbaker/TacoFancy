@@ -14,6 +14,7 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var tableView: UITableView!
     
     var tacoNamePassed: String!
+    var tacoTypePassed: String!
     var savedTaco = [String]()
     var recipe = [String]()
     var ingredientToPass: String!
@@ -81,7 +82,7 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func downloadSavedTaco() {
-        DataService.ds.REF_CURRENT_USER.child("full-tacos").child(tacoNamePassed).observe(.value, with: { (snapshot) in
+        DataService.ds.REF_CURRENT_USER.child(tacoTypePassed).child(tacoNamePassed).observe(.value, with: { (snapshot) in
             
             self.savedTaco = []
             self.recipe = []
@@ -98,21 +99,18 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     DataService.ds.REF_CURRENT_USER.child("Ingredients").child(self.savedTaco[i]).observe( .value, with: { (snapshot) in
                         let recipe = snapshot.value
                         self.recipe.append(String(describing: recipe!))
-                        if self.recipe.count > 0 {
-                            self.perform(#selector(self.loadTableData(_:)), with: nil, afterDelay: 0.5)
-                        }
                     })
                 }
             }
         })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            if self.recipe.count > 0 {
+                self.tableView.reloadData()
+            }
+        })
     }
-    
-    func loadTableData(_ sender:AnyObject) {
-        if self.recipe.count > 0 {
-            self.tableView.reloadData()
-        }
-    }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "RecipeVC" {
             let myVC = segue.destination as? RecipeVC

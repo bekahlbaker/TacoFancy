@@ -88,7 +88,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         DataService.ds.REF_CURRENT_USER.child("Ingredients").updateChildValues(ingredientsToSave)
         DataService.ds.REF_CURRENT_USER.child("Base").updateChildValues([taco.baseLayer: true])
         DataService.ds.REF_CURRENT_USER.child("Condiment").updateChildValues([taco.condiment: true])
-        DataService.ds.REF_CURRENT_USER.child("Mix-in").updateChildValues([taco.mixin: true])
+        DataService.ds.REF_CURRENT_USER.child("Mix-In").updateChildValues([taco.mixin: true])
         DataService.ds.REF_CURRENT_USER.child("Seasoning").updateChildValues([taco.seasoning: true])
         DataService.ds.REF_CURRENT_USER.child("Shell").updateChildValues([taco.shell: true])
     }
@@ -100,20 +100,20 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         let screenHeight = screenSize.height
 
         CARD_WIDTH = screenWidth * 0.75
-        CARD_HEIGHT = screenHeight * 0.5
+        CARD_HEIGHT = screenHeight * 0.5 + 30
 
 
         self.backgroundColor = UIColor.clear
         self.frame = CGRect(x: 0, y: 85, width: screenWidth, height: screenHeight - 85)
 
-        xButton = UIButton(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2 + 35, y: self.frame.size.height/2 + CARD_HEIGHT/2, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
+        xButton = UIButton(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2 + 35, y: self.frame.size.height/2 + CARD_HEIGHT/2 - 20, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
         xButton.setImage(UIImage(named: "dislike-off"), for: UIControlState())
         xButton.layer.shadowRadius = 3;
         xButton.layer.shadowOpacity = 0.2;
         xButton.layer.shadowOffset = CGSize(width: 1, height: 1);
         xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), for: UIControlEvents.touchUpInside)
         
-        checkButton = UIButton(frame: CGRect(x: self.frame.size.width/2 + CARD_WIDTH/2 - 85, y: self.frame.size.height/2 + CARD_HEIGHT/2, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
+        checkButton = UIButton(frame: CGRect(x: self.frame.size.width/2 + CARD_WIDTH/2 - 85, y: self.frame.size.height/2 + CARD_HEIGHT/2 - 20, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
         checkButton.setImage(UIImage(named: "like-off"), for: UIControlState())
         checkButton.layer.shadowRadius = 3;
         checkButton.layer.shadowOpacity = 0.2;

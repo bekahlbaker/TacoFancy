@@ -44,7 +44,18 @@ extension SavedTacosVC {
                 inSearchMode = true;
             }
             tableView.reloadData()
-            
+        case 2:
+            filteredCreatedTacos = createdTacos.filter({ (text) -> Bool in
+                let tmp: NSString = text as NSString
+                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+                return range.location != NSNotFound
+            })
+            if(filteredCreatedTacos.count == 0){
+                inSearchMode = false;
+            } else {
+                inSearchMode = true;
+            }
+            tableView.reloadData()
         default:
             break
         }

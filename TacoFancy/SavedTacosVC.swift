@@ -296,12 +296,33 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if editingStyle == .delete {
             switch segmentedControl.selectedSegmentIndex {
             case 0:
+                if inSearchMode {
+                    let cellValue = filteredSavedTacos[indexPath.row]
+                    DataService.ds.REF_CURRENT_USER.child("full-tacos").child(cellValue).removeValue()
+                } else {
+                    let cellValue = savedTacos[indexPath.row]
+                    DataService.ds.REF_CURRENT_USER.child("full-tacos").child(cellValue).removeValue()
+                }
                 self.savedTacos.remove(at: indexPath.row)
                 self.tableView.reloadData()
             case 1:
+                if inSearchMode {
+                    let cellValue = filteredSavedIngredients[indexPath.row]
+                    DataService.ds.REF_CURRENT_USER.child("Ingredients").child(cellValue).removeValue()
+                } else {
+                    let cellValue = savedIngredients[indexPath.row]
+                    DataService.ds.REF_CURRENT_USER.child("Ingredients").child(cellValue).removeValue()
+                }
                 self.savedIngredients.remove(at: indexPath.row)
                 self.tableView.reloadData()
             case 2:
+                if inSearchMode {
+                    let cellValue = filteredCreatedTacos[indexPath.row]
+                    DataService.ds.REF_CURRENT_USER.child("created-tacos").child(cellValue).removeValue()
+                } else {
+                    let cellValue = createdTacos[indexPath.row]
+                    DataService.ds.REF_CURRENT_USER.child("created-tacos").child(cellValue).removeValue()
+                }
                 self.createdTacos.remove(at: indexPath.row)
                 self.tableView.reloadData()
             default:

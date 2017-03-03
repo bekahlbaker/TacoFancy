@@ -84,15 +84,15 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     
     func saveTaco(_ taco: Taco) {
         self.taco = taco
-        let tacoToSave = ["Base": taco.baseLayer, "Condiment": taco.condiment, "Mix-In": taco.mixin, "Seasoning": taco.seasoning, "Shell": taco.shell]
-        DataService.ds.REF_CURRENT_USER.child("full-tacos").child(taco.baseLayer + " , " + taco.condiment + " , " + taco.mixin + " , " + taco.seasoning + " , " + taco.shell).updateChildValues(tacoToSave)
+        let tacoToSave = ["base": taco.baseLayer, "condiment": taco.condiment, "mix-in": taco.mixin, "seasoning": taco.seasoning, "shell": taco.shell]
+        DataService.ds.REF_CURRENT_USER.child("full-tacos").child(taco.baseLayer + ", " + taco.condiment + ", " + taco.mixin + ", " + taco.seasoning + ", " + taco.shell).updateChildValues(tacoToSave)
         let ingredientsToSave = [taco.baseLayer: taco.baseLayerRecipe, taco.condiment: taco.condimentRecipe, taco.mixin: taco.mixinRecipe, taco.seasoning: taco.seasoningRecipe, taco.shell: taco.shellRecipe]
-        DataService.ds.REF_CURRENT_USER.child("Ingredients").updateChildValues(ingredientsToSave)
-        DataService.ds.REF_CURRENT_USER.child("Base").updateChildValues([taco.baseLayer: true])
-        DataService.ds.REF_CURRENT_USER.child("Condiment").updateChildValues([taco.condiment: true])
-        DataService.ds.REF_CURRENT_USER.child("Mix-In").updateChildValues([taco.mixin: true])
-        DataService.ds.REF_CURRENT_USER.child("Seasoning").updateChildValues([taco.seasoning: true])
-        DataService.ds.REF_CURRENT_USER.child("Shell").updateChildValues([taco.shell: true])
+        DataService.ds.REF_CURRENT_USER.child("ingredients").updateChildValues(ingredientsToSave)
+        DataService.ds.REF_CURRENT_USER.child("base").updateChildValues([taco.baseLayer: true])
+        DataService.ds.REF_CURRENT_USER.child("condiment").updateChildValues([taco.condiment: true])
+        DataService.ds.REF_CURRENT_USER.child("mix-in").updateChildValues([taco.mixin: true])
+        DataService.ds.REF_CURRENT_USER.child("seasoning").updateChildValues([taco.seasoning: true])
+        DataService.ds.REF_CURRENT_USER.child("shell").updateChildValues([taco.shell: true])
     }
     
     func setupView() -> Void {

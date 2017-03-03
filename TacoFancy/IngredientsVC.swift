@@ -96,7 +96,7 @@ class IngredientsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
             if self.savedTaco.count > 0 {
                 for i in 0..<self.savedTaco.count {
-                    DataService.ds.REF_CURRENT_USER.child("Ingredients").child(self.savedTaco[i]).observe( .value, with: { (snapshot) in
+                    DataService.ds.REF_CURRENT_USER.child("ingredients").child(self.savedTaco[i]).observe( .value, with: { (snapshot) in
                         let recipe = snapshot.value
                         self.recipe.append(String(describing: recipe!))
                     })

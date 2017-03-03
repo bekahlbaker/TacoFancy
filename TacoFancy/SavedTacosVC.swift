@@ -308,10 +308,10 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             case 1:
                 if inSearchMode {
                     let cellValue = filteredSavedIngredients[indexPath.row]
-                    DataService.ds.REF_CURRENT_USER.child("Ingredients").child(cellValue).removeValue()
+                    DataService.ds.REF_CURRENT_USER.child("ingredients").child(cellValue).removeValue()
                 } else {
                     let cellValue = savedIngredients[indexPath.row]
-                    DataService.ds.REF_CURRENT_USER.child("Ingredients").child(cellValue).removeValue()
+                    DataService.ds.REF_CURRENT_USER.child("ingredients").child(cellValue).removeValue()
                 }
                 self.savedIngredients.remove(at: indexPath.row)
                 self.tableView.reloadData()
@@ -374,7 +374,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func downloadSavedIngredients() {
-            DataService.ds.REF_CURRENT_USER.child("Ingredients").observe( .value, with: { (snapshot) in
+            DataService.ds.REF_CURRENT_USER.child("ingredients").observe( .value, with: { (snapshot) in
                 self.savedIngredients = []
                 if let _ = snapshot.value as? NSNull {
                     print("No Ingredients saved")

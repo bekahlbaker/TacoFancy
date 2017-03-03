@@ -42,9 +42,7 @@ extension MainVC {
     
     func checkForHasSavedTacoOnce(notification: NSNotification) {
         if(UserDefaults.standard.bool(forKey: "HasSavedTacosOnce")) {
-            print("NOT first launch")
-            setUpCardsScreen()
-        }
+            print("NOT first launch")        }
         else {
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasSavedTacosOnce")

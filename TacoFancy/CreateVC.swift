@@ -12,6 +12,7 @@ import Firebase
 class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var errorLbl: UILabel!
     
     var baseArray = [String]()
     var condimentsArray = [String]()
@@ -26,52 +27,52 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var buttonPicked: UIButton!
     var pickerPicked: UIPickerView!
     var tacoToSave = [String: String]()
-    var tacoName = ""
+    var tacoName = [String]()
     var signHasBeenTurnedOn: Bool!
-    var chosenIngredient = String()
-    var currentBtnTitle = String()
+    var chosenIngredient: String!
+    var currentBtnTitle: String!
+    var hasChosenIng = false
     
     @IBOutlet weak var chooseBaseBtn: UIButton!
     @IBAction func chooseBaseBtn(_ sender: Any) {
-        baseArray = downloadData(layer: "Base")
+        baseArray = downloadData(layer: "base")
         showPickerViewAnimation(btn: chooseBaseBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseCondimentBtn: UIButton!
     @IBAction func chooseCondimentBtn(_ sender: Any) {
-        condimentsArray = downloadData(layer: "Condiment")
+        condimentsArray = downloadData(layer: "condiment")
         showPickerViewAnimation(btn: chooseCondimentBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseMixInBtn: UIButton!
     @IBAction func chooseMixInBtn(_ sender: Any) {
-        mixInArray = downloadData(layer: "Mix-In")
+        mixInArray = downloadData(layer: "mix-in")
         showPickerViewAnimation(btn: chooseMixInBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseSeasoningBtn: UIButton!
     @IBAction func chooseSeasoningBtn(_ sender: Any) {
-        seasoningArray = downloadData(layer: "Seasoning")
+        seasoningArray = downloadData(layer: "seasoning")
         showPickerViewAnimation(btn: chooseSeasoningBtn, shouldGrow: true)
     }
     @IBOutlet weak var chooseShellBtn: UIButton!
     @IBAction func chooseShellBtn(_ sender: Any) {
-        shellArray = downloadData(layer: "Shell")
+        shellArray = downloadData(layer: "shell")
         showPickerViewAnimation(btn: chooseShellBtn, shouldGrow: true)
     }
     @IBOutlet weak var doneBtn: UIButton!
     @IBAction func doneBtn(_ sender: Any) {
         showPickerViewAnimation(btn: buttonPicked, shouldGrow: false)
-        if signHasBeenTurnedOn == false {
+        if signHasBeenTurnedOn == false && hasChosenIng == true {
             turnSign(shouldTurnOn: true)
         }
-        if chosenIngredient.contains("Choose a") {
-            buttonPicked.setTitle(currentBtnTitle, for: .normal)
-        } else {
-            buttonPicked.setTitle(chosenIngredient, for: .normal)
-        }
-
     }
     @IBOutlet weak var createTacoBtn: UIButton!
     @IBAction func createTacoBtn(_ sender: Any) {
-        saveTaco()
+        if hasChosenIng {
+            errorLbl.text = ""
+            saveTaco()
+        } else {
+            errorLbl.text = "You haven't chosen any ingredients to save."
+        }
     }
     @IBOutlet weak var createSign: UIImageView!
     override func viewDidLoad() {
@@ -79,6 +80,7 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         
         createOnboarding.isHidden = true
         signHasBeenTurnedOn = false
+        hasChosenIng = false
         
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -86,6 +88,10 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         buttonPicked = chooseBaseBtn
         
         checkForHasCreatedTacosOnce()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        errorLbl.text = ""
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -131,65 +137,67 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
             switch self.buttonPicked.tag {
             case 1:
                 chosenIngredient = baseArray[row]
-                currentBtnTitle = "Base"
+                if chosenIngredient != "Choose a base..." {
+                    hasChosenIng = true
+                  buttonPicked.setTitle(chosenIngredient, for: .normal)
+                } else {
+                    hasChosenIng = false
+                  buttonPicked.setTitle("Choose a base...", for: .normal)
+                }
             case 2:
                 chosenIngredient = condimentsArray[row]
-                currentBtnTitle = "Condiment"
+                if chosenIngredient != "Choose a condiment..." {
+                    hasChosenIng = true
+                    buttonPicked.setTitle(chosenIngredient, for: .normal)
+                } else {
+                    hasChosenIng = false
+                    buttonPicked.setTitle("Choose a condiment...", for: .normal)
+                }
             case 3:
                 chosenIngredient = mixInArray[row]
-                currentBtnTitle = "Mix-In"
+                if chosenIngredient != "Choose a mix-in..." {
+                    hasChosenIng = true
+                    buttonPicked.setTitle(chosenIngredient, for: .normal)
+                } else {
+                    hasChosenIng = false
+                    buttonPicked.setTitle("Choose a mix-in...", for: .normal)
+                }
             case 4:
                 chosenIngredient = seasoningArray[row]
-                currentBtnTitle = "Seasoning"
+                if chosenIngredient != "Choose a seasoning..." {
+                    hasChosenIng = true
+                    buttonPicked.setTitle(chosenIngredient, for: .normal)
+                } else {
+                    hasChosenIng = false
+                    buttonPicked.setTitle("Choose a seasoning...", for: .normal)
+                }
             case 5:
                 chosenIngredient = shellArray[row]
-                currentBtnTitle = "Shell"
+                if chosenIngredient != "Choose a shell..." {
+                    hasChosenIng = true
+                    buttonPicked.setTitle(chosenIngredient, for: .normal)
+                } else {
+                    hasChosenIng = false
+                    buttonPicked.setTitle("Choose a shell...", for: .normal)
+                }
             default:
                 break
             }
-            
         }
     }
 
     func showPickerViewAnimation(btn: UIButton, shouldGrow: Bool) {
         self.buttonPicked = btn
-//        let pickerX = self.pickerView.frame.midX - 150
-//        let pickerY = self.pickerView.frame.midY - 125
-//        let btnBeginFrame = CGRect(x: Double(UIScreen.main.bounds.size.width * 0.5) - 100, y: 50 * Double(btn.tag) + 20, width: 200, height: 40)
-//        let btnEndFrame = CGRect(x: pickerX, y: pickerY, width: 300, height: 250)
-        
         if shouldGrow {
             UIView.animate(withDuration: 0.5, animations: {
-//                btn.transform = CGAffineTransform(scaleX: 1.5, y: 6.25)
                 self.pickerView.alpha = 1
                 self.doneBtn.alpha = 1
             })
-//            btn.frame = btnBeginFrame
-//            UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseIn, animations: {
-//                btn.frame = btnEndFrame
-//            }, completion: { completion in
-//                UIView.animate(withDuration: 0.3, animations: {
-//                    btn.alpha = 1
-//                    self.pickerView.alpha = 1
-//                    self.doneBtn.alpha = 1
-//                })
-//            })
         } else {
             UIView.animate(withDuration: 0.5, animations: {
-//                btn.transform = CGAffineTransform(scaleX: 1, y: 1)
                 self.pickerView.alpha = 0
                 self.doneBtn.alpha = 0
             })
-//            btn.frame = btnEndFrame
-//            UIView.animate(withDuration: 0.3, delay: 0.2, options: .curveEaseIn, animations: {
-//                btn.alpha = 1
-//                self.pickerView.alpha = 0
-//                self.doneBtn.alpha = 0
-//            }, completion: { completion in
-//                UIView.animate(withDuration: 0.5, animations: {
-//                    btn.frame = btnBeginFrame
-//                })
-//            })
         }
     }
     
@@ -249,32 +257,33 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         return arrayPassedIn
     }
     
-    func createTacoName(ing: String, btn: UIButton) {
-        if let ingredient = btn.title(for: .normal) {
-            if ingredient != ing {
-                tacoName.append(ingredient + " , ")
-                tacoToSave[ing] = btn.title(for: .normal)
-                btn.setTitle(ing, for: .normal)
-            }
-        }
-    }
-    
     func saveTaco() {
-        createTacoName(ing: "Base", btn: chooseBaseBtn)
-        createTacoName(ing: "Condiment", btn: chooseCondimentBtn)
-        createTacoName(ing: "Mix-In", btn: chooseMixInBtn)
-        createTacoName(ing: "Seasoning", btn: chooseSeasoningBtn)
-        createTacoName(ing: "Shell", btn: chooseShellBtn)
-        if tacoName != "" {
-            print(" TACO TO SAVE \(tacoName)")
-            DataService.ds.REF_CURRENT_USER.child("created-tacos").child(tacoName).updateChildValues(tacoToSave)
-            print("Saving taco")
+        if chooseBaseBtn.title(for: .normal) != "Choose a base..." {
+            tacoName.append(chooseBaseBtn.title(for: .normal)!)
+            tacoToSave["base"] = chooseBaseBtn.title(for: .normal)
         }
-        tacoName = ""
-        print("CLEARED TACO NAME \(tacoName)")
-        self.pickerView.selectRow(0, inComponent: 0, animated: false)
-        self.pickerView.reloadAllComponents()
-        turnSign(shouldTurnOn: false)
+        if chooseCondimentBtn.title(for: .normal) != "Choose a condiment..." {
+            tacoName.append(chooseCondimentBtn.title(for: .normal)!)
+            tacoToSave["condiment"] = chooseCondimentBtn.title(for: .normal)
+        }
+        if chooseSeasoningBtn.title(for: .normal) != "Choose a seasoning..." {
+            tacoName.append(chooseSeasoningBtn.title(for: .normal)!)
+            tacoToSave["seasoning"] = chooseSeasoningBtn.title(for: .normal)
+        }
+        if chooseMixInBtn.title(for: .normal) != "Choose a mix-in..." {
+            tacoName.append(chooseMixInBtn.title(for: .normal)!)
+            tacoToSave["mix-in"] = chooseMixInBtn.title(for: .normal)
+        }
+        if chooseShellBtn.title(for: .normal) != "Choose a shell..." {
+            tacoName.append(chooseShellBtn.title(for: .normal)!)
+            tacoToSave["shell"] = chooseShellBtn.title(for: .normal)
+        }
+
+            print(tacoName)
+            let tacoNameToSave = tacoName.joined(separator: ", ")
+            print(tacoNameToSave)
+            DataService.ds.REF_CURRENT_USER.child("created-tacos").child(tacoNameToSave).updateChildValues(tacoToSave)
+            savedTacoAlert()
     }
     
     func flickerSign() {
@@ -322,4 +331,20 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         }
     }
 
+    func savedTacoAlert() {
+        let alert = UIAlertController(title: "Success!", message: "Created taco has been successfully saved.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (alert: UIAlertAction) in
+            self.tacoName = []
+            self.tacoToSave = [:]
+            self.chooseBaseBtn.setTitle("Choose a base...", for: .normal)
+            self.chooseCondimentBtn.setTitle("Choose a condiment...", for: .normal)
+            self.chooseMixInBtn.setTitle("Choose a mix-in...", for: .normal)
+            self.chooseSeasoningBtn.setTitle("Choose a seasoning...", for: .normal)
+            self.chooseShellBtn.setTitle("Choose a shell...", for: .normal)
+            self.pickerView.selectRow(0, inComponent: 0, animated: false)
+            self.pickerView.reloadAllComponents()
+            self.turnSign(shouldTurnOn: false)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

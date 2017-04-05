@@ -8,11 +8,6 @@ A fun, easy-to-use random taco generator based off of https://github.com/evz/tac
 * [XCode](https://developer.apple.com/xcode/)
 * [Firebase](https://firebase.google.com/)
 
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
 ## Versioning
 
 1.1

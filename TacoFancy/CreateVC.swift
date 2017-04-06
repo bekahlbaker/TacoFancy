@@ -10,10 +10,8 @@ import UIKit
 import Firebase
 
 class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var errorLbl: UILabel!
-    
     var baseArray = [String]()
     var condimentsArray = [String]()
     var mixInArray = [String]()
@@ -32,7 +30,6 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var chosenIngredient: String!
     var currentBtnTitle: String!
     var hasChosenIng = false
-    
     @IBOutlet weak var chooseBaseBtn: UIButton!
     @IBAction func chooseBaseBtn(_ sender: Any) {
         baseArray = downloadData(layer: "base")
@@ -77,27 +74,20 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var createSign: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         createOnboarding.isHidden = true
         signHasBeenTurnedOn = false
         hasChosenIng = false
-        
         pickerView.delegate = self
         pickerView.dataSource = self
-        
         buttonPicked = chooseBaseBtn
-        
         checkForHasCreatedTacosOnce()
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         errorLbl.text = ""
     }
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch buttonPicked.tag {
         case 1:
@@ -114,7 +104,6 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
             return 1
         }
     }
-    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch buttonPicked.tag {
         case 1:
@@ -131,7 +120,6 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
             return "Nothing Saved"
         }
     }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.numberOfRows(inComponent: 0) > 1 {
             switch self.buttonPicked.tag {
@@ -200,7 +188,6 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
             })
         }
     }
-    
     func downloadData(layer: String) -> [String] {
         var arrayPassedIn = [String]()
         DispatchQueue.global().async {
@@ -225,7 +212,7 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
                         self.pickerView.selectRow(0, inComponent: 0, animated: false)
                         self.pickerView.reloadAllComponents()
                     }
-                } else{
+                } else {
                     arrayPassedIn.append("Choose a \(layer)...")
                     if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                         for snap in snapshot {
@@ -256,7 +243,6 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         }
         return arrayPassedIn
     }
-    
     func saveTaco() {
         if chooseBaseBtn.title(for: .normal) != "Choose a base..." {
             tacoName.append(chooseBaseBtn.title(for: .normal)!)
@@ -285,7 +271,6 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
             DataService.ds.REF_CURRENT_USER.child("created-tacos").child(tacoNameToSave).updateChildValues(tacoToSave)
             savedTacoAlert()
     }
-    
     func flickerSign() {
         var images: [UIImage] = []
         for i in 1...3 {
@@ -296,7 +281,6 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         createSign.animationRepeatCount = 1
         createSign.startAnimating()
     }
-    
     func turnSign(shouldTurnOn: Bool) {
         if shouldTurnOn {
            flickerSign()
@@ -312,18 +296,15 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
             signHasBeenTurnedOn = false
         }
     }
-    
     @IBOutlet weak var createOnboarding: UIView!
     @IBOutlet weak var gotItBtn: UIButton!
     @IBAction func gotItBtnTapped(_ sender: Any) {
         createOnboarding.isHidden = true
     }
-    
     func checkForHasCreatedTacosOnce() {
-        if(UserDefaults.standard.bool(forKey: "HasCreatedTacosOnce")) {
+        if UserDefaults.standard.bool(forKey: "HasCreatedTacosOnce") {
             print("NOT first launch")
-        }
-        else {
+        } else {
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasCreatedTacosOnce")
             UserDefaults.standard.synchronize()
@@ -333,7 +314,7 @@ class CreateVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     func savedTacoAlert() {
         let alert = UIAlertController(title: "Success!", message: "Created taco has been successfully saved.", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (alert: UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (_: UIAlertAction) in
             self.tacoName = []
             self.tacoToSave = [:]
             self.chooseBaseBtn.setTitle("Choose a base...", for: .normal)

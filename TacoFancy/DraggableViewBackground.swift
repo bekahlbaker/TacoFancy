@@ -12,7 +12,6 @@ import UIKit
 import Firebase
 
 class DraggableViewBackground: UIView, DraggableViewDelegate {
-    
     let MAX_BUFFER_SIZE = 2
     var CARD_HEIGHT: CGFloat = 250
     var CARD_WIDTH: CGFloat = 250
@@ -24,16 +23,12 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
     var checkButton: UIButton!
     var xButton: UIButton!
     var tacoButton: UIButton!
-    
     var taco: Taco!
     var tacoString: String!
-    
     let activitySpinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         super.layoutSubviews()
@@ -41,7 +36,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         self.setupView()
         getRandomTaco()
     }
-    
     func getRandomTaco() {
         activitySpinner.startAnimating()
         guard let url = URL(string: random) else {
@@ -53,7 +47,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         urlconfig.timeoutIntervalForResource = 60
         let urlRequest = URLRequest(url: url)
         let session = URLSession(configuration: urlconfig)
-        let task = session.dataTask(with: urlRequest) { (data, response, error) in
+        let task = session.dataTask(with: urlRequest) { (data, _, error) in
             if error != nil {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "noInternetConnectionError"), object: nil)
             } else {
@@ -76,12 +70,10 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         }
         task.resume()
     }
-    
     func configureTaco(_ taco: Taco) {
         self.taco = taco
         tacoString = taco.baseLayer + "\n with " + taco.condiment + "\n and " + taco.mixin + "\n seasoned with " + taco.seasoning + "\n inside " + taco.shell
     }
-    
     func saveTaco(_ taco: Taco) {
         self.taco = taco
         let tacoToSave = ["base": taco.baseLayer, "condiment": taco.condiment, "mix-in": taco.mixin, "seasoning": taco.seasoning, "shell": taco.shell]
@@ -94,49 +86,41 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         DataService.ds.REF_CURRENT_USER.child("seasoning").updateChildValues([taco.seasoning: true])
         DataService.ds.REF_CURRENT_USER.child("shell").updateChildValues([taco.shell: true])
     }
-    
-    func setupView() -> Void {
+    func setupView() {
         let screenSize = UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
 
         CARD_WIDTH = screenWidth * 0.75
         CARD_HEIGHT = screenHeight * 0.5 + 30
-
-
         self.backgroundColor = UIColor.clear
         self.frame = CGRect(x: 0, y: 85, width: screenWidth, height: screenHeight - 85)
 
         xButton = UIButton(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2 + 35, y: self.frame.size.height/2 + CARD_HEIGHT/2 - 20, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
         xButton.setImage(UIImage(named: "dislike-off"), for: UIControlState())
-        xButton.layer.shadowRadius = 3;
-        xButton.layer.shadowOpacity = 0.2;
-        xButton.layer.shadowOffset = CGSize(width: 1, height: 1);
+        xButton.layer.shadowRadius = 3
+        xButton.layer.shadowOpacity = 0.2
+        xButton.layer.shadowOffset = CGSize(width: 1, height: 1)
         xButton.addTarget(self, action: #selector(DraggableViewBackground.swipeLeft), for: UIControlEvents.touchUpInside)
-        
         checkButton = UIButton(frame: CGRect(x: self.frame.size.width/2 + CARD_WIDTH/2 - 85, y: self.frame.size.height/2 + CARD_HEIGHT/2 - 20, width: screenWidth / 2 * 0.25, height: screenWidth / 2 * 0.25))
         checkButton.setImage(UIImage(named: "like-off"), for: UIControlState())
-        checkButton.layer.shadowRadius = 3;
-        checkButton.layer.shadowOpacity = 0.2;
-        checkButton.layer.shadowOffset = CGSize(width: 1, height: 1);
+        checkButton.layer.shadowRadius = 3
+        checkButton.layer.shadowOpacity = 0.2
+        checkButton.layer.shadowOffset = CGSize(width: 1, height: 1)
         checkButton.addTarget(self, action: #selector(DraggableViewBackground.swipeRight), for: UIControlEvents.touchUpInside)
-        
         activitySpinner.center = CGPoint(x: self.bounds.size.width/2, y: self.bounds.size.height/2 - 50)
         activitySpinner.color = UIColor.white
         self.addSubview(activitySpinner)
-        
         self.addSubview(xButton)
         self.addSubview(checkButton)
     }
-    
     func createDraggableViewWithData() -> DraggableView {
-        let draggableView = DraggableView(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2, y: (self.frame.size.height - CARD_HEIGHT)/2 - 50 , width: CARD_WIDTH, height: CARD_HEIGHT))
+        let draggableView = DraggableView(frame: CGRect(x: (self.frame.size.width - CARD_WIDTH)/2, y: (self.frame.size.height - CARD_HEIGHT)/2 - 50, width: CARD_WIDTH, height: CARD_HEIGHT))
         draggableView.information.text = tacoString
         draggableView.delegate = self
         return draggableView
     }
-    
-    func loadCards() -> Void {
+    func loadCards() {
         self.loadedCard = self.createDraggableViewWithData()
         UIView.animate(withDuration: 0.3, animations: {
             () -> Void in
@@ -146,19 +130,17 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
             self.activitySpinner.stopAnimating()
         })
     }
-    
     //Adds new card to view after clicking
-    func cardClickedLeft(_ card: UIView) -> Void {
+    func cardClickedLeft(_ card: UIView) {
         Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
     }
-    func cardClickedRight(_ card: UIView) -> Void {
+    func cardClickedRight(_ card: UIView) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "checkForHasSavedTacoOnce"), object: nil)
         saveTaco(taco)
         Timer.scheduledTimer(timeInterval: TimeInterval(0.3), target: self, selector: #selector(getRandomTaco), userInfo: nil, repeats: false)
     }
-    
     //Check image following dragging cards
-    func swipeRight() -> Void {
+    func swipeRight() {
         let dragView: DraggableView = loadedCard
         dragView.overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeRight)
         UIView.animate(withDuration: 0.1, animations: {
@@ -168,7 +150,7 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         })
         dragView.rightAction()
     }
-    func swipeLeft() -> Void {
+    func swipeLeft() {
         let dragView: DraggableView = loadedCard
         dragView.overlayView.setMode(GGOverlayViewMode.ggOverlayViewModeLeft)
         UIView.animate(withDuration: 0.1, animations: {
@@ -178,7 +160,6 @@ class DraggableViewBackground: UIView, DraggableViewDelegate {
         })
         dragView.leftAction()
     }
-    
     func likeBtn(isOn: Int) {
         switch isOn {
         case 1:

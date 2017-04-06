@@ -12,7 +12,6 @@ class SavedTacosCell: UITableViewCell {
 
     @IBOutlet weak var tacoName: UILabel!
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
 

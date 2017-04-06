@@ -16,20 +16,18 @@ extension SavedTacosVC {
         }
         searchBar.resignFirstResponder()
     }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        switch segmentedControl.selectedSegmentIndex
-        {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
             filteredSavedTacos = savedTacos.filter({ (text) -> Bool in
                 let tmp: NSString = text as NSString
                 let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
                 return range.location != NSNotFound
             })
-            if(filteredSavedTacos.count == 0){
-                inSearchMode = false;
+            if filteredSavedTacos.count == 0 {
+                inSearchMode = false
             } else {
-                inSearchMode = true;
+                inSearchMode = true
             }
             tableView.reloadData()
         case 1:
@@ -38,10 +36,10 @@ extension SavedTacosVC {
                 let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
                 return range.location != NSNotFound
             })
-            if(filteredSavedIngredients.count == 0){
-                inSearchMode = false;
+            if filteredSavedIngredients.count == 0 {
+                inSearchMode = false
             } else {
-                inSearchMode = true;
+                inSearchMode = true
             }
             tableView.reloadData()
         case 2:
@@ -50,26 +48,23 @@ extension SavedTacosVC {
                 let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
                 return range.location != NSNotFound
             })
-            if(filteredCreatedTacos.count == 0){
-                inSearchMode = false;
+            if filteredCreatedTacos.count == 0 {
+                inSearchMode = false
             } else {
-                inSearchMode = true;
+                inSearchMode = true
             }
             tableView.reloadData()
         default:
             break
         }
     }
-    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         inSearchMode = true
     }
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         inSearchMode = false
         searchBar.text = nil
         searchBar.resignFirstResponder()
         tableView.reloadData()
     }
- 
 }

@@ -9,7 +9,6 @@
 import UIKit
 
 class IngredientCell: UITableViewCell {
-    
     @IBOutlet weak var ingredientLbl: UILabel!
 
     override func awakeFromNib() {

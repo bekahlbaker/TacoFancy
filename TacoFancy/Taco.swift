@@ -10,7 +10,6 @@ import Foundation
 import Firebase
 
 struct Taco {
-    
     //Names
     let baseLayer: String
     let condiment: String
@@ -23,7 +22,6 @@ struct Taco {
     let mixinRecipe: String
     let seasoningRecipe: String
     let shellRecipe: String
-    
 }
 
 extension Taco {
@@ -58,18 +56,15 @@ extension Taco {
             else {
                 return nil
         }
-        
         self.baseLayer = baseLayerResult
         self.condiment = condimentResult
         self.mixin = mixinResult
         self.seasoning = seasoningResult
         self.shell = shellResult
-        
         self.baseLayerRecipe = baseLayerRecipeResult
         self.condimentRecipe = condimentRecipeResult
         self.mixinRecipe = mixinRecipeResult
         self.seasoningRecipe = seasoningRecipeResult
         self.shellRecipe = shellRecipeResult
-        
     }
 }

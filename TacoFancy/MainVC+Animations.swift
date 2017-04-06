@@ -12,7 +12,6 @@ extension MainVC {
     func clearTacoQuote(notification: NSNotification) {
         tacoQuoteLbl.text = ""
     }
-    
     func showTacoQuote(notification: NSNotification) {
         tacoQuoteLbl.alpha = 0
         let indexToUse = UserDefaults.standard.integer(forKey: "index")
@@ -27,7 +26,6 @@ extension MainVC {
             self.tacoQuoteLbl.alpha = 1
         }
     }
-    
     func tacoManJump() {
         print("JUMPING")
         let shakeAnimation = CABasicAnimation(keyPath: "position")
@@ -37,18 +35,15 @@ extension MainVC {
         shakeAnimation.fromValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y + 10)
         shakeAnimation.toValue = CGPoint(x: tacoMan.center.x, y: tacoMan.center.y - 10)
         tacoMan.layer.add(shakeAnimation, forKey: "position")
-        
         flickerSign()
         UIView.animate(withDuration: 0.2, delay:0, options: [.repeat, .autoreverse], animations: {
             UIView.setAnimationRepeatCount(5)
             self.shadowImage.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            
         }, completion: {completion in
             self.shadowImage.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.neonSign.image = UIImage(named: "sign-off")
         })
     }
-    
     func flickerSign() {
         var images: [UIImage] = []
         for i in 1...3 {

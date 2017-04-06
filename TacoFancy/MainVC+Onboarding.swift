@@ -10,28 +10,25 @@ import UIKit
 
 extension MainVC {
     func checkForHasTappedOnce() {
-        if(UserDefaults.standard.bool(forKey: "HasTappedOnce")) {
+        if UserDefaults.standard.bool(forKey: "HasTappedOnce") {
             print("NOT first launch")
             mainOnboard.isHidden = true
-        }
-        else{
+        } else {
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasTappedOnce")
             UserDefaults.standard.synchronize()
-            _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainVC.showMainOnboard), userInfo: nil, repeats: false)
+            _ = Timer.scheduledTimer(timeInterval: 1.0, target: self,
+                                     selector: #selector(MainVC.showMainOnboard), userInfo: nil, repeats: false)
         }
     }
-    
     func showMainOnboard() {
         mainOnboard.isHidden = false
     }
-    
     func checkForHasSwipedOnce() {
-        if(UserDefaults.standard.bool(forKey: "HasSwipedOnce")) {
+        if UserDefaults.standard.bool(forKey: "HasSwipedOnce") {
             print("NOT first launch")
             setUpCardsScreen()
-        }
-        else {
+        } else {
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasSwipedOnce")
             UserDefaults.standard.synchronize()
@@ -39,11 +36,10 @@ extension MainVC {
             setUpCardsScreen()
         }
     }
-    
     func checkForHasSavedTacoOnce(notification: NSNotification) {
-        if(UserDefaults.standard.bool(forKey: "HasSavedTacosOnce")) {
-            print("NOT first launch")        }
-        else {
+        if UserDefaults.standard.bool(forKey: "HasSavedTacosOnce") {
+            print("NOT first launch")
+        } else {
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasSavedTacosOnce")
             UserDefaults.standard.synchronize()

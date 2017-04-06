@@ -9,6 +9,5 @@
 import Foundation
 import UIKit
 
-
 let baseURL = "http://taco-randomizer.herokuapp.com"
 let random = "\(baseURL)/random"

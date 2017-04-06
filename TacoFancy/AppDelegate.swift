@@ -9,33 +9,25 @@
 import UIKit
 import Firebase
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        if(UserDefaults.standard.bool(forKey: "HasLaunchedOnce"))
-        {
+        if UserDefaults.standard.bool(forKey: "HasLaunchedOnce") {
             // app already launched
             print("NOT first launch")
-        }
-        else
-        {
+        } else {
             // This is the first launch ever
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
             UserDefaults.standard.synchronize()
             UserDefaults.standard.set(0, forKey: "index")
         }
-        
         FIRApp.configure()
         return true
-        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -46,9 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clearTacoQuote"), object: nil)
-        
         let indexToUse = UserDefaults.standard.integer(forKey: "index")
         if indexToUse < 38 {
             let indexToStore = indexToUse + 1
@@ -62,7 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        
         let indexToUse = UserDefaults.standard.integer(forKey: "index")
         print("APP DELEGATE FOREGROUND : \(indexToUse)")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
@@ -70,7 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
          NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showTacoQuote"), object: nil)
     }
 
@@ -78,4 +66,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 }
-

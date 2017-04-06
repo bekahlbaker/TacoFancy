@@ -5,13 +5,11 @@
 //  Created by Rebekah Baker on 2/1/17.
 //  Copyright © 2017 Rebekah Baker. All rights reserved.
 //
-
 import UIKit
 import Firebase
 import QuartzCore
 
 class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     @IBOutlet weak var reloadBtn: UIButton!
@@ -23,26 +21,22 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         savedTacosOnboard.isHidden = true
         tableView.reloadData()
     }
-    
     func checkForHasOpenedTacosOnce() {
-        if(UserDefaults.standard.bool(forKey: "HasOpenedTacosOnce")) {
+        if UserDefaults.standard.bool(forKey: "HasOpenedTacosOnce") {
             print("NOT first launch")
             savedTacosOnboard.isHidden = true
-        }
-        else {
+        } else {
             print("FIRST launch")
             UserDefaults.standard.set(true, forKey: "HasOpenedTacosOnce")
             UserDefaults.standard.synchronize()
             savedTacosOnboard.isHidden = false
         }
     }
-    
     @IBOutlet weak var searchBar: UISearchBar!
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBAction func segmentedIndexChanged(_ sender: Any) {
-        switch segmentedControl.selectedSegmentIndex
-        {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
             print("Saved")
             downloadSavedTacos()
@@ -65,7 +59,6 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             break
         }
     }
-    
     var savedTacos = [String]()
     var createdTacos = [String]()
     var savedIngredients = [String]()
@@ -79,20 +72,17 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     var filteredSavedIngredients = [String]()
     var filteredCreatedTacos = [String]()
     var inSearchMode = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reloadBtn.isHidden = true
         savedTacosOnboard.isHidden = true
         checkForHasOpenedTacosOnce()
-        
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         tableView.contentOffset = CGPoint(x: 0.0, y: 44)
-        
         if !self.hasSavedTacos {
             checkForInternetConnection()
         } else {
@@ -116,7 +106,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             urlconfig.timeoutIntervalForResource = 60
             let urlRequest = URLRequest(url: url)
             let session = URLSession(configuration: urlconfig)
-            let task = session.dataTask(with: urlRequest) { (data, response, error) in
+            let task = session.dataTask(with: urlRequest) { (_, _, error) in
                 if error != nil {
                     print("ERROR")
                         self.activitySpinner.stopAnimating()
@@ -129,15 +119,11 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             task.resume()
         }
     }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-        
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch segmentedControl.selectedSegmentIndex
-        {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
             if hasSavedTacos {
                 if inSearchMode {
@@ -164,11 +150,9 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
         return 1
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SavedTacoCell") as? SavedTacosCell
-        switch segmentedControl.selectedSegmentIndex
-        {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
             if hasSavedTacos {
                 if inSearchMode {
@@ -222,10 +206,8 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
         return cell!
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch segmentedControl.selectedSegmentIndex
-        {
+        switch segmentedControl.selectedSegmentIndex {
         case 0:
             if hasSavedTacos {
                 if inSearchMode {
@@ -255,7 +237,7 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                     if self.ingredientNameToPass != nil {
                         performSegue(withIdentifier: "RecipeVC", sender: nil)
                     }
-                }else {
+                } else {
                     let cellValue = savedIngredients[indexPath.row]
                     self.ingredientNameToPass = cellValue
                     if self.ingredientNameToPass != nil {
@@ -291,7 +273,6 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             break
         }
     }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             switch segmentedControl.selectedSegmentIndex {
@@ -330,14 +311,13 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             }
         }
     }
-    
     func downloadSavedTacos() {
             DataService.ds.REF_CURRENT_USER.child("full-tacos").observe( .value, with: { (snapshot) in
                 self.savedTacos = []
                 if let _ = snapshot.value as? NSNull {
                     print("No Tacos saved")
                     self.hasSavedTacos = false
-                } else{
+                } else {
                     self.hasSavedTacos = true
                     if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                         for snap in snapshot {
@@ -351,14 +331,13 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 self.reloadBtn.isHidden = true
             })
     }
-    
     func downloadCreatedTacos() {
             DataService.ds.REF_CURRENT_USER.child("created-tacos").observe( .value, with: { (snapshot) in
                 self.createdTacos = []
                 if let _ = snapshot.value as? NSNull {
                     print("No Tacos saved")
                     self.hasCreatedTacos = false
-                } else{
+                } else {
                     self.hasCreatedTacos = true
                     if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                         for snap in snapshot {
@@ -372,14 +351,13 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 self.reloadBtn.isHidden = true
             })
     }
-    
     func downloadSavedIngredients() {
             DataService.ds.REF_CURRENT_USER.child("ingredients").observe( .value, with: { (snapshot) in
                 self.savedIngredients = []
                 if let _ = snapshot.value as? NSNull {
                     print("No Ingredients saved")
                     self.hasSavedIngredients = false
-                } else{
+                } else {
                     self.hasSavedIngredients = true
                     if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                         for snap in snapshot {
@@ -393,7 +371,6 @@ class SavedTacosVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 self.reloadBtn.isHidden = true
             })
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "IngredientsVC" {
             let myVC = segue.destination as? IngredientsVC
